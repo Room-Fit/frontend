@@ -1,10 +1,9 @@
 // import { useNavigate } from "react-router-dom";
 import { useFlow } from "@/apps/stackflow";
 
-import { Button } from "@/components/ui/button";
-
 import bgMain from "@/assets/bg__main.webp";
 
+import { Button } from "@/shared/ui/button";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 
 export default function HomePage() {

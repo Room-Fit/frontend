@@ -1,6 +1,6 @@
 import { Screen, useFlow } from "@/apps/stackflow";
 
-import { MatchListItem } from "@/domains/match/components/MatchListItem";
+import { MatchListItem } from "@/features/match/ui/MatchListItem";
 
 const dummyData = [
     {
