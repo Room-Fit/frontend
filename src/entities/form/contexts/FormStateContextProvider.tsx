@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useLayoutEffect, useReducer } from "react";
 
 import { FORM_DISPATCH_ACTION_TYPES, formReducer } from "@/entities/form/hooks/useFormStateContext";
 import { FormStateContext } from "@/entities/form/model/FormStateContext";
@@ -13,9 +13,12 @@ export const FormStateContextProvider = ({
     formInitialState,
     children,
 }: FormStateContextProviderProps) => {
-    const [formState, dispatch] = useReducer(formReducer, formInitialState);
+    const [formState, dispatch] = useReducer<typeof formReducer>(formReducer, formInitialState);
 
-    useEffect(() => dispatch({ type: FORM_DISPATCH_ACTION_TYPES.INITIALIZE_FORM_STATUS }), []);
+    useLayoutEffect(
+        () => dispatch({ type: FORM_DISPATCH_ACTION_TYPES.INITIALIZE_FORM_STATUS }),
+        [],
+    );
 
     return (
         <FormStateContext.Provider
