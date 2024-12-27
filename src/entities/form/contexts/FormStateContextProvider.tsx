@@ -1,7 +1,7 @@
-import { useEffect, useLayoutEffect, useReducer } from "react";
+import { useLayoutEffect, useReducer } from "react";
 
+import { FormStateContext } from "@/entities/form/contexts";
 import { FORM_DISPATCH_ACTION_TYPES, formReducer } from "@/entities/form/hooks/useFormStateContext";
-import { FormStateContext } from "@/entities/form/model/FormStateContext";
 import { FormSchema } from "@/entities/form/types";
 
 export interface FormStateContextProviderProps {
