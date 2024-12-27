@@ -1,6 +1,6 @@
 import { Fragment } from "react/jsx-runtime";
 
-import { NavBottom } from "@/components/layouts/NavBottom";
+import { NavBottom } from "@/apps/layouts/NavBottom";
 
 import HomePage from "@/pages/home/HomePage";
 import MatchDeatilPage from "@/pages/match/MatchDeatilPage";

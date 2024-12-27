@@ -1,4 +1,4 @@
-import { CirclePlus, HeartHandshake, MessagesSquare, User, UserSearch } from "lucide-react";
+import { CirclePlus, HeartHandshake, MessagesSquare, User } from "lucide-react";
 
 export const navBottom = [
     {

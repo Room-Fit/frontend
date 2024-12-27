@@ -2,11 +2,11 @@ import { Fragment } from "react/jsx-runtime";
 
 import { Send } from "lucide-react";
 
-import { NavChatTop } from "@/components/layouts/NavChat";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { NavChatTop } from "@/apps/layouts/NavChat";
 
-import { ChatItem } from "@/domains/chat/components/ChatItem";
+import { ChatItem } from "@/features/chat/ui/ChatItem";
+import { Button } from "@/shared/ui/button";
+import { Input } from "@/shared/ui/input";
 
 export default function ChatRoomPage() {
     return (
