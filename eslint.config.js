@@ -6,7 +6,7 @@ import tseslint from "typescript-eslint";
 import js from "@eslint/js";
 
 export default tseslint.config(
-    { ignores: ["dist"] },
+    { ignores: ["dist", ".storybook"] },
     {
         extends: [js.configs.recommended, ...tseslint.configs.recommended],
         files: ["**/*.{ts,tsx}"],
@@ -22,6 +22,7 @@ export default tseslint.config(
             ...reactHooks.configs.recommended.rules,
             "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
             "react-hooks/rules-of-hooks": "error",
+            "@typescript-eslint/no-unused-expressions": ["error", { allowShortCircuit: true }],
         },
     },
 );
