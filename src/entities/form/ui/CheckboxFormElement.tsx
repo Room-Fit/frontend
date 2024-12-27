@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId } from "react";
+import { useCallback, useId } from "react";
 
 import {
     FORM_DISPATCH_ACTION_TYPES,
@@ -23,16 +23,12 @@ export const CheckboxFormElement = ({
 
     const { formState, dispatch } = useFormStateContext();
 
-    const handleChange = useCallback((option: Option, checked: CheckedState) => {
+    const onChange = useCallback((option: Option, checked: CheckedState) => {
         dispatch({
             type: FORM_DISPATCH_ACTION_TYPES.TOGGLE_FORM_STATUS_BY_QUESTION_ID,
             payload: { questionId, label: option.label, value: checked.toString() },
         });
     }, []);
-
-    useEffect(() => {
-        console.log("option : ", formState.questions[0].options);
-    }, [formState.questions[0].options]);
 
     return (
         <div className="flex flex-col gap-1" data-testid="checkbox-with-label-form">
@@ -52,7 +48,7 @@ export const CheckboxFormElement = ({
                             id={`${htmlFor}_${option.label}`}
                             className="block w-5 h-5"
                             checked={isChecked}
-                            onCheckedChange={(checked) => handleChange(option, checked)}
+                            onCheckedChange={(checked) => onChange(option, checked)}
                         />
                         <label htmlFor={`${htmlFor}_${option.label}`}>{option.label}</label>
                     </div>
