@@ -27,3 +27,6 @@ dist-ssr
 *storybook.log
 
 *.http
+
+.env
+.env.*
