@@ -6,7 +6,7 @@ import { FormSchema } from "@/entities/form/types";
 
 export interface FormStateContextProviderProps {
     formInitialState: FormSchema;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export const FormStateContextProvider = ({
@@ -19,7 +19,6 @@ export const FormStateContextProvider = ({
         () => dispatch({ type: FORM_DISPATCH_ACTION_TYPES.INITIALIZE_FORM_STATUS }),
         [],
     );
-
     return (
         <FormStateContext.Provider
             value={{

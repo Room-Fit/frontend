@@ -1,4 +1,4 @@
-import { FormStateContextProvider } from "@/entities/form/model/FormStateContextProvider";
+import { FormStateContextProvider } from "@/entities/form/contexts";
 import { CheckboxFormElement } from "@/entities/form/ui/CheckboxFormElement";
 import type { Meta, StoryObj } from "@storybook/react";
 

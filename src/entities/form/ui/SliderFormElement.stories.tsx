@@ -1,4 +1,4 @@
-import { FormStateContextProvider } from "@/entities/form/model/FormStateContextProvider";
+import { FormStateContextProvider } from "@/entities/form/contexts";
 import { FormSchema } from "@/entities/form/types";
 import { SliderFormElement } from "@/entities/form/ui/SliderFormElement";
 import type { Meta, StoryObj } from "@storybook/react";
