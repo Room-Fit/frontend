@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useMemo } from "react";
+import { useCallback, useId, useMemo } from "react";
 
 import {
     FORM_DISPATCH_ACTION_TYPES,
@@ -28,28 +28,16 @@ export const SelectorFormElement = ({
 
     const value = formState.questions[questionIndex].options[0]?.value || "";
 
-    const onValueChange = useCallback((value: string) => {
-        const payload = {
-            questionId: questionId,
-            targetLabel: options.find((option) => option.value === value)?.label || "",
-            updatedValue: value,
-        };
-
-        console.log(payload);
-
+    const onValueChange = useCallback((updatedValue: string) => {
         dispatch({
             type: FORM_DISPATCH_ACTION_TYPES.CHANGE_FORM_STATUS_BY_QUESTION_ID,
             payload: {
                 questionId: questionId,
-                label: options.find((option) => option.value === value)?.label || "",
-                value: value,
+                label: options.find((option) => option.value === updatedValue)?.label || "",
+                value: updatedValue,
             },
         });
     }, []);
-
-    useEffect(() => {
-        console.log("value updated : ", formState.questions[0].options);
-    }, [formState.questions[0].options]);
 
     return (
         <div data-testid="selector-with-label-form">
