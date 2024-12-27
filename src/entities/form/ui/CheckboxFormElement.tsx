@@ -23,12 +23,15 @@ export const CheckboxFormElement = ({
 
     const { formState, dispatch } = useFormStateContext();
 
-    const onChange = useCallback((option: Option, checked: CheckedState) => {
-        dispatch({
-            type: FORM_DISPATCH_ACTION_TYPES.TOGGLE_FORM_STATUS_BY_QUESTION_ID,
-            payload: { questionId, label: option.label, value: checked.toString() },
-        });
-    }, []);
+    const onChange = useCallback(
+        (option: Option, checked: CheckedState) => {
+            dispatch({
+                type: FORM_DISPATCH_ACTION_TYPES.TOGGLE_FORM_STATUS_BY_QUESTION_ID,
+                payload: { questionId, label: option.label, value: checked.toString() },
+            });
+        },
+        [dispatch, questionId],
+    );
 
     return (
         <div className="flex flex-col gap-1" data-testid="checkbox-with-label-form">

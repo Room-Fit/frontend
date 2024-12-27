@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 import {
     FORM_DISPATCH_ACTION_TYPES,
@@ -18,7 +18,7 @@ export const SliderFormElement = ({
     questionText,
     options,
 }: SliderFormElementProps) => {
-    const [min, max] = useMemo(() => options, []);
+    const [min, max] = options;
 
     const { formState, dispatch } = useFormStateContext();
 
@@ -39,7 +39,7 @@ export const SliderFormElement = ({
                 },
             });
         },
-        [questionId],
+        [dispatch, questionId],
     );
 
     useEffect(() => {
@@ -51,6 +51,7 @@ export const SliderFormElement = ({
                 value: min.value,
             },
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

@@ -24,20 +24,23 @@ export const SelectorFormElement = ({
 
     const questionIndex = useMemo(() => {
         return formState.questions.findIndex((question) => question.questionId === questionId);
-    }, [questionId]);
+    }, [formState.questions, questionId]);
 
     const value = formState.questions[questionIndex].options[0]?.value || "";
 
-    const onValueChange = useCallback((updatedValue: string) => {
-        dispatch({
-            type: FORM_DISPATCH_ACTION_TYPES.CHANGE_FORM_STATUS_BY_QUESTION_ID,
-            payload: {
-                questionId: questionId,
-                label: options.find((option) => option.value === updatedValue)?.label || "",
-                value: updatedValue,
-            },
-        });
-    }, []);
+    const onValueChange = useCallback(
+        (updatedValue: string) => {
+            dispatch({
+                type: FORM_DISPATCH_ACTION_TYPES.CHANGE_FORM_STATUS_BY_QUESTION_ID,
+                payload: {
+                    questionId: questionId,
+                    label: options.find((option) => option.value === updatedValue)?.label || "",
+                    value: updatedValue,
+                },
+            });
+        },
+        [dispatch, options, questionId],
+    );
 
     return (
         <div data-testid="selector-with-label-form">
