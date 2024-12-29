@@ -6,6 +6,19 @@
     .screen {
         @apply relative mx-auto h-full w-full max-w-[500px];
     }
+
+    .gradient-col {
+        background-image: linear-gradient(0deg, rgb(0, 0, 0, 0.7) 24%, rgba(233, 233, 233, 0) 100%);
+    }
+
+    .gradient-col-reverse {
+        background-image: linear-gradient(
+            180deg,
+            rgb(0, 0, 0, 0.7) 24%,
+            rgba(233, 233, 233, 0) 100%
+        );
+    }
+
     :root {
         --background: 0 0% 100%;
         --foreground: 240 10% 3.9%;
