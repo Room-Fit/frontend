@@ -30,6 +30,7 @@
     "@stackflow/plugin-history-sync": "^1.7.0",
     "@stackflow/plugin-renderer-basic": "^1.1.13",
     "@stackflow/react": "^1.4.1",
+    "axios-exception-handler": "^1.2.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "create-jest": "^29.7.0",
