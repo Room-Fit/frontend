@@ -1,0 +1,30 @@
+name: Deploy Storybook
+
+on:
+    pull_request:
+        branches: ["develop"]
+
+jobs:
+    storybook:
+        name: Deploy Storybook
+        runs-on: roomfit
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+
+            - name: Install Yarn Package Manager
+              run: npm install -g yarn
+
+            - name: Install dependencies
+              run: yarn install
+
+            - name: Run Chromatic
+              uses: chromaui/action@latest
+              with:
+                  projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
