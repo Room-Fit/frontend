@@ -1,4 +1,5 @@
-import { Screen, useFlow } from "@/apps/stackflow";
+import { BaseScreen } from "@/apps/Screen";
+import { useFlow } from "@/apps/stackflow";
 
 import { MatchListItem } from "@/features/match/ui/MatchListItem";
 
@@ -56,7 +57,7 @@ export default function MatchListPage() {
     const { push } = useFlow();
 
     return (
-        <Screen>
+        <BaseScreen>
             <div>
                 {dummyData.map((data) => {
                     return (
@@ -71,6 +72,6 @@ export default function MatchListPage() {
                     );
                 })}
             </div>
-        </Screen>
+        </BaseScreen>
     );
 }

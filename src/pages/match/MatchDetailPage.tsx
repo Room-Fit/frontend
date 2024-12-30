@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Screen } from "@/apps/stackflow";
+import { BaseScreen } from "@/apps/Screen";
 
 import defaultImage from "@/assets/bg__main.webp";
 
@@ -28,7 +28,7 @@ const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params 
     const mock__answerResponseByUserId = fetchAnswerByUserId(params.id);
 
     return (
-        <Screen>
+        <BaseScreen>
             <NavPrevious />
 
             <BackDropImage width="100%" height="220px" src={defaultImage}>
@@ -64,7 +64,7 @@ const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params 
                     );
                 })}
             </div>
-        </Screen>
+        </BaseScreen>
     );
 };
 
