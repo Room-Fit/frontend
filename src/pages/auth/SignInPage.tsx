@@ -12,13 +12,7 @@ export default function SignInPage() {
         <Screen>
             <article className="flex flex-col justify-between h-full p-4">
                 <section className="flex flex-col gap-2">
-                    <ChevronLeft
-                        size={24}
-                        className="h-8"
-                        onClick={() => {
-                            pop();
-                        }}
-                    />
+                    <ChevronLeft size={24} className="h-8" onClick={() => pop()} />
 
                     <div>
                         <h1 className="my-2 text-2xl font-bold">로그인</h1>
