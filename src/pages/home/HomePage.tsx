@@ -6,7 +6,7 @@ import bgMain from "@/assets/bg__main.webp";
 import { Button } from "@/shared/ui/button";
 
 export default function HomePage() {
-    const { replace } = useFlow();
+    const { push } = useFlow();
 
     return (
         <Screen>
@@ -24,7 +24,7 @@ export default function HomePage() {
                     <p className="text-white">경북대학교 룸메이트 매칭 서비스</p>
                 </div>
                 <div className="flex flex-col gap-3 mb-6">
-                    <Button variant="default" onClick={() => replace("SignInPage", {})}>
+                    <Button variant="default" onClick={() => push("SignInPage", {})}>
                         로그인
                     </Button>
                     <Button variant="outline" onClick={() => undefined}>
