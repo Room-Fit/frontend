@@ -3,7 +3,7 @@ import { Fragment } from "react/jsx-runtime";
 import { NavBottom } from "@/apps/layouts/NavBottom";
 
 import HomePage from "@/pages/home/HomePage";
-import MatchDeatilPage from "@/pages/match/MatchDeatilPage";
+import MatchDetailPage from "@/pages/match/MatchDetailPage";
 import MatchListPage from "@/pages/match/MatchListPage";
 
 import { AppScreen, AppScreenProps, basicUIPlugin } from "@stackflow/plugin-basic-ui";
@@ -22,7 +22,7 @@ export const { Stack, useFlow } = stackflow({
             routes: {
                 HomePage: "/",
                 MatchListPage: "/match",
-                MatchDeatilPage: "/match/detail",
+                MatchDetailPage: "/match/detail",
             },
             fallbackActivity: () => "HomePage",
         }),
@@ -31,7 +31,7 @@ export const { Stack, useFlow } = stackflow({
     activities: {
         HomePage,
         MatchListPage,
-        MatchDeatilPage,
+        MatchDetailPage,
     },
     initialActivity: () => "HomePage",
 });
