@@ -1,12 +1,10 @@
-import { Fragment } from "react/jsx-runtime";
-
-import { NavBottom } from "@/apps/layouts/NavBottom";
-
+import SignInPage from "@/pages/auth/SignInPage";
+import SignUpPage from "@/pages/auth/SignUpPage";
 import HomePage from "@/pages/home/HomePage";
 import MatchDetailPage from "@/pages/match/MatchDetailPage";
 import MatchListPage from "@/pages/match/MatchListPage";
 
-import { AppScreen, AppScreenProps, basicUIPlugin } from "@stackflow/plugin-basic-ui";
+import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
 import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
 import { stackflow } from "@stackflow/react";
@@ -21,6 +19,8 @@ export const { Stack, useFlow } = stackflow({
         historySyncPlugin({
             routes: {
                 HomePage: "/",
+                SignInPage: "/auth/signin",
+                SignUpPage: "/auth/signup",
                 MatchListPage: "/match",
                 MatchDetailPage: "/match/detail",
             },
@@ -30,19 +30,10 @@ export const { Stack, useFlow } = stackflow({
 
     activities: {
         HomePage,
+        SignInPage,
+        SignUpPage,
         MatchListPage,
         MatchDetailPage,
     },
     initialActivity: () => "HomePage",
 });
-
-export const Screen = ({ children, ...appScreenProps }: AppScreenProps) => {
-    return (
-        <Fragment>
-            <AppScreen {...appScreenProps}>
-                <div className="screen">{children}</div>
-            </AppScreen>
-            <NavBottom />
-        </Fragment>
-    );
-};
