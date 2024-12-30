@@ -2566,7 +2566,6 @@ available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
-
 axios-exception-handler@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/axios-exception-handler/-/axios-exception-handler-1.2.2.tgz#6122051af648a50bf8d7e1d900f523c6831dabfb"
@@ -2820,7 +2819,7 @@ chokidar@^3.6.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-chromatic@^11.15.0:
+chromatic@^11.15.0, chromatic@^11.20.2:
   version "11.20.2"
   resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-11.20.2.tgz#10b309179cdc0b9195a5b68970366f9ebe67dfd1"
   integrity sha512-c+M3HVl5Y60c7ipGTZTyeWzWubRW70YsJ7PPDpO1D735ib8+Lu3yGF90j61pvgkXGngpkTPHZyBw83lcu2JMxA==

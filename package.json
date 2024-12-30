@@ -11,7 +11,8 @@
     "prettier": "prettier --write .",
     "test": "jest --config jest.config.ts --ci --runInBand",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_e2ea1abdcfb3f6d"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
@@ -31,8 +32,8 @@
     "@stackflow/plugin-renderer-basic": "^1.1.13",
     "@stackflow/react": "^1.4.1",
     "@tanstack/react-query": "^5.62.11",
-    "axios-exception-handler": "^1.2.2",
     "axios": "^1.7.9",
+    "axios-exception-handler": "^1.2.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "create-jest": "^29.7.0",
@@ -73,6 +74,7 @@
     "@vitejs/plugin-react": "^4.3.3",
     "add": "^2.0.6",
     "autoprefixer": "^10.4.20",
+    "chromatic": "^11.20.2",
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
