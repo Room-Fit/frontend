@@ -2566,6 +2566,12 @@ available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
+
+axios-exception-handler@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/axios-exception-handler/-/axios-exception-handler-1.2.2.tgz#6122051af648a50bf8d7e1d900f523c6831dabfb"
+  integrity sha512-8FT/ToX1wQ3C8GpfXbatTR5/lN7rx61vbJ1UIsqAXjnXfs2jzij7SowJiak+gzKULLyp4h4hjD26pbncBEirXA==
+
 axios@^1.7.9:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.9.tgz#d7d071380c132a24accda1b2cfc1535b79ec650a"

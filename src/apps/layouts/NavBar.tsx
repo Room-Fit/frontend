@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const NavTop = () => {
+export const NavBar = () => {
     return (
         <nav className="h-[60px] w-full fixed top-0 px-6 bg-white z-10 shadow-md">
             <ul className="flex items-center w-full h-full gap-4">
