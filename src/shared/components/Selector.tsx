@@ -7,10 +7,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/shared/ui";
+import * as SelectPrimitive from "@radix-ui/react-select";
 
-export interface SelectorProps {
+export interface SelectorProps extends SelectPrimitive.SelectProps {
     placeholder?: string;
-    onValueChange?: (value: string) => void;
     options: Option[];
 }
 
