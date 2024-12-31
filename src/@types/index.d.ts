@@ -21,3 +21,7 @@ declare type CSSRelativeUnit =
     | "%";
 
 declare type SizeProp = `${number}${CSSAbsoluteUnit | CSSRelativeUnit}`;
+
+declare type Children = {
+    children: React.ReactNode;
+};
