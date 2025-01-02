@@ -1,4 +1,5 @@
 import { NavBottom } from "@/apps/layouts/NavBottom";
+import { NavTop } from "@/apps/layouts/NavTop";
 
 import { AppScreen, AppScreenProps } from "@stackflow/plugin-basic-ui";
 
@@ -13,6 +14,7 @@ export const Screen = ({ children, ...appScreenProps }: AppScreenProps) => {
 export const BaseScreen = ({ children, ...appScreenProps }: AppScreenProps) => {
     return (
         <Screen {...appScreenProps}>
+            <NavTop />
             <div className="screen">{children}</div>
             <NavBottom />
         </Screen>
