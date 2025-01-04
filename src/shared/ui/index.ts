@@ -13,3 +13,4 @@ export * from "./toggle-group";
 export * from "./toggle";
 export * from "./label";
 export * from "./dialog";
+export * from "./textarea";
