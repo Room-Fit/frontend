@@ -12,10 +12,8 @@ import { BackDropImage } from "@/shared/components/BackDropImage";
 import { NavPrevious } from "@/shared/components/NavPrevious";
 import { ActivityComponentType } from "@stackflow/react";
 
-// import { fetchAnswerResponse } from "@/__mocks__/fetchAnswerResponse";
-
 export interface MatchDetailPageParams {
-    id: number;
+    id?: number;
 }
 
 const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params }) => {
@@ -23,9 +21,8 @@ const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params 
 
     console.log("id : ", params.id);
 
-    const mock__matchDetailResponse = fetchMatchDetail(params.id);
-    // const mock__answerResponse = fetchAnswerResponse(params.id);
-    const mock__answerResponseByUserId = fetchAnswerByUserId(params.id);
+    const mock__matchDetailResponse = fetchMatchDetail(params.id as number);
+    const mock__answerResponseByUserId = fetchAnswerByUserId(params.id as number);
 
     return (
         <BaseScreen>

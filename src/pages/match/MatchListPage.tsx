@@ -1,4 +1,5 @@
 import { BaseScreen } from "@/apps/Screen";
+import { NavTop } from "@/apps/layouts/NavTop";
 import { useFlow } from "@/apps/stackflow";
 
 import { MatchListItem } from "@/features/match/ui/MatchListItem";
@@ -58,6 +59,7 @@ export default function MatchListPage() {
 
     return (
         <BaseScreen>
+            <NavTop />
             <div>
                 {dummyData.map((data) => {
                     return (
