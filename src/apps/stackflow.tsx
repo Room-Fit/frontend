@@ -1,6 +1,8 @@
 import SignInPage from "@/pages/auth/SignInPage";
 import SignUpPage from "@/pages/auth/SignUpPage";
+import ChatRoomPage from "@/pages/chat/ChatRoomPage";
 import HomePage from "@/pages/home/HomePage";
+import CreateMatchPage from "@/pages/match/CreateMatchPage";
 import MatchDetailPage from "@/pages/match/MatchDetailPage";
 import MatchListPage from "@/pages/match/MatchListPage";
 import MyPage from "@/pages/mypage/MyPage";
@@ -10,7 +12,7 @@ import { historySyncPlugin } from "@stackflow/plugin-history-sync";
 import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
 import { stackflow } from "@stackflow/react";
 
-export const { Stack, useFlow } = stackflow({
+const stackflowApp = stackflow({
     transitionDuration: 250,
     plugins: [
         basicRendererPlugin(),
@@ -20,10 +22,16 @@ export const { Stack, useFlow } = stackflow({
         historySyncPlugin({
             routes: {
                 HomePage: "/",
+
                 SignInPage: "/auth/signin",
                 SignUpPage: "/auth/signup",
+
                 MatchListPage: "/match",
+                CreateMatchPage: "/match/new",
                 MatchDetailPage: "/match/detail",
+
+                ChatRoomPage: "/chat",
+
                 MyPage: "/mypage",
             },
             fallbackActivity: () => "HomePage",
@@ -32,11 +40,20 @@ export const { Stack, useFlow } = stackflow({
 
     activities: {
         HomePage,
+
         SignInPage,
         SignUpPage,
+
         MatchListPage,
+        CreateMatchPage,
         MatchDetailPage,
+
+        ChatRoomPage,
+
         MyPage,
     },
     initialActivity: () => "HomePage",
 });
+
+export const { Stack, useFlow } = stackflowApp;
+export type ActivityName = keyof typeof stackflowApp.activities;
