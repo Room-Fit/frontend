@@ -3,6 +3,7 @@ import SignUpPage from "@/pages/auth/SignUpPage";
 import HomePage from "@/pages/home/HomePage";
 import MatchDetailPage from "@/pages/match/MatchDetailPage";
 import MatchListPage from "@/pages/match/MatchListPage";
+import MyPage from "@/pages/mypage/MyPage";
 
 import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
@@ -23,6 +24,7 @@ export const { Stack, useFlow } = stackflow({
                 SignUpPage: "/auth/signup",
                 MatchListPage: "/match",
                 MatchDetailPage: "/match/detail",
+                MyPage: "/mypage",
             },
             fallbackActivity: () => "HomePage",
         }),
@@ -34,6 +36,7 @@ export const { Stack, useFlow } = stackflow({
         SignUpPage,
         MatchListPage,
         MatchDetailPage,
+        MyPage,
     },
     initialActivity: () => "HomePage",
 });
