@@ -49,3 +49,46 @@ jobs:
 
             - name: Run tests
               run: yarn test
+
+    ui-test:
+        name: Storybook UI Test
+        runs-on: roomfit
+        needs: unit-test
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+
+            - name: Install Yarn Package Manager
+              run: npm install -g yarn
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Build Storybook
+              run: yarn build-storybook
+
+            - name: Create Preview
+              id: chromatic
+              uses: chromaui/action@latest
+              with:
+                  projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+                  onlyChanged: true
+                  exitZeroOnChanges: true
+
+            - name: Set Storybook Preview URL
+              if: success()
+              run: echo "STORYBOOK_URL=${{ steps.chromatic.outputs.storybookUrl }}" >> $GITHUB_ENV
+
+            - name: Comment with Storybook Preview URL
+              uses: thollander/actions-comment-pull-request@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  message: |
+                      📚 Storybook Preview
+                      🔗 URL : ${{env.STORYBOOK_URL}}
