@@ -1,0 +1,28 @@
+export const siteConfiguration = {
+    studentIdRange: {
+        min: 2010,
+        max: 2025,
+    },
+    university: [
+        { label: "인문대학", value: "Humanities" },
+        { label: "사회과학대학", value: "Social Sciences" },
+        { label: "자연과학대학", value: "Natural Sciences" },
+        { label: "경상대학", value: "Business and Economics" },
+        { label: "공과대학", value: "Engineering" },
+        { label: "IT대학", value: "Information Technology" },
+        { label: "농업생명과학대학", value: "Agriculture and Life Sciences" },
+        { label: "예술대학", value: "Arts" },
+        { label: "사범대학", value: "Education" },
+        { label: "의과대학", value: "Medicine" },
+        { label: "치과대학", value: "Dentistry" },
+        { label: "수의과대학", value: "Veterinary Medicine" },
+        { label: "생활과학대학", value: "Human Ecology" },
+        { label: "간호대학", value: "Nursing" },
+        { label: "약학대학", value: "Pharmacy" },
+        { label: "행정학부", value: "Department of Public Administration" },
+        { label: "자율전공부", value: "Division of Interdisciplinary Studies" },
+        { label: "첨단기술융합대학", value: "Advanced Technology Fusion" },
+        { label: "생태환경대학", value: "Ecological Environment" },
+        { label: "과학기술대학", value: "Science and Technology" },
+    ],
+};
