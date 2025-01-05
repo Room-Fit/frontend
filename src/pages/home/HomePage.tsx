@@ -27,7 +27,7 @@ export default function HomePage() {
                     <Button variant="default" onClick={() => push("SignInPage", {})}>
                         로그인
                     </Button>
-                    <Button variant="outline" onClick={() => undefined}>
+                    <Button variant="outline" onClick={() => push("SignUpPage", {})}>
                         회원가입
                     </Button>
                 </div>
