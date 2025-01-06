@@ -23,6 +23,32 @@
         );
     }
 
+    .text-dark-400 {
+        color: var(--dark-400);
+    }
+    .text-dark-300 {
+        color: var(--dark-300);
+    }
+    .text-dark-200 {
+        color: var(--dark-200);
+    }
+    .text-dark-100 {
+        color: var(--dark-100);
+    }
+
+    .bg-dark-400 {
+        background-color: var(--dark-400);
+    }
+    .bg-dark-300 {
+        background-color: var(--dark-300);
+    }
+    .bg-dark-200 {
+        background-color: var(--dark-200);
+    }
+    .bg-dark-100 {
+        background-color: var(--dark-100);
+    }
+
     :root {
         --background: #fff;
         --foreground: #000;
@@ -53,6 +79,11 @@
         --ring: #0675ff;
 
         --radius: 0.5rem;
+
+        --dark-400: #727171;
+        --dark-300: #9fa0a0;
+        --dark-200: #c9caca;
+        --dark-100: #efefef;
     }
 }
 
