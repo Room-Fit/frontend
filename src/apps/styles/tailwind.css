@@ -4,7 +4,11 @@
 
 @layer base {
     .screen {
-        @apply relative mx-auto h-full w-full max-w-[500px];
+        @apply relative mx-auto min-h-[100dvh] w-full max-w-[500px];
+    }
+
+    .gradient-main {
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 12%, #5da5ff 75%);
     }
 
     .gradient-col {
@@ -30,10 +34,10 @@
         --popover-foreground: #000;
 
         --primary: #0675ff;
-        --primary-foreground: #5da5ff;
+        --primary-foreground: #fff;
 
-        --secondary: #5da5ff;
-        --secondary-foreground: #b1d4ff;
+        --secondary: #fff;
+        --secondary-foreground: #0675ff;
 
         --muted: #efefef;
         --muted-foreground: #9fa0a0;
