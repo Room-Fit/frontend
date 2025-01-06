@@ -2,7 +2,7 @@ import { InputWithLabel } from "@/shared/components/InputWithLabel/InputWithLabe
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof InputWithLabel> = {
-    title: "Form/InputWithLabel",
+    title: "Components/Form/InputWithLabel",
     component: InputWithLabel,
 };
 
