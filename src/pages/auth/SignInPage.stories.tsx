@@ -1,10 +1,10 @@
-import HomePage from "@/pages/home/HomePage";
+import SignInPage from "@/pages/auth/SignInPage";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof HomePage> = {
-    title: "Pages/HomePage (메인 페이지)",
-    component: HomePage,
+const meta: Meta<typeof SignInPage> = {
+    title: "Pages/SignInPage (로그인 페이지)",
+    component: SignInPage,
     parameters: {
         defaultViewport: "mobile1",
         layout: "fullscreen",
@@ -12,7 +12,7 @@ const meta: Meta<typeof HomePage> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof HomePage>;
+type Story = StoryObj<typeof SignInPage>;
 
 export const Default: Story = {
     args: {},
