@@ -53,6 +53,11 @@
         --ring: #0675ff;
 
         --radius: 0.5rem;
+
+        --dark-400: #727171;
+        --dark-300: #9fa0a0;
+        --dark-200: #c9caca;
+        --dark-100: #efefef;
     }
 }
 
