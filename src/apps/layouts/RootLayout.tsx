@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 
-import { NavTop } from "./NavBar";
+import { NavTop } from "./NavTop";
 
 export const RootLayout = () => {
     return (
