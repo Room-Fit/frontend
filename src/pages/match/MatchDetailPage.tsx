@@ -2,11 +2,10 @@ import { useState } from "react";
 
 import { BaseScreen } from "@/apps/Screen";
 
-import defaultImage from "@/assets/bg__main.webp";
-
 import { fetchAnswerByUserId } from "@/__mocks__/fetchAnswerByUserId";
 import { fetchMatchDetail } from "@/__mocks__/fetchMatchDetail";
 import { MatchInfo } from "@/features/match/ui/MatchInfo";
+import defaultImage from "@/shared/assets/bg-background.webp";
 import { Selector } from "@/shared/components";
 import { BackDropImage } from "@/shared/components/BackDropImage";
 import { NavPrevious } from "@/shared/components/NavPrevious";

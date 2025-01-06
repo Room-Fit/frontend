@@ -1,5 +1,4 @@
-import testImage from "@/assets/bg__main.webp";
-
+import testImage from "@/shared/assets/bg-background.webp";
 import { BackDropImage } from "@/shared/components/BackDropImage";
 import type { Meta, StoryObj } from "@storybook/react";
 
