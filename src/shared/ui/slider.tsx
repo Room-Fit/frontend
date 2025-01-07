@@ -12,7 +12,7 @@ const Slider = React.forwardRef<
         className={cn("relative flex w-full touch-none select-none items-center", className)}
         {...props}
     >
-        <SliderPrimitive.Track className="relative w-full h-[6px] overflow-hidden rounded-full grow bg-[#FED7D7]">
+        <SliderPrimitive.Track className="relative w-full h-[6px] overflow-hidden rounded-full grow bg-dark-100">
             <SliderPrimitive.Range className="absolute h-full bg-primary" />
         </SliderPrimitive.Track>
         <SliderPrimitive.Thumb className="block w-5 h-5 transition-colors rounded-full shadow-md border-primary bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" />
@@ -37,7 +37,7 @@ const DualRangeSlider = React.forwardRef<
             className={cn("relative flex w-full touch-none select-none items-center", className)}
             {...props}
         >
-            <SliderPrimitive.Track className="relative w-full h-2 overflow-hidden rounded-full grow bg-secondary bg-[#FED7D7]">
+            <SliderPrimitive.Track className="relative w-full h-2 overflow-hidden rounded-full grow bg-dark-100">
                 <SliderPrimitive.Range className="absolute h-full bg-primary" />
             </SliderPrimitive.Track>
             {initialValue.map((value, index) => (
