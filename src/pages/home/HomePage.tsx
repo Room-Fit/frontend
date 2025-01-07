@@ -32,9 +32,19 @@ export default function HomePage() {
                     <Button variant="default" onClick={() => push("SignInPage", {})}>
                         로그인
                     </Button>
-                    <Button variant="secondary" onClick={() => push("SignUpPage", {})}>
-                        회원가입
+                    <Button variant="secondary" onClick={() => push("MatchListPage", {})}>
+                        룸메이트 둘러보기
                     </Button>
+
+                    <p className="text-xs text-center text-white">
+                        아직 계정이 없으신가요?{" "}
+                        <span
+                            className="font-semibold underline"
+                            onClick={() => push("SignUpPage", {})}
+                        >
+                            회원가입
+                        </span>
+                    </p>
                 </section>
             </div>
         </Screen>
