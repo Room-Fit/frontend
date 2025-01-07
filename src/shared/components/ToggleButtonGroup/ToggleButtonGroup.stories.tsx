@@ -11,7 +11,7 @@ const meta: Meta<typeof ToggleButtonGroup> = {
 export default meta;
 type Story = StoryObj<typeof ToggleButtonGroup>;
 
-export const ToggleButtonGroupExample = ({ options }: { options: string[] }) => {
+const ToggleButtonGroupExample = ({ options }: { options: string[] }) => {
     const [option, setOption] = useState("수면환경");
 
     useEffect(() => {
