@@ -85,3 +85,32 @@ jobs:
                   onlyChanged: true
                   autoAcceptChanges: false
                   exitOnceUploaded: true
+
+            - name: Comment Storybook and Chromatic URLs on PR
+              if: github.event_name == 'pull_request'
+              uses: actions/github-script@v6
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  script: |
+                      const storybookUrl = '${{ steps.chromatic.outputs.url }}';
+                      const chromaticBuildUrl = '${{ steps.chromatic.outputs.buildUrl }}';
+
+                      const prNumber = context.payload.pull_request.number;
+
+                      let commentBody = '';
+
+                      if (!storybookUrl) console.warn('Storybook URL not found.');
+                      else commentBody += `📖 **Storybook Preview:** [View Here](${storybookUrl})\n`;
+
+                      if (!chromaticBuildUrl) console.warn('Chromatic Build URL not found.');
+                      else commentBody += `🔍 **Chromatic Review:** [View Here](${chromaticBuildUrl})\n`;
+
+                      if (!commentBody) console.warn('No URLs available to comment.');
+                      else {
+                        await github.rest.issues.createComment({
+                          ...context.repo,
+                          issue_number: prNumber,
+                          body: commentBody,
+                        });
+                        console.log('Storybook and Chromatic URLs commented on PR.');
+                      }
