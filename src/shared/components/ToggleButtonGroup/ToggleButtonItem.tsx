@@ -19,7 +19,7 @@ export const ToggleButtonItem = ({
         <Button
             className={cn(
                 isSelected ? "bg-primary text-white" : "bg-dark-100 text-dark-300",
-                "h-[34px]",
+                "h-[34px] flex-grow px-0",
             )}
             onClick={() => setSelectedOption(option)}
         >

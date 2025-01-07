@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 
 import { ToggleButtonItem } from "@/shared/components/ToggleButtonGroup/ToggleButtonItem";
+import { cn } from "@/shared/lib";
 
 export interface ToggleButtonGroupProps {
+    className?: string;
+
     options: string[];
     onChange: (selectedOption: string) => void;
 }
 
-export const ToggleButtonGroup = ({ options, onChange }: ToggleButtonGroupProps) => {
+export const ToggleButtonGroup = ({ className, options, onChange }: ToggleButtonGroupProps) => {
     const [selectedOption, setSelectedOption] = useState<string>("");
 
     useEffect(() => {
@@ -15,7 +18,7 @@ export const ToggleButtonGroup = ({ options, onChange }: ToggleButtonGroupProps)
     }, [onChange, selectedOption]);
 
     return (
-        <div className="flex gap-2">
+        <div className={cn("flex w-full gap-1", className)}>
             {options.map((option, index) => {
                 return (
                     <ToggleButtonItem
