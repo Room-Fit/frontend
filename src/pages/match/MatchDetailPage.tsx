@@ -1,12 +1,9 @@
-import { useState } from "react";
-
 import { BaseScreen } from "@/apps/Screen";
 
-import { fetchAnswerByUserId } from "@/__mocks__/fetchAnswerByUserId";
 import { fetchMatchDetail } from "@/__mocks__/fetchMatchDetail";
+import { ProfileCard } from "@/entities/profile/ui/ProfileCard/ProfileCard";
 import { MatchInfo } from "@/features/match/ui/MatchInfo";
 import defaultImage from "@/shared/assets/bg-background.webp";
-import { Selector } from "@/shared/components";
 import { BackDropImage } from "@/shared/components/BackDropImage";
 import { NavPrevious } from "@/shared/components/NavPrevious";
 import { ActivityComponentType } from "@stackflow/react";
@@ -16,12 +13,7 @@ export interface MatchDetailPageParams {
 }
 
 const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params }) => {
-    const [selectedUser, setSelectedUser] = useState<string>("");
-
-    console.log("id : ", params.id);
-
     const mock__matchDetailResponse = fetchMatchDetail(params.id as number);
-    const mock__answerResponseByUserId = fetchAnswerByUserId(params.id as number);
 
     return (
         <BaseScreen>
@@ -38,27 +30,10 @@ const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params 
                 />
             </BackDropImage>
 
-            <div className="p-4">
-                <p className="font-bold">참여중인 인원</p>
-                <Selector
-                    placeholder="참여중인 인원을 선택해주세요"
-                    options={[
-                        { label: "홍길동", value: "1" },
-                        { label: "김철수", value: "2" },
-                        { label: "이영희", value: "3" },
-                    ]}
-                    value={selectedUser}
-                    onValueChange={(value) => setSelectedUser(value)}
-                />
-            </div>
-            <div className="p-4">
-                {mock__answerResponseByUserId.map((answer) => {
-                    return (
-                        <div key={answer.questionId}>
-                            <p>{answer.questionText}</p>
-                        </div>
-                    );
-                })}
+            <div className="flex flex-col gap-5 p-6">
+                <ProfileCard id={0} name={"김룸핏"} studentId={20} birthYear={2000} mbti={"ESTP"} />
+                <ProfileCard id={0} name={"김룸핏"} studentId={20} birthYear={2000} mbti={"ESTP"} />
+                <ProfileCard id={0} name={"김룸핏"} studentId={20} birthYear={2000} mbti={"ESTP"} />
             </div>
         </BaseScreen>
     );
