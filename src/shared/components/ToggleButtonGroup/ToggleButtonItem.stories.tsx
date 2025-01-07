@@ -4,6 +4,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 const meta: Meta<typeof ToggleButtonItem> = {
     title: "Components/Form/ToggleButtonItem",
     component: ToggleButtonItem,
+    argTypes: {
+        isSelected: {
+            control: "boolean",
+        },
+    },
 };
 
 export default meta;
