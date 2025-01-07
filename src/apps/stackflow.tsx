@@ -6,6 +6,7 @@ import CreateMatchPage from "@/pages/match/CreateMatchPage";
 import MatchDetailPage from "@/pages/match/MatchDetailPage";
 import MatchListPage from "@/pages/match/MatchListPage";
 import MyPage from "@/pages/mypage/MyPage";
+import ProfileDetailPage from "@/pages/profile/ProfileDetailPage";
 
 import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
@@ -33,6 +34,7 @@ const stackflowApp = stackflow({
                 ChatRoomPage: "/chat",
 
                 MyPage: "/mypage",
+                ProfileDetailPage: "/profile/detail",
             },
             fallbackActivity: () => "HomePage",
         }),
@@ -51,6 +53,7 @@ const stackflowApp = stackflow({
         ChatRoomPage,
 
         MyPage,
+        ProfileDetailPage,
     },
     initialActivity: () => "HomePage",
 });
