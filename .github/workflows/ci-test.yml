@@ -57,6 +57,11 @@ jobs:
         name: Storybook UI Test
         runs-on: roomfit
         needs: unit-test
+
+        permissions:
+            issues: write
+            pull-requests: write
+
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
