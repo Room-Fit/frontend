@@ -39,7 +39,7 @@ export const RangeDisplay = ({
     }, [maxRange, maxValue, minRange, minValue]);
 
     return (
-        <div className={cn(className, "relative")}>
+        <div className={cn("relative h-9 mt-1", className)}>
             <div className="absolute w-full h-[10px] rounded-full bg-dark-100" />
             <div className="absolute h-[10px] rounded-full bg-primary" ref={rangeDisplayRef} />
             <div className="absolute flex justify-between w-full top-[14px] text-xs font-normal">
