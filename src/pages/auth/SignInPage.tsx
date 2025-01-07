@@ -38,13 +38,13 @@ export default function SignInPage() {
                             <span className="ml-1 font-semibold underline">비밀번호 찾기</span>
                         </p>
                     </div>
-                </section>
 
-                <section className="flex gap-2 pb-2">
-                    <Button variant="secondary" className="w-full border-[1px] border-primary">
-                        회원가입
-                    </Button>
-                    <Button className="w-full">로그인</Button>
+                    <div className="flex gap-2">
+                        <Button className="w-full">로그인</Button>
+                        <Button variant="secondary" className="w-full border-[1px] border-primary">
+                            회원가입
+                        </Button>
+                    </div>
                 </section>
             </article>
         </Screen>
