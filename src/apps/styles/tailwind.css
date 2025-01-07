@@ -48,6 +48,9 @@
     .bg-dark-100 {
         background-color: var(--dark-100);
     }
+    .bg-dark-100\/50 {
+        background-color: rgba(239, 239, 239, 0.5);
+    }
 
     :root {
         --background: #fff;
