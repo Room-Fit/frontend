@@ -1,46 +1,35 @@
-import { Fragment } from "react/jsx-runtime";
+import { Screen } from "@/apps/Screen";
 
-import { Send } from "lucide-react";
-
-import { NavChatTop } from "@/apps/layouts/NavChat";
-
-import { ChatItem } from "@/features/chat/ui/ChatItem";
-import { Button } from "@/shared/ui/button";
-import { Input } from "@/shared/ui/input";
+import { ChatHistoryGroup } from "@/entities/chat/ui/ChatHistory/ChatHistoryGroup";
+import { ChatHistoryItem } from "@/entities/chat/ui/ChatHistory/ChatHistoryItem";
+import { ChatHistoryTime } from "@/entities/chat/ui/ChatHistory/ChatHistoryTime";
+import { ChatInput } from "@/entities/chat/ui/ChatInput/ChatInput";
+import { ChatNavTop } from "@/entities/chat/ui/ChatNavTop/ChatNavTop";
+import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
 
 export default function ChatRoomPage() {
     return (
-        <Fragment>
-            <NavChatTop title={"채팅방 이름"} currentQuota={0} maxQuota={0} />
+        <Screen>
+            <ChatGradientLayer className="w-full min-h-screen">
+                <ChatNavTop title={"채팅방 이름"} currentQuota={2} maxQuota={4} />
 
-            <div className="flex flex-col mt-[60px] pt-2 px-4 gap-2 mb-[64px]">
-                {Array.from({ length: 10 }).map(() => {
-                    return (
-                        <>
-                            <ChatItem
-                                sender={"홍길동"}
-                                time={"08:10"}
-                                content={"좀 더 긴 채팅 내용좀 더 긴 채팅 내용좀 더 긴 채팅 내용"}
-                                type={"ME"}
-                            />
-
-                            <ChatItem
-                                sender={"홍길동"}
-                                time={"08:10"}
-                                content={"좀 더 긴 채팅 내용"}
-                                type={"OTHER"}
-                            />
-                        </>
-                    );
-                })}
-            </div>
-
-            <div className="fixed bottom-0 bg-white shadow-lg w-full h-[60px] flex gap-2 px-2 py-2 items-center">
-                <Input className="h-full" />
-                <Button className="h-full aspect-square shrink-0">
-                    <Send />
-                </Button>
-            </div>
-        </Fragment>
+                <ChatHistoryGroup>
+                    <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
+                    <ChatHistoryItem
+                        type={"send"}
+                        author={"보내는 사람"}
+                        message={"최대 말품선 길이입니다 다람쥐다람쥐다람쥐다람쥐"}
+                        timeStamp={"2022-01-01T00:43:00+09:00"}
+                    />
+                    <ChatHistoryItem
+                        type={"receive"}
+                        author={"보내는 사람"}
+                        message={"최대 말품선 길이입니다 다람쥐다람쥐다람쥐다람쥐"}
+                        timeStamp={"2022-01-01T00:46:00+09:00"}
+                    />
+                </ChatHistoryGroup>
+                <ChatInput />
+            </ChatGradientLayer>
+        </Screen>
     );
 }
