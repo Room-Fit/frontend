@@ -14,3 +14,4 @@ export * from "./toggle";
 export * from "./label";
 export * from "./dialog";
 export * from "./textarea";
+export * from "./sheet";
