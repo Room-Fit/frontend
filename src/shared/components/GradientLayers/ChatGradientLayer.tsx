@@ -9,7 +9,7 @@ export const ChatGradientLayer = ({ className, children }: ChatGradientLayerProp
             className={className}
             style={{
                 background:
-                    "linear-gradient(to bottom, rgba(93, 165, 255, 0.5) 8%, rgba(6, 117, 255, 1) 58%)",
+                    "linear-gradient(to bottom, rgba(93, 165, 255, 0.3) 8%, rgba(6, 117, 255, 0.3) 58%)",
             }}
         >
             {children}
