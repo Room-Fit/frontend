@@ -1,12 +1,8 @@
-interface ProfileCardLogoProps extends React.ComponentProps<"svg"> {
+interface CardLogoProps extends React.ComponentProps<"svg"> {
     primaryColor?: string;
     secondaryColor?: string;
 }
-export const ProfileCardLogo = ({
-    primaryColor,
-    secondaryColor,
-    ...props
-}: ProfileCardLogoProps) => (
+export const CardLogo = ({ primaryColor, secondaryColor, ...props }: CardLogoProps) => (
     <svg
         width={159}
         height={156}

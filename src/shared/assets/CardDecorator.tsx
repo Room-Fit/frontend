@@ -1,7 +1,7 @@
-interface ProfileCardDecoratorProps extends React.ComponentProps<"svg"> {
+interface CardDecoratorProps extends React.ComponentProps<"svg"> {
     color?: string;
 }
-export const ProfileCardDecorator = ({ color, ...props }: ProfileCardDecoratorProps) => (
+export const CardDecorator = ({ color, ...props }: CardDecoratorProps) => (
     <svg
         width={187}
         height={341}
