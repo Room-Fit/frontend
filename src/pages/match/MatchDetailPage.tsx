@@ -1,7 +1,7 @@
 import { BaseScreen } from "@/apps/Screen";
 
 import { fetchMatchDetail } from "@/__mocks__/fetchMatchDetail";
-import { ProfileCard } from "@/entities/profile/ui/ProfileCard/ProfileCard";
+import { ChatProfileCard } from "@/entities/profile/ui/ChatProfileCard/ChatProfileCard";
 import { MatchInfo } from "@/features/match/ui/MatchInfo";
 import defaultImage from "@/shared/assets/bg-background.webp";
 import { BackDropImage } from "@/shared/components/BackDropImage";
@@ -31,9 +31,9 @@ const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params 
             </BackDropImage>
 
             <div className="flex flex-col gap-5 p-6">
-                <ProfileCard id={0} name={"김룸핏"} studentId={20} birthYear={2000} mbti={"ESTP"} />
-                <ProfileCard id={0} name={"김룸핏"} studentId={20} birthYear={2000} mbti={"ESTP"} />
-                <ProfileCard id={0} name={"김룸핏"} studentId={20} birthYear={2000} mbti={"ESTP"} />
+                <ChatProfileCard id={1} name={"김룸핏"} description="경북대학교 컴퓨터학부" />
+                <ChatProfileCard id={2} name={"김룸핏"} description="경북대학교 컴퓨터학부" />
+                <ChatProfileCard id={3} name={"김룸핏"} description="경북대학교 컴퓨터학부" />
             </div>
         </BaseScreen>
     );
