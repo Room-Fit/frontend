@@ -20,6 +20,24 @@ describe("useMatchFilterStore()", () => {
             };
         });
 
+        test("MatchFilterActionType.SET_RECRUITMENT_STATUS : payload 를 recruitmentStatus 에 반영하고, numOfAppliedFilters 를 업데이트합니다", () => {
+            const action: MatchFilterAction = {
+                type: MatchFilterActionType.SET_RECRUITMENT_STATUS,
+                payload: ["status1", "status2"],
+            };
+
+            const result = matchFilterReducer(state, action);
+
+            expect(result).toEqual({
+                numOfAppliedFilters: 2,
+                isRecruitmentPeopleSet: false,
+                recruitmentStatus: ["status1", "status2"],
+                minRecruitmentPeople: 1,
+                maxRecruitmentPeople: 6,
+                dormitoryType: "전체",
+            });
+        });
+
         test("MatchFilterActionType.ADD_RECRUITMENT_STATUS : payload 를 recruitmentStatus 에 추가합니다", () => {
             const action: MatchFilterAction = {
                 type: MatchFilterActionType.ADD_RECRUITMENT_STATUS,

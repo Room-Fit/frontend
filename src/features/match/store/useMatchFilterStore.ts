@@ -5,6 +5,7 @@ import { persist, redux } from "zustand/middleware";
 
 export enum MatchFilterActionType {
     CLEAR_ALL_FILTERS = "CLEAR_ALL_FILTERS",
+    SET_RECRUITMENT_STATUS = "SET_RECRUITMENT_STATUS",
     ADD_RECRUITMENT_STATUS = "ADD_RECRUITMENT_STATUS",
     REMOVE_RECRUITMENT_STATUS = "REMOVE_RECRUITMENT_STATUS",
     TOGGLE_RECRUITMENT_STATUS = "TOGGLE_RECRUITMENT_STATUS",
@@ -15,6 +16,7 @@ export enum MatchFilterActionType {
 
 export type MatchFilterAction =
     | { type: MatchFilterActionType.CLEAR_ALL_FILTERS }
+    | { type: MatchFilterActionType.SET_RECRUITMENT_STATUS; payload: string[] }
     | { type: MatchFilterActionType.ADD_RECRUITMENT_STATUS; payload: string }
     | { type: MatchFilterActionType.REMOVE_RECRUITMENT_STATUS; payload: string }
     | { type: MatchFilterActionType.TOGGLE_RECRUITMENT_STATUS; payload: string }
@@ -49,6 +51,12 @@ export const matchFilterReducer = (
     switch (action.type) {
         case MatchFilterActionType.CLEAR_ALL_FILTERS:
             return matchFilterInitialState;
+
+        case MatchFilterActionType.SET_RECRUITMENT_STATUS:
+            return produce(state, (draft) => {
+                draft.numOfAppliedFilters = action.payload.length;
+                draft.recruitmentStatus = action.payload;
+            });
 
         case MatchFilterActionType.ADD_RECRUITMENT_STATUS:
             if (state.recruitmentStatus.includes(action.payload)) return state;
