@@ -1,7 +1,7 @@
 import { execSync } from "child_process";
 import { danger, markdown, schedule } from "danger";
 
-const dangerJsStatus = {
+const dangerTestResults = {
     IS_PR_INCLUDE_ISSUE_NUMBER: {
         status: false,
         successMessage: "PR 제목에 #이슈넘버가 포함되어 있습니다.",
@@ -53,7 +53,7 @@ if (!danger.github.issue.labels || danger.github.issue.labels.length === 0) {
 schedule(async () => {
     try {
         execSync("npx tsc --noEmit", { stdio: "inherit" });
-    } catch (error) {
+    } catch {
         dangerTestResults.IS_TYPESCRIPT_COMPILE_SUCCESS.status = false;
     }
 });
@@ -62,7 +62,7 @@ schedule(async () => {
 schedule(async () => {
     try {
         execSync("npx eslint . --ext .ts,.tsx", { stdio: "inherit" });
-    } catch (error) {
+    } catch {
         dangerTestResults.IS_ESLINT_SUCCESS.status = false;
     }
 });
@@ -74,9 +74,9 @@ let prMessage = `
     | --- | --- |
 `;
 
-Object.entries(dangerTestResults).forEach(([_, result]) => {
+Object.values(dangerTestResults).forEach((testResult) => {
     prMessage += `
-    | ${result.status ? "✅" : "⚠️"} | ${result.status ? result.successMessage : result.failureMessage} |
+    | ${testResult.status ? "✅" : "⚠️"} | ${testResult.status ? testResult.successMessage : testResult.failureMessage} |
 `;
 });
 
