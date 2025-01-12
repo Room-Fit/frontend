@@ -1,13 +1,13 @@
 import { http, HttpResponse } from "msw";
 
-import { SignIn } from "@/features/auth/service/signIn";
+import { SignInRequestBody, SignInResponseBody } from "@/features/auth/service/signIn";
 
 export const signInHandlers = [
     http.post("/api/v1/auth/login", async ({ request }) => {
-        const body = (await request.json()) as SignIn.RequestBody;
+        const body = (await request.json()) as SignInRequestBody;
 
         if (body.email === "admin@knu.ac.kr" && body.password === "admin") {
-            const response: SignIn.ResponseBody = {
+            const response: SignInResponseBody = {
                 accessToken: "jwt-token",
                 refreshToken: "jwt-token2",
             };
