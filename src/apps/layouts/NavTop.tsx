@@ -10,9 +10,15 @@ export const NavTop = ({ children }: NavTopProps) => {
     return (
         <nav className="z-50 bg-white sticky top-0 h-[60px] shadow-md flex flex-col justify-center px-4">
             <ul className="flex items-center justify-between">
-                <li className="flex items-center gap-2" onClick={() => replace("HomePage", {})}>
-                    <img src="/favicon.svg" alt="룸핏" />
-                    <h1 className="text-lg font-bold">룸핏</h1>
+                <li
+                    className="flex items-center gap-2 w-[140px] hover:cursor-pointer"
+                    onClick={() => replace("MatchListPage", {})}
+                >
+                    <img
+                        className="block h-[50%]"
+                        src="/icon/logo-horizontal-dark.png"
+                        alt="룸핏"
+                    />
                 </li>
 
                 <li>{children}</li>
