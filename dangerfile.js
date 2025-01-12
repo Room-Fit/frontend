@@ -29,22 +29,22 @@ const dangerTestResults = {
     },
 };
 
-// 1. PR 제목에 #이슈넘버 포함
+// 1. PR 제목에 #이슈넘버 포함 여부 확인
 if (!/^#\d+/.test(danger.github.pr.title)) {
     dangerTestResults.IS_PR_INCLUDE_ISSUE_NUMBER.status = false;
 }
 
-// 2. Reviewer 지정
+// 2. Reviewer 지정 여부 확인
 if (danger.github.requested_reviewers.users.length === 0) {
     dangerTestResults.IS_REVIEWER_ASSIGNED.status = false;
 }
 
-// 3. Assignee 지정
+// 3. Assignee 지정 여부 확인
 if (!danger.github.pr.assignee) {
     dangerTestResults.IS_LABEL_ASSIGNED.status = false;
 }
 
-// 4. Label 할당
+// 4. Label 할당 여부 확인
 if (!danger.github.issue.labels || danger.github.issue.labels.length === 0) {
     dangerTestResults.IS_LABEL_ASSIGNED.status = false;
 }
@@ -67,16 +67,12 @@ schedule(async () => {
     }
 });
 
-// PR Message
-let prMessage = `
-    ### DangerJS Test Results
-    
-    | Tests | Message | 
-    | --- | --- |
-`;
+let prMessage = `### DangerJS Test Results\n\n| Tests | Message |\n| --- | --- |\n`;
 
 Object.values(dangerTestResults).forEach((testResult) => {
-    prMessage += `| ${testResult.status ? "✅" : "⚠️"} | ${testResult.status ? testResult.successMessage : testResult.failureMessage} | \n`;
+    prMessage += `| ${testResult.status ? "✅" : "⚠️"} | ${
+        testResult.status ? testResult.successMessage : testResult.failureMessage
+    } |\n`;
 });
 
 markdown(prMessage);
