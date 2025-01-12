@@ -19,6 +19,7 @@ export default tseslint.config(
             "**/*.config.mjs",
             "**/*.config.cjs",
         ],
+        "@typescript-eslint/no-namespace": "off",
     },
     {
         extends: [js.configs.recommended, ...tseslint.configs.recommended],
