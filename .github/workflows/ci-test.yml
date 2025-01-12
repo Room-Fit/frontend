@@ -7,9 +7,30 @@ on:
         types: [opened, reopened, synchronize]
 
 jobs:
-    lint:
-        name: Compile & Lint
+    cache:
+        name: Cache Node Modules
         runs-on: roomfit
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+
+            - name: Cache node_modules
+              uses: actions/cache@v3
+              with:
+                  path: node_modules
+                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-yarn-
+
+    danger:
+        name: Run DangerJS
+        runs-on: roomfit
+        needs: cache
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
@@ -31,18 +52,17 @@ jobs:
               run: npm install -g yarn
 
             - name: Install dependencies
-              run: yarn install
+              run: yarn install --frozen-lockfile
 
-            - name: Compile Typescript
-              run: npx tsc --noEmit
-
-            - name: Run lint
-              run: yarn lint
+            - name: Run DangerJS
+              env:
+                  DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: npx danger ci
 
     unit-test:
         name: Unit Test
         runs-on: roomfit
-        needs: lint
+        needs: danger
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
