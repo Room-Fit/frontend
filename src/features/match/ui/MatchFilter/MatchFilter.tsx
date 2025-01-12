@@ -5,7 +5,7 @@ import {
     useMatchFilterStore,
 } from "@/features/match/store/useMatchFilterStore";
 import { Selector } from "@/shared/components";
-import { CheckBoxWithLabel } from "@/shared/components/CheckBoxWithLabel/CheckBoxWithLabel";
+import { CheckBoxGroupWithLabel } from "@/shared/components/CheckBoxGroupWithLabel";
 import { DoubleSliderWithLabel } from "@/shared/components/DoubleSliderWithLabel/DoubleSliderWithLabel";
 import {
     Button,
@@ -22,8 +22,8 @@ import {
 
 export const MatchFilter = () => {
     const {
+        // recruitmentStatus,
         numOfAppliedFilters,
-        recruitmentStatus,
         minRecruitmentPeople,
         maxRecruitmentPeople,
         dormitoryType,
@@ -50,40 +50,17 @@ export const MatchFilter = () => {
                 </DrawerHeader>
 
                 <div className="px-4 py-1">
-                    <Label className="font-semibold">모집상태</Label>
-                    <div className="flex gap-2">
-                        {/* TODO: Array.map 으로 리팩토링 필요 */}
-                        <CheckBoxWithLabel
-                            label="모집중"
-                            checked={recruitmentStatus.includes("모집중")}
-                            onCheckedChange={() => {
-                                dispatch({
-                                    type: MatchFilterActionType.TOGGLE_RECRUITMENT_STATUS,
-                                    payload: "모집중",
-                                });
-                            }}
-                        />
-                        <CheckBoxWithLabel
-                            label="모집완료"
-                            checked={recruitmentStatus.includes("모집완료")}
-                            onCheckedChange={() => {
-                                dispatch({
-                                    type: MatchFilterActionType.TOGGLE_RECRUITMENT_STATUS,
-                                    payload: "모집완료",
-                                });
-                            }}
-                        />
-                        <CheckBoxWithLabel
-                            label="매칭완료"
-                            checked={recruitmentStatus.includes("매칭완료")}
-                            onCheckedChange={() => {
-                                dispatch({
-                                    type: MatchFilterActionType.TOGGLE_RECRUITMENT_STATUS,
-                                    payload: "매칭완료",
-                                });
-                            }}
-                        />
-                    </div>
+                    <CheckBoxGroupWithLabel
+                        groupClassName="flex gap-2"
+                        label="모집상태"
+                        options={["모집중", "모집완료", "매칭완료"]}
+                        onCheckedStateChange={(checked) => {
+                            dispatch({
+                                type: MatchFilterActionType.SET_RECRUITMENT_STATUS,
+                                payload: checked,
+                            });
+                        }}
+                    />
 
                     <Label className="font-semibold">기숙사</Label>
                     <Selector
