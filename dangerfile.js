@@ -30,7 +30,7 @@ const dangerTestResults = {
 };
 
 // 1. PR 제목에 #이슈넘버 포함 여부 확인
-if (!/^#\d+/.test(danger.github.pr.title)) {
+if (!/.*#\d+/.test(danger.github.pr.title)) {
     dangerTestResults.IS_PR_INCLUDE_ISSUE_NUMBER.status = false;
 }
 
