@@ -68,15 +68,15 @@ schedule(async () => {
 });
 
 // PR Message
-const prMessage = `
+let prMessage = `
     ### 
     | Tests | Message | 
     | --- | --- |
 `;
 
-Object.entries(dangerTestResults).forEach(([key, value]) => {
+Object.entries(dangerTestResults).forEach(([_, result]) => {
     prMessage += `
-    | ${value.value ? "✅" : "⚠️"} | ${value.value ? value.successMessage : value.failureMessage} |
+    | ${result.value ? "✅" : "⚠️"} | ${result.value ? result.successMessage : result.failureMessage} |
 `;
 });
 
