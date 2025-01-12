@@ -1,5 +1,3 @@
-import { Bell } from "lucide-react";
-
 import { NavTop } from "@/apps/layouts/NavTop";
 
 import type { Meta, StoryObj } from "@storybook/react";
@@ -13,7 +11,5 @@ export default meta;
 type Story = StoryObj<typeof NavTop>;
 
 export const Default: Story = {
-    args: {
-        children: <Bell size={24} />,
-    },
+    args: {},
 };
