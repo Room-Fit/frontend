@@ -3,27 +3,27 @@ import { danger, markdown, schedule } from "danger";
 
 const dangerTestResults = {
     IS_PR_INCLUDE_ISSUE_NUMBER: {
-        status: false,
+        status: true,
         successMessage: "PR 제목에 #이슈넘버가 포함되어 있습니다.",
         failureMessage: "PR 제목에 #이슈넘버를 포함해주세요.",
     },
     IS_REVIEWER_ASSIGNED: {
-        status: false,
+        status: true,
         successMessage: "PR에 Reviewer가 지정되어 있습니다.",
         failureMessage: "PR에 Reviewer를 지정해주세요.",
     },
     IS_LABEL_ASSIGNED: {
-        status: false,
+        status: true,
         successMessage: "PR에 Label이 지정되어 있습니다.",
         failureMessage: "PR에 Label을 지정해주세요.",
     },
     IS_TYPESCRIPT_COMPILE_SUCCESS: {
-        status: false,
+        status: true,
         successMessage: "TypeScript 컴파일에 성공했습니다.",
         failureMessage: "TypeScript 컴파일에 실패했습니다.",
     },
     IS_ESLINT_SUCCESS: {
-        status: false,
+        status: true,
         successMessage: "ESLint 결과에서 문제가 발견되지 않았습니다.",
         failureMessage: "ESLint 결과에서 문제가 발견되었습니다.",
     },
@@ -69,15 +69,14 @@ schedule(async () => {
 
 // PR Message
 let prMessage = `
-    ### 
+    ### DangerJS Test Results
+    
     | Tests | Message | 
     | --- | --- |
 `;
 
 Object.values(dangerTestResults).forEach((testResult) => {
-    prMessage += `
-    | ${testResult.status ? "✅" : "⚠️"} | ${testResult.status ? testResult.successMessage : testResult.failureMessage} |
-`;
+    prMessage += `| ${testResult.status ? "✅" : "⚠️"} | ${testResult.status ? testResult.successMessage : testResult.failureMessage} | \n`;
 });
 
 markdown(prMessage);
