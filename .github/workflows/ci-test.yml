@@ -31,6 +31,11 @@ jobs:
         name: Run DangerJS
         runs-on: roomfit
         needs: cache
+
+        permissions:
+            issues: write
+            pull-requests: write
+
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
