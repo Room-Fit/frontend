@@ -2,6 +2,7 @@ import { BaseScreen } from "@/apps/Screen";
 import { NavTop } from "@/apps/layouts/NavTop";
 import { useFlow } from "@/apps/stackflow";
 
+import { MatchFilter } from "@/features/match/ui";
 import { MatchListItem } from "@/features/match/ui/MatchListItem";
 
 const dummyData = [
@@ -59,7 +60,9 @@ export default function MatchListPage() {
 
     return (
         <BaseScreen>
-            <NavTop />
+            <NavTop>
+                <MatchFilter />
+            </NavTop>
             <div>
                 {dummyData.map((data) => {
                     return (
