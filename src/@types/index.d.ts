@@ -1,3 +1,33 @@
+declare module "*.png" {
+    const value: string;
+    export default value;
+}
+
+declare module "*.jpg" {
+    const value: string;
+    export default value;
+}
+
+declare module "*.jpeg" {
+    const value: string;
+    export default value;
+}
+
+declare module "*.gif" {
+    const value: string;
+    export default value;
+}
+
+declare module "*.svg" {
+    const content: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+    export default content;
+}
+
+declare module "*.webp" {
+    const value: string;
+    export default value;
+}
+
 declare type CSSAbsoluteUnit = "cm" | "mm" | "Q" | "in" | "pc" | "pt" | "px";
 declare type CSSRelativeUnit =
     | "em"
