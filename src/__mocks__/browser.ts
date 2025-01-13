@@ -1,4 +1,6 @@
-import { signInHandlers } from "@/__mocks__/auth/signIn";
+import { authHandlers } from "@/__mocks__/auth";
 import { setupWorker } from "msw/browser";
 
-export const worker = setupWorker(...signInHandlers);
+const handlers = [...authHandlers];
+
+export const worker = setupWorker(...handlers);
