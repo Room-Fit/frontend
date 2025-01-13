@@ -1,13 +1,17 @@
 import { House, Users } from "lucide-react";
 
 export interface MatchInfoProps {
+    id: number;
     title: string;
     dormitory: string;
 
     currentQuota: number;
     maxQuota: number;
 
-    author: string;
+    author: {
+        id: number;
+        nickname: string;
+    };
     createdAt: string;
 }
 
@@ -39,7 +43,7 @@ export const MatchInfo = ({
 
                 <ul className="flex gap-2 text-sm">
                     <li>
-                        <span>{author}</span>
+                        <span>{author.nickname}</span>
                     </li>
                     <li>
                         <span>{createdAt}</span>
