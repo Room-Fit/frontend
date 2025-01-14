@@ -12,20 +12,20 @@ export default meta;
 type Story = StoryObj<typeof SelectorFormElement>;
 
 const formInitialState: FormSchema = {
-    _id: "_id",
+    id: 1,
     title: "선호하는 색상",
     description: "선호하는 색상을 선택해주세요.",
     questions: [
         {
-            questionId: 1,
-            questionText: "선호하는 색상이 무엇인가요?",
-            questionType: "selector",
-            dataType: "string",
+            id: 1,
+            title: "선호하는 색상이 무엇인가요?",
+            type: "selector",
             options: [
                 { label: "빨강", value: "Red" },
                 { label: "초록", value: "Green" },
                 { label: "파랑", value: "Blue" },
             ],
+            optionDelimiter: null,
         },
     ],
 };
@@ -38,10 +38,12 @@ export const Default: Story = {
         return (
             <FormStateContextProvider formInitialState={formInitialState}>
                 <SelectorFormElement
-                    questionId={args.questionId}
-                    questionText={args.questionText}
+                    id={args.id}
+                    title={args.title}
                     options={args.options}
-                ></SelectorFormElement>
+                    type={args.type}
+                    optionDelimiter={args.optionDelimiter}
+                />
             </FormStateContextProvider>
         );
     },

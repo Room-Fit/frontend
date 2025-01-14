@@ -24,20 +24,20 @@ describe("FormContext", () => {
 
         beforeEach(() => {
             formInitialState = {
-                _id: "_id",
+                id: 1,
                 title: "test-title",
                 description: "test-description",
                 questions: [
                     {
-                        questionId: 1,
-                        questionText: "test-question-text",
-                        questionType: "test-type",
+                        id: 1,
+                        title: "test-question-text",
+                        type: "test-type",
                         options: [
                             { label: "선택지1", value: "value1" },
                             { label: "선택지2", value: "value2" },
                             { label: "선택지3", value: "value3" },
                         ],
-                        dataType: "string",
+                        optionDelimiter: null,
                     },
                 ],
             };
@@ -54,7 +54,7 @@ describe("FormContext", () => {
         test("APPEND_FORM_STATUS_BY_QUESTION_ID : questionId 에 해당하는 문항의 선택지 중 label 에 해당하는 option 을 options 배열에 추가한다", () => {
             const updatedState = formReducer(formInitialState, {
                 type: FORM_DISPATCH_ACTION_TYPES.APPEND_FORM_STATUS_BY_QUESTION_ID,
-                payload: { questionId: 1, label: "value", value: "1" },
+                payload: { id: 1, label: "value", value: "1" },
             });
 
             expect(updatedState?.questions[0].options).toEqual([
@@ -74,7 +74,7 @@ describe("FormContext", () => {
 
             updatedState = formReducer(updatedState, {
                 type: FORM_DISPATCH_ACTION_TYPES.APPEND_FORM_STATUS_BY_QUESTION_ID,
-                payload: { questionId: 1, label: "value", value: "1" },
+                payload: { id: 1, label: "value", value: "1" },
             });
 
             expect(updatedState?.questions[0].options).toEqual([{ label: "value", value: "1" }]);
@@ -83,7 +83,7 @@ describe("FormContext", () => {
         test("UPDATE_FORM_STATUS_BY_QUESTION_ID : questionId 에 해당하는 문항의 선택지 중 label 에 해당하는 선택지의 value 를 변경한다", () => {
             const updatedState = formReducer(formInitialState, {
                 type: FORM_DISPATCH_ACTION_TYPES.UPDATE_FORM_STATUS_BY_QUESTION_ID,
-                payload: { questionId: 1, label: "선택지2", value: "updatedValue" },
+                payload: { id: 1, label: "선택지2", value: "updatedValue" },
             });
             expect(updatedState?.questions[0].options[1].value).toBe("updatedValue");
         });
@@ -91,7 +91,7 @@ describe("FormContext", () => {
         test("DELETE_FORM_STATUS_BY_QUESTION_ID : questionId 에 해당하는 문항의 선택지 중 label 에 해당하는 option 을 options 배열에서 제거한다", () => {
             const updatedState = formReducer(formInitialState, {
                 type: FORM_DISPATCH_ACTION_TYPES.DELETE_FORM_STATUS_BY_QUESTION_ID,
-                payload: { questionId: 1, label: "선택지2", value: "value2" },
+                payload: { id: 1, label: "선택지2", value: "value2" },
             });
             expect(updatedState?.questions[0].options).toEqual([
                 { label: "선택지1", value: "value1" },
@@ -105,7 +105,7 @@ describe("FormContext", () => {
 
                 const updatedState = formReducer(formInitialState, {
                     type: FORM_DISPATCH_ACTION_TYPES.TOGGLE_FORM_STATUS_BY_QUESTION_ID,
-                    payload: { questionId: 1, label: "선택지2", value: "value2" },
+                    payload: { id: 1, label: "선택지2", value: "value2" },
                 });
                 expect(updatedState?.questions[0].options[0].value).toBe("value2");
             });
@@ -115,7 +115,7 @@ describe("FormContext", () => {
 
                 const updatedState = formReducer(formInitialState, {
                     type: FORM_DISPATCH_ACTION_TYPES.TOGGLE_FORM_STATUS_BY_QUESTION_ID,
-                    payload: { questionId: 1, label: "선택지2", value: "value2" },
+                    payload: { id: 1, label: "선택지2", value: "value2" },
                 });
                 expect(updatedState?.questions[0].options).toHaveLength(0);
             });
@@ -126,7 +126,7 @@ describe("FormContext", () => {
 
             const updatedState = formReducer(formInitialState, {
                 type: FORM_DISPATCH_ACTION_TYPES.CHANGE_FORM_STATUS_BY_QUESTION_ID,
-                payload: { questionId: 1, label: "선택지2", value: "updatedValue" },
+                payload: { id: 1, label: "선택지2", value: "updatedValue" },
             });
             expect(updatedState?.questions[0].options[0]).toEqual({
                 label: "선택지2",

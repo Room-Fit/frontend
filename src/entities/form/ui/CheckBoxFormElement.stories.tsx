@@ -1,4 +1,5 @@
 import { FormStateContextProvider } from "@/entities/form/contexts";
+import { FormSchema } from "@/entities/form/types";
 import { CheckboxFormElement } from "@/entities/form/ui/CheckboxFormElement";
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -10,16 +11,16 @@ const meta: Meta<typeof CheckboxFormElement> = {
 export default meta;
 type Story = StoryObj<typeof CheckboxFormElement>;
 
-const formInitialState = {
-    _id: "_id",
+const formInitialState: FormSchema = {
+    id: 1,
     title: "선호하는 색상",
     description: "선호하는 색상을 선택해주세요.",
     questions: [
         {
-            questionId: 1,
-            questionText: "선호하는 색상이 무엇인가요?",
-            questionType: "checkbox",
-            dataType: "string",
+            id: 1,
+            title: "선호하는 색상이 무엇인가요?",
+            type: "checkbox",
+            optionDelimiter: null,
             options: [
                 { label: "빨강", value: "Red" },
                 { label: "초록", value: "Green" },
@@ -37,10 +38,12 @@ export const Default: Story = {
         return (
             <FormStateContextProvider formInitialState={formInitialState}>
                 <CheckboxFormElement
-                    questionId={args.questionId}
-                    questionText={args.questionText}
+                    id={args.id}
+                    title={args.title}
                     options={args.options}
-                ></CheckboxFormElement>
+                    type={args.type}
+                    optionDelimiter={args.optionDelimiter}
+                />
             </FormStateContextProvider>
         );
     },

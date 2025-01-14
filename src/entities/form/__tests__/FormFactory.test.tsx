@@ -10,30 +10,30 @@ describe("FormFactory", () => {
 
             beforeEach(() => {
                 formSchema = {
-                    _id: "_id",
+                    id: 1,
                     title: "test-title",
                     description: "test-description",
                     questions: [
                         {
-                            questionId: 1,
-                            questionText: "test-question-text",
-                            questionType: "",
+                            id: 1,
+                            title: "test-question-text",
+                            type: "",
                             options: [],
-                            dataType: "string",
+                            optionDelimiter: null,
                         },
                     ],
                 };
             });
 
             test("questionType 이 selector 인 경우 SelectorFormElement 를 반환한다", () => {
-                formSchema.questions[0].questionType = "selector";
+                formSchema.questions[0].type = "selector";
 
                 const form = FormFactory.createFormBySchema(formSchema);
                 expect(form).toContain(SelectorFormElement);
             });
 
             test("questionType 이 checkbox 인 경우 CheckboxFormElement 를 반환한다", () => {
-                formSchema.questions[0].questionType = "checkbox";
+                formSchema.questions[0].type = "checkbox";
 
                 const form = FormFactory.createFormBySchema(formSchema);
                 expect(form).toContain(CheckboxFormElement);

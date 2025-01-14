@@ -4,27 +4,19 @@ import {
     FORM_DISPATCH_ACTION_TYPES,
     useFormStateContext,
 } from "@/entities/form/hooks/useFormStateContext";
-import { Option } from "@/entities/form/types";
+import { Question } from "@/entities/form/types";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select";
 
-export type SelectorWithLabelFormProps = {
-    questionId: number;
-    questionText: string;
-    options: Option[];
-};
+export type SelectorWithLabelFormProps = Question;
 
-export const SelectorFormElement = ({
-    questionId,
-    questionText,
-    options,
-}: SelectorWithLabelFormProps) => {
+export const SelectorFormElement = ({ id, title, options }: SelectorWithLabelFormProps) => {
     const htmlFor = useId();
 
     const { formState, dispatch } = useFormStateContext();
 
     const questionIndex = useMemo(() => {
-        return formState.questions.findIndex((question) => question.questionId === questionId);
-    }, [formState.questions, questionId]);
+        return formState.questions.findIndex((question) => question.id === id);
+    }, [formState.questions, id]);
 
     const value = formState.questions[questionIndex].options[0]?.value || "";
 
@@ -33,19 +25,19 @@ export const SelectorFormElement = ({
             dispatch({
                 type: FORM_DISPATCH_ACTION_TYPES.CHANGE_FORM_STATUS_BY_QUESTION_ID,
                 payload: {
-                    questionId: questionId,
+                    id,
                     label: options.find((option) => option.value === updatedValue)?.label || "",
                     value: updatedValue,
                 },
             });
         },
-        [dispatch, options, questionId],
+        [dispatch, options, id],
     );
 
     return (
         <div data-testid="selector-with-label-form">
             <label className="py-1 font-bold" htmlFor={htmlFor}>
-                {questionText}
+                {title}
             </label>
 
             <Select value={value} onValueChange={onValueChange}>

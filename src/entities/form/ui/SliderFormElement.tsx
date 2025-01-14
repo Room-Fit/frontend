@@ -4,27 +4,19 @@ import {
     FORM_DISPATCH_ACTION_TYPES,
     useFormStateContext,
 } from "@/entities/form/hooks/useFormStateContext";
-import { Option } from "@/entities/form/types";
+import { Question } from "@/entities/form/types";
 import { Slider } from "@/shared/ui/slider";
 
-export interface SliderFormElementProps {
-    questionId: number;
-    questionText: string;
-    options: Option[];
-}
+export type SliderFormElementProps = Question;
 
-export const SliderFormElement = ({
-    questionId,
-    questionText,
-    options,
-}: SliderFormElementProps) => {
+export const SliderFormElement = ({ id, title, options }: SliderFormElementProps) => {
     const [min, max] = options;
 
     const { formState, dispatch } = useFormStateContext();
 
     const question = useMemo(() => {
-        return formState.questions.find((question) => question.questionId === questionId);
-    }, [formState.questions, questionId]);
+        return formState.questions.find((question) => question.id === id);
+    }, [formState.questions, id]);
 
     const value = [Number(question?.options[0]?.value) || 1];
 
@@ -33,20 +25,20 @@ export const SliderFormElement = ({
             dispatch({
                 type: FORM_DISPATCH_ACTION_TYPES.UPDATE_FORM_STATUS_BY_QUESTION_ID,
                 payload: {
-                    questionId: questionId,
+                    id,
                     label: "value",
                     value: value[0].toString(),
                 },
             });
         },
-        [dispatch, questionId],
+        [dispatch, id],
     );
 
     useEffect(() => {
         dispatch({
             type: FORM_DISPATCH_ACTION_TYPES.APPEND_FORM_STATUS_BY_QUESTION_ID,
             payload: {
-                questionId: questionId,
+                id,
                 label: "value",
                 value: min.value,
             },
@@ -56,7 +48,7 @@ export const SliderFormElement = ({
 
     return (
         <div>
-            <p className="font-bold">{questionText}</p>
+            <p className="font-bold">{title}</p>
             <div className="px-2">
                 <Slider
                     data-testid="slider-with-label-form"

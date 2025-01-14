@@ -12,19 +12,19 @@ export default meta;
 type Story = StoryObj<typeof SliderFormElement>;
 
 const formInitialState: FormSchema = {
-    _id: "_id",
+    id: 1,
     title: "잠귀",
     description: "잠귀에 대한 민감도를 선택해주세요.",
     questions: [
         {
-            questionId: 1,
-            questionText: "잠귀에 대한 민감도를 선택해주세요.",
-            questionType: "slider",
-            dataType: "string",
+            id: 1,
+            title: "잠귀에 대한 민감도를 선택해주세요.",
+            type: "slider",
             options: [
                 { label: "밝음", value: "1" },
                 { label: "어두움", value: "10" },
             ],
+            optionDelimiter: null,
         },
     ],
 };
@@ -37,9 +37,11 @@ export const Default: Story = {
         return (
             <FormStateContextProvider formInitialState={formInitialState}>
                 <SliderFormElement
-                    questionId={args.questionId}
-                    questionText={args.questionText}
+                    id={args.id}
+                    title={args.title}
                     options={args.options}
+                    optionDelimiter={args.optionDelimiter}
+                    type={args.type}
                 ></SliderFormElement>
             </FormStateContextProvider>
         );
