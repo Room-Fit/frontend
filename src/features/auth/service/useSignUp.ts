@@ -79,22 +79,43 @@ export const useSignUp = () => {
         push("SignUpPage", { section: 2 });
     }, [password, push]);
 
-    const toSignUpCompleteSection = useCallback(() => {
+    const toSignUpCompleteSection = useCallback(async () => {
+        if (!emailRef.current?.value) return;
+        if (!nicknameRef.current?.value) return;
+
         try {
             SignUpInfoSchema.parse({
-                nickname: nicknameRef.current?.value as string,
+                nickname: nicknameRef.current.value,
                 birth,
                 studentId,
                 department,
                 gender,
             });
+            await toast
+                .promise(
+                    authService.signUp({
+                        email: emailRef.current.value,
+                        nickname: nicknameRef.current.value,
+                        password,
+                        birth,
+                        studentId,
+                        department,
+                        gender,
+                    }),
+                    {
+                        success: "회원가입 성공!",
+                        pending: "회원가입 중 입니다",
+                        error: renderToastFromDerivedError,
+                    },
+                )
+                .then(() => {
+                    replace("HomePage", {});
+                });
         } catch (e: unknown) {
             toast.error((e as ThrownZodError).errors[0].message);
             return;
         }
-
-        replace("HomePage", {});
-    }, [birth, department, gender, replace, studentId]);
+    }, [birth, department, gender, password, replace, studentId]);
 
     return {
         state,
