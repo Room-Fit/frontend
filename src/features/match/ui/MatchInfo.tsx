@@ -4,10 +4,8 @@ export interface MatchInfoProps {
     id: number;
     title: string;
     dormitory: string;
-
     currentQuota: number;
     maxQuota: number;
-
     author: {
         id: number;
         nickname: string;
