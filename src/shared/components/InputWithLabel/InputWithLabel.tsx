@@ -9,13 +9,13 @@ export interface InputWithLabelProps extends React.ComponentProps<"input"> {
 }
 
 export const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
-    ({ id, label, ...props }) => {
+    ({ id, label, ...props }, ref) => {
         return (
             <Fragment>
                 <Label htmlFor={id} className="my-1 text-base font-normal">
                     {label}
                 </Label>
-                <Input id={id} {...props} />
+                <Input ref={ref} id={id} {...props} />
             </Fragment>
         );
     },
