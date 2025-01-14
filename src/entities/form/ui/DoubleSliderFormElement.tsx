@@ -1,29 +1,26 @@
 import { useCallback, useEffect, useMemo } from "react";
 
 import { FORM_DISPATCH_ACTION_TYPES, useFormStateContext } from "@/entities/form/hooks";
-import { Option } from "@/entities/form/types";
+import { Question } from "@/entities/form/types";
 import { DualRangeSlider } from "@/shared/ui";
 
-export interface DoubleSliderWithLabelFormProps {
-    questionId: number;
-    questionText: string;
-    options: Option[];
-}
+export type DoubleSliderWithLabelFormProps = Question;
 
 export const DoubleSliderFormElement = ({
-    questionId,
-    questionText,
+    id,
+    title,
     options,
+    optionDelimiter,
 }: DoubleSliderWithLabelFormProps) => {
     const min = options[0];
     const max = options[1];
-    const unit = options[2];
+    const unit = optionDelimiter;
 
     const { formState, dispatch } = useFormStateContext();
 
     const question = useMemo(() => {
-        return formState.questions.find((q) => q.questionId === questionId);
-    }, [formState.questions, questionId]);
+        return formState.questions.find((question) => question.id === id);
+    }, [formState.questions, id]);
 
     const value = useMemo(() => {
         return [Number(question?.options[0]?.value), Number(question?.options[1]?.value)];
@@ -33,31 +30,31 @@ export const DoubleSliderFormElement = ({
         (updatedValue: number[]) => {
             dispatch({
                 type: FORM_DISPATCH_ACTION_TYPES.UPDATE_FORM_STATUS_BY_QUESTION_ID,
-                payload: { questionId, label: "min", value: updatedValue[0].toString() },
+                payload: { id, label: "min", value: updatedValue[0].toString() },
             });
             dispatch({
                 type: FORM_DISPATCH_ACTION_TYPES.UPDATE_FORM_STATUS_BY_QUESTION_ID,
-                payload: { questionId, label: "max", value: updatedValue[1].toString() },
+                payload: { id, label: "max", value: updatedValue[1].toString() },
             });
         },
-        [dispatch, questionId],
+        [dispatch, id],
     );
 
     useEffect(() => {
         dispatch({
             type: FORM_DISPATCH_ACTION_TYPES.APPEND_FORM_STATUS_BY_QUESTION_ID,
-            payload: { questionId, label: "min", value: min.value },
+            payload: { id, label: "min", value: min.value },
         });
         dispatch({
             type: FORM_DISPATCH_ACTION_TYPES.APPEND_FORM_STATUS_BY_QUESTION_ID,
-            payload: { questionId, label: "max", value: max.value },
+            payload: { id, label: "max", value: max.value },
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div>
-            <p className="font-bold">{questionText}</p>
+            <p className="font-bold">{title}</p>
             <div className="px-2">
                 <DualRangeSlider
                     data-testid="double-slider-with-label-form"
@@ -71,7 +68,7 @@ export const DoubleSliderFormElement = ({
                     label={(value) => (
                         <span className="flex-shrink-0 mt-2 text-sm text-gray-500">
                             {value}
-                            {unit.value}
+                            {unit}
                         </span>
                     )}
                     labelPosition="bottom"

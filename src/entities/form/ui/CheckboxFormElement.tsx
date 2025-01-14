@@ -4,21 +4,13 @@ import {
     FORM_DISPATCH_ACTION_TYPES,
     useFormStateContext,
 } from "@/entities/form/hooks/useFormStateContext";
-import { Option } from "@/entities/form/types";
+import { Option, Question } from "@/entities/form/types";
 import { Checkbox } from "@/shared/ui/checkbox";
 import { CheckedState } from "@radix-ui/react-checkbox";
 
-export interface CheckboxFormElementProps {
-    questionId: number;
-    questionText: string;
-    options: Option[];
-}
+export type CheckboxFormElementProps = Question;
 
-export const CheckboxFormElement = ({
-    questionId,
-    questionText,
-    options,
-}: CheckboxFormElementProps) => {
+export const CheckboxFormElement = ({ id, title, options }: CheckboxFormElementProps) => {
     const htmlFor = useId();
 
     const { formState, dispatch } = useFormStateContext();
@@ -27,20 +19,18 @@ export const CheckboxFormElement = ({
         (option: Option, checked: CheckedState) => {
             dispatch({
                 type: FORM_DISPATCH_ACTION_TYPES.TOGGLE_FORM_STATUS_BY_QUESTION_ID,
-                payload: { questionId, label: option.label, value: checked.toString() },
+                payload: { id, label: option.label, value: checked.toString() },
             });
         },
-        [dispatch, questionId],
+        [dispatch, id],
     );
 
     return (
         <div className="flex flex-col gap-1" data-testid="checkbox-with-label-form">
-            <p className="font-bold">{questionText}</p>
+            <p className="font-bold">{title}</p>
 
             {options.map((option, index) => {
-                const question = formState.questions.find(
-                    (question) => question.questionId === questionId,
-                );
+                const question = formState.questions.find((question) => question.id === id);
                 const isChecked =
                     question?.options.find((q) => q.label === option.label)?.value === "true";
 

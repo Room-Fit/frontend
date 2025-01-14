@@ -44,7 +44,7 @@ export type FormDispatchAction =
       };
 
 export type FormDispatchActionPayload = {
-    questionId: number;
+    id: number;
     label?: string;
     value: string;
 };
@@ -60,11 +60,11 @@ export const formReducer = (state: FormSchema, action: FormDispatchAction): Form
                 });
             });
 
-        // questionId 를 기반으로 사용자가 선택한 label 에 대응하는 value 를 업데이트
+        // id 를 기반으로 사용자가 선택한 label 에 대응하는 value 를 업데이트
         case FORM_DISPATCH_ACTION_TYPES.UPDATE_FORM_STATUS_BY_QUESTION_ID:
             return produce(state, (draft) => {
                 draft.questions.forEach((question) => {
-                    if (question.questionId === action.payload?.questionId) {
+                    if (question.id === action.payload?.id) {
                         question.options.forEach((option) => {
                             if (option.label === action.payload?.label)
                                 option.value = action.payload?.value;
@@ -73,11 +73,11 @@ export const formReducer = (state: FormSchema, action: FormDispatchAction): Form
                 });
             });
 
-        // questionId 를 기반으로 options 에 사용자가 선택한 label 과 value 를 추가
+        // id 를 기반으로 options 에 사용자가 선택한 label 과 value 를 추가
         case FORM_DISPATCH_ACTION_TYPES.APPEND_FORM_STATUS_BY_QUESTION_ID:
             return produce(state, (draft) => {
                 draft.questions.forEach((question) => {
-                    if (question.questionId === action.payload?.questionId) {
+                    if (question.id === action.payload?.id) {
                         question.options.push({
                             label: action.payload?.label || "",
                             value: action.payload?.value,
@@ -86,11 +86,11 @@ export const formReducer = (state: FormSchema, action: FormDispatchAction): Form
                 });
             });
 
-        // questionId 를 기반으로 options 에 사용자가 선택한 label 과 value 를 삭제
+        // id 를 기반으로 options 에 사용자가 선택한 label 과 value 를 삭제
         case FORM_DISPATCH_ACTION_TYPES.DELETE_FORM_STATUS_BY_QUESTION_ID:
             return produce(state, (draft) => {
                 draft.questions.forEach((question) => {
-                    if (question.questionId === action.payload?.questionId) {
+                    if (question.id === action.payload?.id) {
                         question.options = question.options.filter(
                             (option) =>
                                 option.label !== action.payload?.label &&
@@ -100,12 +100,10 @@ export const formReducer = (state: FormSchema, action: FormDispatchAction): Form
                 });
             });
 
-        // questionId 를 기반으로 options 에 사용자가 선택한 label 과 value 를 toggle
+        // id 를 기반으로 options 에 사용자가 선택한 label 과 value 를 toggle
         case FORM_DISPATCH_ACTION_TYPES.TOGGLE_FORM_STATUS_BY_QUESTION_ID:
             return produce(state, (draft) => {
-                const question = draft.questions.find(
-                    (q) => q.questionId === action.payload?.questionId,
-                );
+                const question = draft.questions.find((q) => q.id === action.payload?.id);
                 if (question) {
                     const optionIndex = question.options.findIndex(
                         (option) => option.label === action.payload?.label,
@@ -122,7 +120,7 @@ export const formReducer = (state: FormSchema, action: FormDispatchAction): Form
 
         case FORM_DISPATCH_ACTION_TYPES.CLEAR_FORM_STATUS:
             return {
-                _id: "",
+                id: 0,
                 title: "",
                 description: "",
                 questions: [],
@@ -131,7 +129,7 @@ export const formReducer = (state: FormSchema, action: FormDispatchAction): Form
         case FORM_DISPATCH_ACTION_TYPES.CHANGE_FORM_STATUS_BY_QUESTION_ID:
             return produce(state, (draft) => {
                 draft.questions.forEach((question) => {
-                    if (question.questionId === action.payload?.questionId) {
+                    if (question.id === action.payload?.id) {
                         question.options = [
                             {
                                 label: action.payload?.label || "",
