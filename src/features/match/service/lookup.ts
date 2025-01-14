@@ -21,7 +21,6 @@ const fetchMatchList = async () => {
             .addCase(404, "존재하지 않는 핏글입니다.")
             .addCase(500, "서버 오류가 발생하였습니다. 관리자에게 문의바랍니다.")
             .handle();
-        throw err;
     }
 };
 
