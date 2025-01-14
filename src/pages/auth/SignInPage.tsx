@@ -3,11 +3,14 @@ import { ChevronLeft } from "lucide-react";
 import { Screen } from "@/apps/Screen";
 import { useFlow } from "@/apps/stackflow";
 
+import { useSignIn } from "@/features/auth/service/useSignIn";
 import { InputWithLabel } from "@/shared/components/InputWithLabel/InputWithLabel";
 import { Button } from "@/shared/ui";
 
 export default function SignInPage() {
     const { pop } = useFlow();
+
+    const { emailRef, passwordRef, signIn } = useSignIn();
 
     return (
         <Screen>
@@ -19,6 +22,7 @@ export default function SignInPage() {
                         <h1 className="my-2 text-xl font-bold">로그인</h1>
 
                         <InputWithLabel
+                            ref={emailRef}
                             id="email"
                             label="아이디 (이메일)"
                             type="email"
@@ -27,6 +31,7 @@ export default function SignInPage() {
                         />
 
                         <InputWithLabel
+                            ref={passwordRef}
                             id="password"
                             label="비밀번호"
                             type="password"
@@ -40,7 +45,9 @@ export default function SignInPage() {
                     </div>
 
                     <div className="flex gap-2">
-                        <Button className="w-full">로그인</Button>
+                        <Button className="w-full" data-testid="btn-login" onClick={signIn}>
+                            로그인
+                        </Button>
                         <Button variant="secondary" className="w-full border-[1px] border-primary">
                             회원가입
                         </Button>
