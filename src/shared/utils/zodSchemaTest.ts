@@ -1,5 +1,7 @@
 import { ZodError } from "zod";
 
+export type ThrownZodError = { errors: { message: string }[] };
+
 export const zodSuccessCase = (result: object, expectedResult: Record<string, unknown>) => {
     expect(() => result).not.toThrow();
     expect(result).toEqual(expectedResult);
