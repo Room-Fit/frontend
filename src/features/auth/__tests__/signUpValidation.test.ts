@@ -1,6 +1,6 @@
 import { ZodError } from "zod";
 
-import { Gender, SignUpInfoSchema, SignUpVerifySchema } from "@/features/auth/service/signUp";
+import { SignUpInfoSchema, SignUpVerifySchema } from "@/features/auth/service/signUp";
 import { zodFailureCase, zodSuccessCase } from "@/shared/utils/zodSchemaTest";
 
 describe("SignUpRequestSchema validation 테스트", () => {
