@@ -5,11 +5,13 @@ import { useFlow } from "@/apps/stackflow";
 
 import { useSignUpContext } from "@/features/auth/hooks/useSignUpContext";
 import { authService } from "@/features/auth/service";
+import { SignUpInfoSchema, SignUpVerifySchema } from "@/features/auth/service/signUp";
 import { renderToastFromDerivedError } from "@/shared/utils/renderToastFromDerivedError";
+import { ThrownZodError } from "@/shared/utils/zodSchemaTest";
 
 export const useSignUp = () => {
     const { state, dispatch } = useSignUpContext();
-    const { push } = useFlow();
+    const { push, replace } = useFlow();
 
     const [isVerifyComponentVisible, setIsVerifyComponentVisible] = useState<boolean>(false);
     const [isVerified, setIsVerified] = useState<boolean>(false);
@@ -19,6 +21,11 @@ export const useSignUp = () => {
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const isPasswordMatch = password === passwordConfirm;
+    const nicknameRef = useRef<HTMLInputElement>(null);
+    const [birth, setBirth] = useState<string>("");
+    const [studentId, setStudentId] = useState<string>("");
+    const [department, setDepartment] = useState<string>("");
+    const [gender, setGender] = useState<string>("");
 
     const sendEmailVerificationCode = useCallback(async () => {
         if (!emailRef.current?.value) return;
@@ -59,21 +66,35 @@ export const useSignUp = () => {
     }, [push]);
 
     const toSignUpInfoSection = useCallback(() => {
-        if (!isVerified) {
-            toast.error("이메일 인증을 먼저 해주세요");
-            return;
-        }
-        if (!password) {
-            toast.error("비밀번호를 입력해주세요");
-            return;
-        }
-        if (!isPasswordMatch) {
-            toast.error("비밀번호가 일치하지 않습니다");
+        try {
+            SignUpVerifySchema.parse({
+                email: emailRef.current?.value as string,
+                password,
+            });
+        } catch (e: unknown) {
+            toast.error((e as ThrownZodError).errors[0].message);
             return;
         }
 
         push("SignUpPage", { section: 2 });
-    }, [isPasswordMatch, isVerified, password, push]);
+    }, [password, push]);
+
+    const toSignUpCompleteSection = useCallback(() => {
+        try {
+            SignUpInfoSchema.parse({
+                nickname: nicknameRef.current?.value as string,
+                birth,
+                studentId,
+                department,
+                gender,
+            });
+        } catch (e: unknown) {
+            toast.error((e as ThrownZodError).errors[0].message);
+            return;
+        }
+
+        replace("HomePage", {});
+    }, [birth, department, gender, replace, studentId]);
 
     return {
         state,
@@ -93,8 +114,19 @@ export const useSignUp = () => {
         passwordConfirm,
         setPasswordConfirm,
 
+        nicknameRef,
+        birth,
+        setBirth,
+        studentId,
+        setStudentId,
+        department,
+        setDepartment,
+        gender,
+        setGender,
+
         toHomePage,
         toSignUpVerifySection,
         toSignUpInfoSection,
+        toSignUpCompleteSection,
     };
 };
