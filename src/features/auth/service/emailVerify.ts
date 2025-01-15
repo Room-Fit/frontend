@@ -3,6 +3,7 @@ import ExceptionHandler from "axios-exception-handler";
 import { api } from "@/shared/lib";
 
 export type EmailVerifyRequestBody = {
+    authToken: string;
     code: string;
 };
 
