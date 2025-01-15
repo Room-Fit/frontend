@@ -1,5 +1,6 @@
 import SignInPage from "@/pages/auth/SignInPage";
 import SignUpPage from "@/pages/auth/SignUpPage";
+import ChatRoomListPage from "@/pages/chat/ChatRoomListPage";
 import ChatRoomPage from "@/pages/chat/ChatRoomPage";
 import HomePage from "@/pages/home/HomePage";
 import CreateMatchPage from "@/pages/match/CreateMatchPage";
@@ -31,7 +32,8 @@ const stackflowApp = stackflow({
                 CreateMatchPage: "/match/new",
                 MatchDetailPage: "/match/detail",
 
-                ChatRoomPage: "/chat",
+                ChatRoomListPage: "/chat",
+                ChatRoomPage: "/chat/room",
 
                 MyPage: "/mypage",
                 ProfileDetailPage: "/profile/detail",
@@ -50,6 +52,7 @@ const stackflowApp = stackflow({
         CreateMatchPage,
         MatchDetailPage,
 
+        ChatRoomListPage,
         ChatRoomPage,
 
         MyPage,

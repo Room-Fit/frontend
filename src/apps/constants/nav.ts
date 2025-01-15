@@ -25,7 +25,7 @@ export const navBottom: NavBottomItem[] = [
         icon: CirclePlus,
     },
     {
-        activityName: "ChatRoomPage",
+        activityName: "ChatRoomListPage",
         path: "/chat",
         label: "채팅",
         icon: MessagesSquare,
