@@ -37,14 +37,14 @@ export const ChatRoomListItem = ({
                     )}
                 </div>
 
-                <div>
+                <div className="flex-grow">
                     <h1 className="font-semibold mb-0.5 line-clamp-1">{title}</h1>
                     <div className="h-12 leading-5 text-dark-300 ">
-                        <p className="line-clamp-2">{lastMessage}</p>
+                        <p className="text-sm line-clamp-2">{lastMessage}</p>
                     </div>
                 </div>
 
-                <div className="flex items-start justify-end w-32 h-full text-sm font-light font-normal text-dark-200">
+                <div className="flex items-start justify-end h-full text-sm font-light w-18 text-dark-200">
                     <p>{lastMessageTimeStamp}</p>
                 </div>
             </li>

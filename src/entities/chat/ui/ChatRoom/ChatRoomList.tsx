@@ -1,7 +1,8 @@
 export interface ChatRoomListProps {
+    className?: string;
     children?: React.ReactNode;
 }
 
-export const ChatRoomList = ({ children }: ChatRoomListProps) => {
-    return <ul>{children}</ul>;
+export const ChatRoomList = ({ className, children }: ChatRoomListProps) => {
+    return <ul className={className}>{children}</ul>;
 };
