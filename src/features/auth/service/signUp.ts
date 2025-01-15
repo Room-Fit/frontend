@@ -4,8 +4,8 @@ import { z } from "zod";
 import { api } from "@/shared/lib";
 
 export enum Gender {
-    MAN = "남자",
-    WOMAN = "여자",
+    M = "M",
+    F = "F",
 }
 
 export const SignUpVerifySchema = z.object({
@@ -17,6 +17,7 @@ export const SignUpVerifySchema = z.object({
         .string({ message: "비밀번호를 입력해주세요." })
         .min(8, { message: "비밀번호는 8자리 이상이어야 합니다." })
         .nonempty({ message: "비밀번호를 입력해주세요." }),
+    authToken: z.string().nonempty({ message: "인증 토큰이 필요합니다." }),
 });
 
 export const SignUpInfoSchema = z.object({
@@ -24,8 +25,8 @@ export const SignUpInfoSchema = z.object({
         .string({ message: "닉네임을 입력해주세요." })
         .min(2, { message: "닉네임은 두자리 이상 이어야 합니다." }),
     birth: z.string().nonempty({ message: "생년월일을 입력해주세요." }),
-    studentId: z.string().nonempty({ message: "학번을 입력해주세요." }),
-    department: z.string().nonempty({ message: "학과를 입력해주세요." }),
+    studentId: z.number({ message: "학번을 입력해주세요." }),
+    college: z.string().nonempty({ message: "학과를 입력해주세요." }),
     gender: z.string().nonempty({ message: "성별을 입력해주세요." }),
 });
 
@@ -45,7 +46,7 @@ export type SignUpResponseBody = {
 
 export async function signUp(body: SignUpRequestBody) {
     try {
-        const response = await api.post<SignUpResponseBody>("/user", body);
+        const response = await api.post<SignUpResponseBody>("/api/v1/user", body);
         return response.data;
     } catch (err) {
         ExceptionHandler(err)
