@@ -4,10 +4,12 @@ import { RoomFitLogoGray } from "@/shared/assets/RoomFitLogoGray";
 
 export interface ChatRoomListItemProps {
     isNotReadMessageExist: boolean;
+    roomId: number;
     title: string;
     imgSrc?: string;
     lastMessage: string;
     lastMessageTimeStamp: string;
+    onClick?: React.EventHandler<React.MouseEvent<HTMLLIElement>>;
 }
 
 export const ChatRoomListItem = ({
@@ -16,10 +18,11 @@ export const ChatRoomListItem = ({
     imgSrc,
     lastMessage,
     lastMessageTimeStamp,
+    onClick,
 }: ChatRoomListItemProps) => {
     return (
         <Fragment>
-            <li className="flex items-center h-20 gap-4 list-none">
+            <li className="flex items-center h-20 gap-4 list-none" onClick={onClick}>
                 <div className="relative flex items-center justify-center flex-shrink-0 h-16 rounded-xl bg-dark-100 aspect-square ">
                     {isNotReadMessageExist && (
                         <div className="absolute w-4 h-4 rounded-full bg-primary top-[-5px] right-[-5px]" />

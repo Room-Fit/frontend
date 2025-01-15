@@ -16,18 +16,21 @@ export const Default: Story = {
         return (
             <ChatRoomList>
                 <ChatRoomListItem
+                    roomId={1}
                     isNotReadMessageExist={true}
                     title="매우 미친듯이 긴 채팅방 이름 채팅방 이름은 핏글 제목과 동일"
                     lastMessage="읽지 않은 메시지가 있는 채팅방은 이렇게 활성화하는 거 어케 생각하시는지..가장 최근 채팅내용 입니다람쥐다람쥐"
                     lastMessageTimeStamp="12:43"
                 />
                 <ChatRoomListItem
+                    roomId={2}
                     isNotReadMessageExist={true}
                     title="채팅방 이름은 핏글 제목과 동일"
                     lastMessage="읽지 않은 메시지가 있는 채팅방은 이렇게 활성화하는 거 어케 생각하시는지.."
                     lastMessageTimeStamp="12:43"
                 />
                 <ChatRoomListItem
+                    roomId={3}
                     isNotReadMessageExist={false}
                     title="채팅방 이름은 핏글 제목과 동일"
                     lastMessage="읽지 않은 메시지가 있는 채팅방은 이렇게 활성화하는 거 어케 생각하시는지.."
