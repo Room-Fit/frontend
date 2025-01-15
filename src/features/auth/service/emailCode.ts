@@ -6,13 +6,13 @@ export type EmailCodeRequestBody = {
     email: string;
 };
 
-export type EmailCodeResponseBody = {
-    code: string;
-};
+// export type EmailCodeResponseBody = {
+//     authToken: string;
+// };
 
 export async function sendEmailVerificationCode(body: EmailCodeRequestBody) {
     try {
-        const response = await api.post<EmailCodeResponseBody>("/api/v1/auth/code", body);
+        const response = await api.post<string>("/api/v1/auth/code", body, {});
         return response.data;
     } catch (err) {
         ExceptionHandler(err)
