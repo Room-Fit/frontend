@@ -1,5 +1,5 @@
-import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatSideBar";
-import { ChatProfileCard } from "@/entities/profile/ui/ChatProfileCard/ChatProfileCard";
+import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileCard";
+import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof ChatSideBar> = {
