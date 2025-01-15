@@ -25,6 +25,7 @@ export default function MatchListPage() {
                 {data?.map((data) => {
                     return (
                         <MatchListItem
+                            key={data.id}
                             title={data.title}
                             dormitory={data.dormitory}
                             description={data.description}
