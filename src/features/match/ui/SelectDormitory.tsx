@@ -42,7 +42,7 @@ export const SelectDormitory = ({ value, onChange }: SelectDormitoryProps) => {
                     setSelectedCampus(campus);
                 }}
             >
-                <SelectTrigger className="w-36">
+                <SelectTrigger className="w-full">
                     <SelectValue placeholder="캠퍼스" />
                 </SelectTrigger>
                 <SelectContent>
@@ -52,7 +52,7 @@ export const SelectDormitory = ({ value, onChange }: SelectDormitoryProps) => {
             </Select>
 
             <Select value={value} onValueChange={onChange} disabled={!selectedCampus}>
-                <SelectTrigger className="w-32">
+                <SelectTrigger className="w-full">
                     <SelectValue placeholder="기숙사 선택" />
                 </SelectTrigger>
                 <SelectContent>

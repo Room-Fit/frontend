@@ -18,7 +18,7 @@ export const SelectMaxQuota = ({ value, onChange }: SelectQuotaProps) => {
 
     return (
         <Select value={value.toString()} onValueChange={(val) => onChange(Number(val))}>
-            <SelectTrigger className="w-36">
+            <SelectTrigger className="w-full">
                 <SelectValue placeholder="인원수 선택" />
             </SelectTrigger>
             <SelectContent>
