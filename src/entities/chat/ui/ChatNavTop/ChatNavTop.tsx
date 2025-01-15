@@ -1,4 +1,4 @@
-import { ChevronLeft, Users, Vote } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 import { useFlow } from "@/apps/stackflow";
 
@@ -7,9 +7,11 @@ export interface ChatNavTopProps {
 
     currentQuota: number;
     maxQuota: number;
+
+    children?: React.ReactNode;
 }
 
-export const ChatNavTop = ({ title, currentQuota, maxQuota }: ChatNavTopProps) => {
+export const ChatNavTop = ({ title, currentQuota, maxQuota, children }: ChatNavTopProps) => {
     const { pop } = useFlow();
 
     return (
@@ -29,10 +31,7 @@ export const ChatNavTop = ({ title, currentQuota, maxQuota }: ChatNavTopProps) =
                     </p>
                 </div>
 
-                <div className="flex items-center gap-2 mr-2">
-                    <Vote className="block text-dark-300" strokeWidth={1.5} />
-                    <Users className="block text-dark-300" size={20} />
-                </div>
+                <div className="flex items-center gap-2 mr-2">{children}</div>
             </div>
         </nav>
     );

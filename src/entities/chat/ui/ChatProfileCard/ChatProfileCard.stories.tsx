@@ -1,4 +1,4 @@
-import { ChatProfileCard } from "@/entities/profile/ui/ChatProfileCard/ChatProfileCard";
+import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileCard";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof ChatProfileCard> = {

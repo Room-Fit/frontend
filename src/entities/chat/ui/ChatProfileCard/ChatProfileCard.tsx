@@ -12,16 +12,26 @@ export interface ChatProfileCardProps {
     id: number;
     name: string;
     description: string;
+    onClick?: () => void;
 }
 
-export const ChatProfileCard = ({ id, className, name, description }: ChatProfileCardProps) => {
+export const ChatProfileCard = ({
+    id,
+    className,
+    name,
+    description,
+    onClick,
+}: ChatProfileCardProps) => {
     const { push } = useFlow();
 
     return (
         <Card
             theme="gray"
-            className={cn("flex p-3 px-5", className)}
-            onClick={() => push("ProfileDetailPage", { id })}
+            className={cn("flex p-2 px-5", className)}
+            onClick={() => {
+                push("ProfileDetailPage", { id });
+                onClick && onClick();
+            }}
         >
             <div className="flex items-center justify-between w-full h-full py-1">
                 <div className="relative flex-grow-[1] z-10">
@@ -29,7 +39,7 @@ export const ChatProfileCard = ({ id, className, name, description }: ChatProfil
                     <p className="text-sm font-semibold text-dark-400">{description}</p>
                 </div>
                 <div>
-                    <Chip theme="gray" className="gap-0 opacity-1">
+                    <Chip theme="gray" className="gap-0">
                         <span className="text-dark-400">프로필</span>
                         <ChevronRight />
                     </Chip>

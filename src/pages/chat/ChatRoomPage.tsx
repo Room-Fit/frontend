@@ -1,5 +1,7 @@
 import withProviders from "react-with-providers";
 
+import { Vote } from "lucide-react";
+
 import { Screen } from "@/apps/Screen";
 
 import { ChatHistoryGroup } from "@/entities/chat/ui/ChatHistory/ChatHistoryGroup";
@@ -7,6 +9,8 @@ import { ChatHistoryItem } from "@/entities/chat/ui/ChatHistory/ChatHistoryItem"
 import { ChatHistoryTime } from "@/entities/chat/ui/ChatHistory/ChatHistoryTime";
 import { ChatInput } from "@/entities/chat/ui/ChatInput/ChatInput";
 import { ChatNavTop } from "@/entities/chat/ui/ChatNavTop/ChatNavTop";
+import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileCard";
+import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
 import { ChatHistoryContextProvider } from "@/features/chat/contexts/ChatHistoryContext";
 import { useChat } from "@/features/chat/hooks/useChat";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
@@ -21,7 +25,16 @@ export default withProviders([<ChatHistoryContextProvider />], function ChatRoom
         <Screen>
             <ChatHistoryContextProvider>
                 <ChatGradientLayer className="w-full min-h-screen">
-                    <ChatNavTop title={"채팅방 이름"} currentQuota={2} maxQuota={4} />
+                    <ChatNavTop title={"채팅방 이름"} currentQuota={2} maxQuota={4}>
+                        <Vote className="block text-dark-300" strokeWidth={1.5} />
+                        <ChatSideBar>
+                            <ChatProfileCard
+                                id={1}
+                                name={"김룸핏"}
+                                description={"경북대학교 컴퓨터학부"}
+                            />
+                        </ChatSideBar>
+                    </ChatNavTop>
 
                     <ChatHistoryGroup>
                         <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
