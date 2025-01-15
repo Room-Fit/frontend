@@ -1,4 +1,4 @@
-import { ComponentType } from "react";
+import { ComponentType, useState } from "react";
 import withProviders from "react-with-providers";
 
 import { Vote } from "lucide-react";
@@ -26,6 +26,7 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         userId: 10,
         roomId: params.roomId,
     });
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <Screen>
@@ -33,11 +34,12 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                 <ChatGradientLayer className="w-full min-h-screen">
                     <ChatNavTop title={"채팅방 이름"} currentQuota={2} maxQuota={4}>
                         <Vote className="block text-dark-300" strokeWidth={1.5} />
-                        <ChatSideBar>
+                        <ChatSideBar isOpen={isOpen} onClose={() => setIsOpen(!isOpen)}>
                             <ChatProfileCard
                                 id={1}
                                 name={"김룸핏"}
                                 description={"경북대학교 컴퓨터학부"}
+                                onClick={() => setIsOpen((prev) => !prev)}
                             />
                         </ChatSideBar>
                     </ChatNavTop>
