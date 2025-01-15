@@ -1,3 +1,4 @@
+import { ComponentType } from "react";
 import withProviders from "react-with-providers";
 
 import { Vote } from "lucide-react";
@@ -14,11 +15,16 @@ import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
 import { ChatHistoryContextProvider } from "@/features/chat/contexts/ChatHistoryContext";
 import { useChat } from "@/features/chat/hooks/useChat";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
+import { ActivityComponentType } from "@stackflow/react";
 
-export default withProviders([<ChatHistoryContextProvider />], function ChatRoomPage() {
+export interface ChatRoomPageParams {
+    roomId: number;
+}
+
+const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => {
     const { chatInputRef, sendMessage, chatHistory } = useChat({
         userId: 10,
-        roomId: 1,
+        roomId: params.roomId,
     });
 
     return (
@@ -61,4 +67,6 @@ export default withProviders([<ChatHistoryContextProvider />], function ChatRoom
             </ChatHistoryContextProvider>
         </Screen>
     );
-});
+};
+
+export default withProviders([<ChatHistoryContextProvider />], ChatRoomPage as ComponentType);
