@@ -5,13 +5,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/shared/ui";
 
 export interface ChatSideBarProps {
     children?: React.ReactNode;
-    isOpen?: boolean;
-    onClose?: () => void;
+    open?: boolean;
+    onOpenChange?: () => void;
 }
 
-export const ChatSideBar = ({ children, isOpen, onClose }: ChatSideBarProps) => {
+export const ChatSideBar = ({ children, open, onOpenChange }: ChatSideBarProps) => {
     return (
-        <Sheet open={isOpen} onOpenChange={onClose}>
+        <Sheet open={open} onOpenChange={onOpenChange}>
             <SheetTrigger>
                 <Users className="block text-dark-300" size={20} />
             </SheetTrigger>

@@ -34,7 +34,7 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                 <ChatGradientLayer className="w-full min-h-screen">
                     <ChatNavTop title={"채팅방 이름"} currentQuota={2} maxQuota={4}>
                         <Vote className="block text-dark-300" strokeWidth={1.5} />
-                        <ChatSideBar isOpen={isOpen} onClose={() => setIsOpen(!isOpen)}>
+                        <ChatSideBar open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
                             <ChatProfileCard
                                 id={1}
                                 name={"김룸핏"}
