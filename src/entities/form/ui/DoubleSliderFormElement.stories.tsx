@@ -19,7 +19,7 @@ const formInitialState: FormSchema = {
         {
             id: 1,
             title: "기상시간",
-            type: "doubleSlider",
+            type: "DOUBLE_SLIDER",
             options: [
                 { label: "최소", value: "4" },
                 { label: "최대", value: "12" },

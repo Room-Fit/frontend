@@ -19,7 +19,7 @@ const formInitialState: FormSchema = {
         {
             id: 1,
             title: "선호하는 색상이 무엇인가요?",
-            type: "selector",
+            type: "SELECTOR",
             options: [
                 { label: "빨강", value: "Red" },
                 { label: "초록", value: "Green" },
