@@ -28,7 +28,7 @@ export const useSendEmailVerificationCode = () => {
                 });
                 dispatch({
                     type: SignUpStoreActionType.SET_AUTH_TOKEN,
-                    payload: { authToken: data as string },
+                    payload: { authToken: data?.data as string },
                 });
             });
     };

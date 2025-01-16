@@ -1,5 +1,5 @@
 import ExceptionHandler from "axios-exception-handler";
-import { z, ZodError } from "zod";
+import { z } from "zod";
 
 import { api } from "@/shared/lib";
 import { BaseResponse } from "@/shared/types/BaseResponse";
@@ -16,10 +16,11 @@ export type EmailVerifyResponseBody = boolean;
 export async function verifyEmailVerificationCode(body: EmailVerifyRequestBody) {
     try {
         EmailVerifySchema.parse(body);
-        const response = await api.post<BaseResponse<EmailVerifyResponseBody>>(
+        const { data: response } = await api.post<BaseResponse<EmailVerifyResponseBody>>(
             "/api/v1/auth/verify",
             body,
         );
+        if (!response.data) throw new Error("인증 코드가 올바르지 않습니다.");
         return response.data;
     } catch (err) {
         ExceptionHandler(err)

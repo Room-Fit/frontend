@@ -1,18 +1,21 @@
 import ExceptionHandler from "axios-exception-handler";
 
 import { api } from "@/shared/lib";
+import { BaseResponse } from "@/shared/types/BaseResponse";
 
 export type EmailCodeRequestBody = {
     email: string;
 };
 
-// export type EmailCodeResponseBody = {
-//     authToken: string;
-// };
+export type EmailCodeResponseBody = string;
 
 export async function sendEmailVerificationCode(body: EmailCodeRequestBody) {
     try {
-        const response = await api.post<string>("/api/v1/auth/code", body, {});
+        const response = await api.post<BaseResponse<EmailCodeResponseBody>>(
+            "/api/v1/auth/code",
+            body,
+            {},
+        );
         return response.data;
     } catch (err) {
         ExceptionHandler(err)
