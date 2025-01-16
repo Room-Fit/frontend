@@ -19,7 +19,7 @@ export type SignInRequestBody = z.infer<typeof SignInSchema>;
 export async function signIn(body: SignInRequestBody) {
     try {
         SignInSchema.parse(body);
-        const response = await api.post<BaseResponse<SignInResponseBody>>(
+        const { data : response } = await api.post<BaseResponse<SignInResponseBody>>(
             "/api/v1/auth/login",
             body,
         );
