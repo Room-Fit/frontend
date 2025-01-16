@@ -1,7 +1,6 @@
 import SignUpInfoSection from "@/pages/auth/SignUpInfoSection";
 import SignUpVerifySection from "@/pages/auth/SignUpVerifySection";
 
-import { SignUpRequestContextProvider } from "@/features/auth/context/SignUpRequestContextProvider";
 import { ActivityComponentType } from "@stackflow/react";
 
 export interface SignUpPageParams {
@@ -20,11 +19,7 @@ const SignUpSection = ({ params }: { params: SignUpPageParams }) => {
 };
 
 const SignUpPage: ActivityComponentType<SignUpPageParams> = ({ params }) => {
-    return (
-        <SignUpRequestContextProvider>
-            <SignUpSection params={params} />
-        </SignUpRequestContextProvider>
-    );
+    return <SignUpSection params={params} />;
 };
 
 export default SignUpPage;

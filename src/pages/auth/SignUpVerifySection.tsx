@@ -1,32 +1,26 @@
+import { useState } from "react";
+
 import { ChevronLeft, CircleAlert } from "lucide-react";
 
 import { Screen } from "@/apps/Screen";
 import { useFlow } from "@/apps/stackflow";
 
-import { useSignUp } from "@/features/auth/service/useSignUp";
+import { useNavigateSignUpSection } from "@/features/auth/hooks/useNavigateSignUpSection";
+import { useEmailVerify } from "@/features/auth/service/useEmailVerify";
+import { useSendEmailVerificationCode } from "@/features/auth/service/useSendEmailVerificationCode";
+import { SignUpStoreActionType, useSignUpStore } from "@/features/auth/store/useSignUpStore";
 import { Button, Input, Label } from "@/shared/ui";
 
 export default function SignUpVerifySection() {
     const { pop } = useFlow();
 
-    const {
-        emailRef,
-        sendEmailVerificationCode,
+    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+    const { password, dispatch } = useSignUpStore();
 
-        isVerified,
-        isVerifyComponentVisible,
-        emailVerificationCodeRef,
-        verifyEmailVerificationCode,
+    const { emailRef, onSendEmailVerificationCode, isVisible } = useSendEmailVerificationCode();
+    const { emailVerificationCodeRef, isVerified, verifyCode } = useEmailVerify();
 
-        isPasswordMatch,
-        password,
-        passwordConfirm,
-        setPassword,
-        setPasswordConfirm,
-
-        toHomePage,
-        toSignUpInfoSection,
-    } = useSignUp();
+    const { toHomePage, toSignUpInfoSection } = useNavigateSignUpSection();
 
     return (
         <Screen>
@@ -51,14 +45,14 @@ export default function SignUpVerifySection() {
                                 />
                                 <Button
                                     className="flex-grow-[1]"
-                                    onClick={sendEmailVerificationCode}
+                                    onClick={onSendEmailVerificationCode}
                                 >
                                     인증하기
                                 </Button>
                             </div>
                         </div>
 
-                        {isVerifyComponentVisible && (
+                        {isVisible && (
                             <div>
                                 <Label
                                     htmlFor="verification-code"
@@ -77,7 +71,7 @@ export default function SignUpVerifySection() {
                                     />
                                     <Button
                                         className="flex-grow-[1]"
-                                        onClick={verifyEmailVerificationCode}
+                                        onClick={verifyCode}
                                         disabled={isVerified}
                                     >
                                         {isVerified ? "인증완료" : "인증하기"}
@@ -95,7 +89,12 @@ export default function SignUpVerifySection() {
                                 type="password"
                                 placeholder="비밀번호를 입력해주세요"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => {
+                                    dispatch({
+                                        type: SignUpStoreActionType.SET_PASSWORD,
+                                        payload: { password: e.target.value },
+                                    });
+                                }}
                             />
                         </div>
 
@@ -108,10 +107,12 @@ export default function SignUpVerifySection() {
                                 type="password"
                                 placeholder="비밀번호를 입력해주세요"
                                 value={passwordConfirm}
-                                onChange={(e) => setPasswordConfirm(e.target.value)}
+                                onChange={(e) => {
+                                    setPasswordConfirm(e.target.value);
+                                }}
                             />
                             <p className="flex items-center h-6 gap-1 text-red-400">
-                                {!isPasswordMatch && (
+                                {password !== passwordConfirm && (
                                     <>
                                         <CircleAlert size={16} className="h-full" />
                                         <span>비밀번호가 일치하지 않습니다</span>
