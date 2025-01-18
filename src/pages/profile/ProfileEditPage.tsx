@@ -19,7 +19,7 @@ export default function ProfileEditPage() {
                 ) : (
                     <div>
                         <DynamicForm formSchema={data as FormSchema} />
-                        <Button className="w-full">저장하기</Button>
+                        <Button className="w-full my-2">등록하기</Button>
                     </div>
                 )}
             </div>
