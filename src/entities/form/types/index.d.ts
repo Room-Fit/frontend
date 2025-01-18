@@ -54,7 +54,3 @@ export interface FormSchema {
     description: string;
     questions: Question[];
 }
-
-export interface ButtonProps extends React.ComponentProps<"button"> {
-    children: React.ReactNode;
-}
