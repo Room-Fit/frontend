@@ -8,10 +8,12 @@ export interface FormProps {
 export const DynamicForm = ({ formSchema }: FormProps) => {
     return (
         <FormStateContextProvider formInitialState={formSchema}>
-            {formSchema.questions.map((question) => {
-                const Component = formElementMap[question.type as FormElementType];
-                return <Component {...question} />;
-            })}
+            <div className="flex flex-col gap-3">
+                {formSchema.questions.map((question) => {
+                    const Component = formElementMap[question.type as FormElementType];
+                    return <Component {...question} />;
+                })}
+            </div>
         </FormStateContextProvider>
     );
 };
