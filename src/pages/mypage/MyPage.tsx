@@ -11,12 +11,15 @@ import {
 
 import { BaseScreen } from "@/apps/Screen";
 import { NavTop } from "@/apps/layouts/NavTop";
+import { useFlow } from "@/apps/stackflow";
 
 import { Menu } from "@/features/mypage/ui/Menu";
 import { MenuItem } from "@/features/mypage/ui/MenuItem";
 import { ProfileHeader } from "@/features/mypage/ui/ProfileHeader";
 
 export default function MyPage() {
+    const { push } = useFlow();
+
     return (
         <BaseScreen>
             <NavTop />
@@ -26,7 +29,11 @@ export default function MyPage() {
 
                 <Menu label="내 정보 관리">
                     <MenuItem label="비밀번호 변경하기" icon={<KeyRound size={20} />} />
-                    <MenuItem label="프로필 관리하기" icon={<UserRoundPen size={20} />} />
+                    <MenuItem
+                        label="프로필 수정하기"
+                        icon={<UserRoundPen size={20} />}
+                        onClick={() => push("ProfileEditPage", {})}
+                    />
                     <MenuItem label="로그아웃" icon={<LogOut size={20} />} />
                 </Menu>
 

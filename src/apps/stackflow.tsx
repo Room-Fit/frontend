@@ -8,6 +8,7 @@ import MatchDetailPage from "@/pages/match/MatchDetailPage";
 import MatchListPage from "@/pages/match/MatchListPage";
 import MyPage from "@/pages/mypage/MyPage";
 import ProfileDetailPage from "@/pages/profile/ProfileDetailPage";
+import ProfileEditPage from "@/pages/profile/ProfileEditPage";
 
 import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
@@ -37,6 +38,7 @@ const stackflowApp = stackflow({
 
                 MyPage: "/mypage",
                 ProfileDetailPage: "/profile/detail",
+                ProfileEditPage: "/profile/edit",
             },
             fallbackActivity: () => "HomePage",
         }),
@@ -57,6 +59,7 @@ const stackflowApp = stackflow({
 
         MyPage,
         ProfileDetailPage,
+        ProfileEditPage,
     },
     initialActivity: () => "HomePage",
 });

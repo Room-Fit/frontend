@@ -6,8 +6,8 @@ import { SelectorFormElement } from "@/entities/form/ui/SelectorFormElement";
 export type FormElementType = keyof typeof formElementMap;
 
 export const formElementMap = {
-    selector: SelectorFormElement,
-    checkbox: CheckboxFormElement,
-    slider: SliderFormElement,
-    doubleSlider: DoubleSliderFormElement,
+    SELECTOR: SelectorFormElement,
+    CHECKBOX: CheckboxFormElement,
+    SLIDER: SliderFormElement,
+    DOUBLE_SLIDER: DoubleSliderFormElement,
 };

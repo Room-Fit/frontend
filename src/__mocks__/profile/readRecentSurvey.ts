@@ -1,21 +1,16 @@
-import { FormSchema } from "@/entities/form/types";
-import { DynamicForm } from "@/entities/form/ui/DynamicForm";
-import type { Meta, StoryObj } from "@storybook/react";
+import { http, HttpResponse } from "msw";
 
-const meta: Meta<typeof DynamicForm> = {
-    title: "Entity/Form/DynamicForm",
-    component: DynamicForm,
-};
+export const readRecentSurveyHandler = [
+    http.get("/api/v1/survey", async () => {
+        return HttpResponse.json(recentSurvey);
+    }),
+];
 
-export default meta;
-type Story = StoryObj<typeof DynamicForm>;
-
-const formSchema: FormSchema = {
+const recentSurvey = {
     id: 1,
     title: "경북대학교 2025년 룸핏 모집공고",
     description: "경북대학교 2025년 룸핏 모집공고",
     questions: [
-        // 수면
         {
             id: 1,
             title: "기상시간",
@@ -80,7 +75,7 @@ const formSchema: FormSchema = {
                 { label: "몸부림", value: "몸부림" },
             ],
         },
-        // 환경 및 관계
+
         {
             id: 7,
             title: "더위",
@@ -122,6 +117,7 @@ const formSchema: FormSchema = {
                 { label: "깨끗함", value: "5" },
             ],
         },
+
         {
             id: 11,
             title: "룸메이트와 관계",
@@ -155,7 +151,33 @@ const formSchema: FormSchema = {
                 { label: "사전허락", value: "사전허락" },
             ],
         },
-        // 취미 및 생활
+        {
+            id: 16,
+            title: "본가방문 주기",
+            type: "selector",
+            optionDelimiter: null,
+            options: [
+                { label: "방학만", value: "방학만" },
+                { label: "주말마다", value: "주말마다" },
+                { label: "2주에 한번", value: "2주에 한번" },
+                { label: "매달", value: "매달" },
+                { label: "한달 반", value: "한달 반" },
+            ],
+        },
+        {
+            id: 22,
+            title: "벌레",
+            type: "selector",
+            optionDelimiter: null,
+            options: [
+                { label: "극혐", value: "극혐" },
+                { label: "못잡음", value: "못잡음" },
+                { label: "중간", value: "중간" },
+                { label: "잡음", value: "잡음" },
+                { label: "좋아함", value: "좋아함" },
+            ],
+        },
+
         {
             id: 14,
             title: "운동빈도",
@@ -179,31 +201,7 @@ const formSchema: FormSchema = {
                 { label: "저녁", value: "저녁" },
             ],
         },
-        {
-            id: 16,
-            title: "본가방문 주기",
-            type: "selector",
-            optionDelimiter: null,
-            options: [
-                { label: "방학만", value: "방학만" },
-                { label: "주말마다", value: "주말마다" },
-                { label: "2주에 한번", value: "2주에 한번" },
-                { label: "매달", value: "매달" },
-                { label: "한달 반", value: "한달 반" },
-            ],
-        },
-        {
-            id: 17,
-            title: "공부장소",
-            type: "selector",
-            optionDelimiter: null,
-            options: [
-                { label: "기숙사", value: "기숙사" },
-                { label: "도서관", value: "도서관" },
-                { label: "자습실", value: "자습실" },
-                { label: "유동적", value: "유동적" },
-            ],
-        },
+
         {
             id: 18,
             title: "게임",
@@ -228,6 +226,28 @@ const formSchema: FormSchema = {
             ],
         },
         {
+            id: 21,
+            title: "음주빈도",
+            type: "slider",
+            optionDelimiter: null,
+            options: [
+                { label: "자주안마심", value: "1" },
+                { label: "자주마심", value: "5" },
+            ],
+        },
+        {
+            id: 17,
+            title: "공부장소",
+            type: "selector",
+            optionDelimiter: null,
+            options: [
+                { label: "기숙사", value: "기숙사" },
+                { label: "도서관", value: "도서관" },
+                { label: "자습실", value: "자습실" },
+                { label: "유동적", value: "유동적" },
+            ],
+        },
+        {
             id: 20,
             title: "실내통화",
             type: "selector",
@@ -239,34 +259,5 @@ const formSchema: FormSchema = {
                 { label: "많이함", value: "많이함" },
             ],
         },
-        {
-            id: 21,
-            title: "음주빈도",
-            type: "slider",
-            optionDelimiter: null,
-            options: [
-                { label: "자주안마심", value: "1" },
-                { label: "자주마심", value: "5" },
-            ],
-        },
-        {
-            id: 22,
-            title: "나는 대학 옮길 준비가 되어 있다",
-            type: "selector",
-            optionDelimiter: null,
-            options: [
-                { label: "예", value: "예" },
-                { label: "아니오", value: "아니오" },
-            ],
-        },
     ],
-};
-
-export const Default: Story = {
-    args: {
-        formSchema,
-    },
-    render: ({ formSchema }) => {
-        return <DynamicForm formSchema={formSchema} />;
-    },
 };

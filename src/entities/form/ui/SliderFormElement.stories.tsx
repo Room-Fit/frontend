@@ -19,7 +19,7 @@ const formInitialState: FormSchema = {
         {
             id: 1,
             title: "잠귀에 대한 민감도를 선택해주세요.",
-            type: "slider",
+            type: "SLIDER",
             options: [
                 { label: "밝음", value: "1" },
                 { label: "어두움", value: "10" },
