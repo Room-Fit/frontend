@@ -26,14 +26,14 @@ describe("FormFactory", () => {
             });
 
             test("questionType 이 selector 인 경우 SelectorFormElement 를 반환한다", () => {
-                formSchema.questions[0].type = "SELECTOR";
+                formSchema.questions[0].type = "selector";
 
                 const form = FormFactory.createFormBySchema(formSchema);
                 expect(form).toContain(SelectorFormElement);
             });
 
             test("questionType 이 checkbox 인 경우 CheckboxFormElement 를 반환한다", () => {
-                formSchema.questions[0].type = "CHECKBOX";
+                formSchema.questions[0].type = "checkbox";
 
                 const form = FormFactory.createFormBySchema(formSchema);
                 expect(form).toContain(CheckboxFormElement);
