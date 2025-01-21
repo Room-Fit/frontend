@@ -14,7 +14,7 @@ export type LookUpResponse = {
 
 const fetchMatchList = async () => {
     try {
-        const response = await api.get<LookUpResponse[]>("/api/v1/chat");
+        const response = await api.get<LookUpResponse[]>("/api/v1/chats");
         return response.data;
     } catch (err) {
         ExceptionHandler(err)

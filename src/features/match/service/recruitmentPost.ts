@@ -24,7 +24,7 @@ export type RecruitmentPost = {
 
 export const MAX_RECRUITEMENT_NUMBER = 6;
 
-export const postRecruitment = async ({
+export const recruitmentPost = async ({
     id,
     title,
     description,
@@ -32,7 +32,7 @@ export const postRecruitment = async ({
     maxQuota,
 }: RecruitmentPost) => {
     try {
-        const response = await api.post<RecruitmentPost>("/api/v1/recruiment", {
+        const response = await api.post<RecruitmentPost>("/api/v1/chats", {
             id,
             title,
             dormitory,

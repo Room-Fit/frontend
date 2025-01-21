@@ -6,7 +6,7 @@ import { useFlow } from "@/apps/stackflow";
 
 import {
     MAX_RECRUITEMENT_NUMBER,
-    postRecruitment,
+    recruitmentPost,
     RecruitmentPost,
 } from "@/features/match/service/recruitmentPost";
 import { SelectDormitory } from "@/features/match/ui/SelectDormitory";
@@ -35,7 +35,7 @@ export default function CreateMatchPage() {
     };
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const result = await postRecruitment(formData).then(() => {
+        const result = await recruitmentPost(formData).then(() => {
             push("MatchListPage", {});
         });
         console.log(result);
