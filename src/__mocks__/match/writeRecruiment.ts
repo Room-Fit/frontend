@@ -7,7 +7,7 @@ export const writeRecruitmentHandler = [
         try {
             const body = (await request.json()) as RecruitmentPost;
 
-            if (!body.title || !body.description || !body.dormitory || !body.maxQuota) {
+            if (!body.name || !body.description || !body.dormitory || !body.maxQuota) {
                 return new HttpResponse(null, {
                     status: 400,
                     statusText: "잘못된 요청입니다.",

@@ -1,11 +1,11 @@
 import { http, HttpResponse } from "msw";
 
-import { LookUpDetailResponse } from "@/features/match/service/readMatchDetail";
+import { ReadMatchById } from "@/features/match/service/readMatchDetail";
 
 export const lookupDetailHandler = [
     http.get(`/api/v1/chat/:chatroom_id/participants`, async ({ params }) => {
         const { chatroom_id } = params;
-        const mockLookUpResponse: LookUpDetailResponse = {
+        const mockLookUpResponse: ReadMatchById = {
             id: Number(chatroom_id),
             title: "조용하고 청결한 룸메이트 구해요",
             currentQuota: 1,

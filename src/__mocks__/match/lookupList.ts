@@ -1,10 +1,10 @@
 import { http, HttpResponse } from "msw";
 
-import { LookUpResponse } from "@/features/match/service/readAllMatch";
+import { ReadMatchList } from "@/features/match/service/readAllMatch";
 
 export const lookupListHandler = [
     http.get("/api/v1/chat", async () => {
-        const mookLookUpListResponse: LookUpResponse[] = [
+        const mookLookUpListResponse: ReadMatchList[] = [
             {
                 id: 1,
                 title: "조용하고 청결한 룸메이트 구해요",
