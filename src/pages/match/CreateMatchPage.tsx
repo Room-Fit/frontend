@@ -8,8 +8,8 @@ import {
     MAX_RECRUITEMENT_NUMBER,
     RecruitmentPost,
 } from "@/features/match/service/createRecruitmentPost";
-import { SelectChatType } from "@/features/match/ui/SelectChatType";
 import { SelectDormitory } from "@/features/match/ui/SelectDormitory";
+import { SelectMaxQuota } from "@/features/match/ui/SelectMaxQuota";
 import { Button, Input, Label, Textarea } from "@/shared/ui";
 
 /**
@@ -73,14 +73,11 @@ export default function CreateMatchPage() {
                 </div>
                 <div>
                     <Label htmlFor="type" className="block my-2">
-                        채팅방 타입
+                        최대 인원수
                     </Label>
-                    <SelectChatType
-                        value={formData.type}
-                        onChange={(value) => setFormData((prev) => ({ ...prev, type: value }))}
-                        onQuotaChange={(value) =>
-                            setFormData((prev) => ({ ...prev, maxQuota: value }))
-                        }
+                    <SelectMaxQuota
+                        value={formData.maxQuota}
+                        onChange={(value) => setFormData((prev) => ({ ...prev, maxQuota: value }))}
                     />
                 </div>
                 <div>
