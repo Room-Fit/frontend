@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 
-import { RecruitmentPost } from "@/features/match/service/recruitmentPost";
+import { RecruitmentPost } from "@/features/match/service/createRecruitmentPost";
 
 export const writeRecruitmentHandler = [
     http.post("/api/v1/recruiment", async ({ request }) => {

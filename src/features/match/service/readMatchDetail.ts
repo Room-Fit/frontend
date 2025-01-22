@@ -2,9 +2,10 @@ import ExceptionHandler from "axios-exception-handler";
 
 import { MATCH_QUERY_KEY_FACTORY } from "@/features/match/service/keys";
 import { api } from "@/shared/lib";
+import { BaseResponse } from "@/shared/types/BaseResponse";
 import { useQuery } from "@tanstack/react-query";
 
-export type LookUpDetailResponse = {
+export type ReadMatchById = {
     id: number;
     title: string;
     dormitory: string;
@@ -21,9 +22,11 @@ export type LookUpDetailResponse = {
     }>;
 };
 
-const fetchMatchDetail = async (id: number) => {
+const readMatchDetail = async (id: number) => {
     try {
-        const response = await api.get<LookUpDetailResponse>(`/api/v1/chat/${id}/participants`);
+        const { data: response } = await api.get<BaseResponse<ReadMatchById>>(
+            `/api/v1/chat/${id}/participants`,
+        );
         return response.data;
     } catch (err) {
         ExceptionHandler(err)
@@ -36,7 +39,7 @@ const fetchMatchDetail = async (id: number) => {
 export const useMatchDetail = (id: number) => {
     const { data } = useQuery({
         queryKey: MATCH_QUERY_KEY_FACTORY.READ_MATCH_DETAIL_BY_ID(id),
-        queryFn: () => fetchMatchDetail(id),
+        queryFn: () => readMatchDetail(id),
         enabled: !!id,
     });
 

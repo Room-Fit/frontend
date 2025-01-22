@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 
-import { LookUpResponse } from "@/features/match/service/lookup";
+import { LookUpResponse } from "@/features/match/service/readAllMatch";
 
 export const lookupListHandler = [
     http.get("/api/v1/chat", async () => {

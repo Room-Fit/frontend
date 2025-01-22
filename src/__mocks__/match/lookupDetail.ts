@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 
-import { LookUpDetailResponse } from "@/features/match/service/lookupDetail";
+import { LookUpDetailResponse } from "@/features/match/service/readMatchDetail";
 
 export const lookupDetailHandler = [
     http.get(`/api/v1/chat/:chatroom_id/participants`, async ({ params }) => {

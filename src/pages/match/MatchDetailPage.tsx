@@ -1,7 +1,7 @@
 import { BaseScreen } from "@/apps/Screen";
 
 import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileCard";
-import { useMatchDetail } from "@/features/match/service/lookupDetail";
+import { useMatchDetail } from "@/features/match/service/readMatchDetail";
 import { MatchInfo } from "@/features/match/ui/MatchInfo";
 import defaultImage from "@/shared/assets/bg-background.webp";
 import { BackDropImage } from "@/shared/components/BackDropImage";

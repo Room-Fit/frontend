@@ -1,9 +1,10 @@
 import ExceptionHandler from "axios-exception-handler";
 
 import { api } from "@/shared/lib";
+import { BaseResponse } from "@/shared/types/BaseResponse";
 import { useQuery } from "@tanstack/react-query";
 
-export type LookUpResponse = {
+export type ReadMatchList = {
     id: number;
     title: string;
     description: string;
@@ -12,9 +13,9 @@ export type LookUpResponse = {
     maxQuota: number;
 };
 
-const fetchMatchList = async () => {
+const readAllMatch = async () => {
     try {
-        const response = await api.get<LookUpResponse[]>("/api/v1/chats");
+        const { data: response } = await api.get<BaseResponse<ReadMatchList[]>>("/api/v1/chats");
         return response.data;
     } catch (err) {
         ExceptionHandler(err)
@@ -27,6 +28,6 @@ const fetchMatchList = async () => {
 export const useMatchList = () => {
     return useQuery({
         queryKey: ["matchList"],
-        queryFn: fetchMatchList,
+        queryFn: readAllMatch,
     });
 };

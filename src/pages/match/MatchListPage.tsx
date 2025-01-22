@@ -2,7 +2,7 @@ import { BaseScreen } from "@/apps/Screen";
 import { NavTop } from "@/apps/layouts/NavTop";
 import { useFlow } from "@/apps/stackflow";
 
-import { useMatchList } from "@/features/match/service/lookup";
+import { useMatchList } from "@/features/match/service/readAllMatch";
 import { MatchFilter } from "@/features/match/ui";
 import { MatchListItem } from "@/features/match/ui/MatchListItem";
 
