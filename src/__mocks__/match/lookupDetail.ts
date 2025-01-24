@@ -3,7 +3,7 @@ import { http, HttpResponse } from "msw";
 import { ReadMatchById } from "@/features/match/service/readMatchDetail";
 
 export const lookupDetailHandler = [
-    http.get(`/api/v1/chat/:chatroom_id/participants`, async ({ params }) => {
+    http.get(`/api/v1/room/:chatroom_id/participants`, async ({ params }) => {
         const { chatroom_id } = params;
         const mockLookUpResponse: ReadMatchById = {
             id: Number(chatroom_id),

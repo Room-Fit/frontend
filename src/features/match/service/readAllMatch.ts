@@ -15,7 +15,7 @@ export type ReadMatchList = {
 
 const readAllMatch = async () => {
     try {
-        const { data: response } = await api.get<BaseResponse<ReadMatchList[]>>("/api/v1/chats");
+        const { data: response } = await api.get<BaseResponse<ReadMatchList[]>>("/api/v1/room");
         return response.data;
     } catch (err) {
         ExceptionHandler(err)

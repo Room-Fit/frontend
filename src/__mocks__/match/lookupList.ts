@@ -3,7 +3,7 @@ import { http, HttpResponse } from "msw";
 import { ReadMatchList } from "@/features/match/service/readAllMatch";
 
 export const lookupListHandler = [
-    http.get("/api/v1/chat", async () => {
+    http.get("/api/v1/room", async () => {
         const mookLookUpListResponse: ReadMatchList[] = [
             {
                 id: 1,

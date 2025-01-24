@@ -33,7 +33,7 @@ export const createRecruitmentPost = async ({
     maxQuota,
 }: RecruitmentPost) => {
     try {
-        const { data: response } = await api.post<BaseResponse<RecruitmentPost>>("/api/v1/chats", {
+        const { data: response } = await api.post<BaseResponse<RecruitmentPost>>("/api/v1/room", {
             type,
             name,
             dormitory,

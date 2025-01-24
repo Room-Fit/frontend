@@ -25,7 +25,7 @@ export type ReadMatchById = {
 const readMatchDetail = async (id: number) => {
     try {
         const { data: response } = await api.get<BaseResponse<ReadMatchById>>(
-            `/api/v1/chat/${id}/participants`,
+            `/api/v1/room/${id}/participants`,
         );
         return response.data;
     } catch (err) {
