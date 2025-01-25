@@ -20,12 +20,12 @@ const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params 
 
             <BackDropImage width="100%" height="220px" src={defaultImage}>
                 <MatchInfo
-                    title={data?.title ?? ""}
+                    name={data?.name ?? ""}
                     dormitory={data?.dormitory ?? ""}
                     currentQuota={data?.currentQuota ?? 0}
                     maxQuota={data?.maxQuota ?? 0}
-                    author={data?.author ?? { id: 0, nickname: "" }}
-                    createdAt={data?.createdAt ?? ""}
+                    // author={data?.author ?? { id: 0, nickname: "" }}
+                    // createdAt={data?.createdAt ?? ""}
                     id={data?.id ?? 0}
                 />
             </BackDropImage>

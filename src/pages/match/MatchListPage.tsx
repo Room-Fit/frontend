@@ -6,12 +6,6 @@ import { useMatchList } from "@/features/match/service/readAllMatch";
 import { MatchFilter } from "@/features/match/ui";
 import { MatchListItem } from "@/features/match/ui/MatchListItem";
 
-export enum MatchStatus {
-    PENDING = "PENDING",
-    MATCHING = "MATCHING",
-    MATCHED = "MATCHED",
-}
-
 export default function MatchListPage() {
     const { push } = useFlow();
     const { data } = useMatchList();
