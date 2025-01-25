@@ -1,6 +1,6 @@
 import { House, Users } from "lucide-react";
 
-import { Badge } from "@/shared/ui/badge";
+import { MatchStatus } from "@/features/match/ui/MatchStatus";
 
 export interface MatchListItemProps extends React.ComponentProps<"div"> {
     name: string;
@@ -35,7 +35,7 @@ export const MatchListItem = ({
                         {currentQuota}/{maxQuota}
                     </span>
                 </p>
-                <Badge>{status}</Badge>
+                <MatchStatus status={status} />
             </div>
         </div>
     );
