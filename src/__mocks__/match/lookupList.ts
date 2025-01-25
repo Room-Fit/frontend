@@ -13,6 +13,7 @@ export const lookupListHandler = [
                     "조용하고 청결한 룸메이트를 구합니다. 학교 근처에 있으면 좋겠어요. MBTI 는 I 를 선호합니다.",
                 currentQuota: 1,
                 maxQuota: 4,
+                status: "RECRUITING",
             },
             {
                 id: 2,
@@ -21,6 +22,7 @@ export const lookupListHandler = [
                 description: "활발하고 외향적인 룸메이트를 구합니다. 운동을 좋아하면 좋겠어요.",
                 currentQuota: 2,
                 maxQuota: 4,
+                status: "RECRUITING",
             },
             {
                 id: 3,
@@ -29,6 +31,7 @@ export const lookupListHandler = [
                 description: "조용하고 책 읽는 것을 좋아하는 룸메이트를 구합니다.",
                 currentQuota: 1,
                 maxQuota: 2,
+                status: "RECRUITING",
             },
             {
                 id: 4,
@@ -38,6 +41,7 @@ export const lookupListHandler = [
                     "청결하고 깔끔한 룸메이트를 구합니다. 정리정돈 잘하는 분이면 좋겠어요.",
                 currentQuota: 3,
                 maxQuota: 4,
+                status: "RECRUITING",
             },
             {
                 id: 5,
@@ -46,6 +50,7 @@ export const lookupListHandler = [
                 description: "친절하고 배려심 있는 룸메이트를 구합니다.",
                 currentQuota: 1,
                 maxQuota: 3,
+                status: "RECRUITING",
             },
         ];
         return HttpResponse.json(mookLookUpListResponse);
