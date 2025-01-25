@@ -6,11 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 
 export type ReadMatchList = {
     id: number;
-    title: string;
+    name: string;
     description: string;
     dormitory: string;
     currentQuota: number;
     maxQuota: number;
+    status: "RECRUITING" | "RECRUITMENT_COMPLETE" | "MATCH_COMPLETE";
 };
 
 const readAllMatch = async () => {

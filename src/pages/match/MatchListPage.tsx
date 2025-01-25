@@ -26,11 +26,12 @@ export default function MatchListPage() {
                     return (
                         <MatchListItem
                             key={data.id}
-                            title={data.title}
+                            name={data.name}
                             dormitory={data.dormitory}
                             description={data.description}
                             currentQuota={data.currentQuota}
                             maxQuota={data.maxQuota}
+                            status={data.status}
                             onClick={() => push("MatchDetailPage", { id: data.id })}
                         />
                     );
