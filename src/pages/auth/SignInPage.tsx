@@ -4,13 +4,17 @@ import { Screen } from "@/apps/Screen";
 import { useFlow } from "@/apps/stackflow";
 
 import { useSignIn } from "@/features/auth/service/useSignIn";
+import { useAuth } from "@/features/auth/store/useAuth";
 import { InputWithLabel } from "@/shared/components/InputWithLabel/InputWithLabel";
 import { Button } from "@/shared/ui";
 
 export default function SignInPage() {
-    const { pop } = useFlow();
-
+    const { pop, replace } = useFlow();
     const { emailRef, passwordRef, signIn } = useSignIn();
+    const { isAuthenticated } = useAuth();
+
+    // 로그인 상태일 경우, MatchListPage로 이동
+    if (isAuthenticated) replace("MatchListPage", {});
 
     return (
         <Screen>
