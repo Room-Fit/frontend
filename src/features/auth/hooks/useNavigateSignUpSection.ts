@@ -7,14 +7,14 @@ import { useSignUpStore } from "@/features/auth/store/useSignUpStore";
 export const useNavigateSignUpSection = () => {
     const { push } = useFlow();
 
-    const { email, password, authToken } = useSignUpStore();
+    const { isEmailVerified, email, password, authToken } = useSignUpStore();
 
     const toHomePage = () => {
         push("HomePage", {});
     };
 
     const toSignUpInfoSection = () => {
-        if (!email || !authToken) toast.error("이메일 인증을 먼저 해주세요");
+        if (!isEmailVerified || !email || !authToken) toast.error("이메일 인증을 먼저 해주세요");
         else if (!password) toast.error("비밀번호를 입력해주세요");
         else push("SignUpPage", { section: 2 });
     };
