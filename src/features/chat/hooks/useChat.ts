@@ -11,6 +11,7 @@ import { ChatHistoryActionTypes, useChatHistory } from "@/features/chat/hooks/us
 import { CompatClient, Stomp } from "@stomp/stompjs";
 
 export interface MessagePayload {
+    id: number;
     roomId: number;
     sender: {
         userId: number;
@@ -41,10 +42,11 @@ export const useChat = ({ roomId, userId }: UseChatOptions) => {
                 dispatch({
                     type: ChatHistoryActionTypes.PUSH_BACK_MESSAGE,
                     payload: {
+                        id: parsedMessage.id,
                         type: parsedMessage.sender.userId === userId ? "send" : "receive",
-                        author: parsedMessage.sender.nickname,
-                        message: parsedMessage.content,
-                        timeStamp: new Date().toISOString(),
+                        nickname: parsedMessage.sender.nickname,
+                        content: parsedMessage.content,
+                        createdAt: new Date().toISOString(),
                     },
                 });
             });
@@ -85,6 +87,7 @@ export const useChat = ({ roomId, userId }: UseChatOptions) => {
         if (!chatInputRef.current) return;
 
         const messagePayload: MessagePayload = {
+            id: 0,
             roomId,
             sender: {
                 userId,

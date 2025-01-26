@@ -5,6 +5,7 @@ import { Vote } from "lucide-react";
 
 import { Screen } from "@/apps/Screen";
 
+// import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
 import { ChatHistoryGroup } from "@/entities/chat/ui/ChatHistory/ChatHistoryGroup";
 import { ChatHistoryItem } from "@/entities/chat/ui/ChatHistory/ChatHistoryItem";
 import { ChatHistoryTime } from "@/entities/chat/ui/ChatHistory/ChatHistoryTime";
@@ -14,6 +15,7 @@ import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileC
 import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
 import { ChatHistoryContextProvider } from "@/features/chat/contexts/ChatHistoryContext";
 import { useChat } from "@/features/chat/hooks/useChat";
+import { usePreviousMessageHistory } from "@/features/chat/hooks/usePreviousMessageHistory";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
 import { ActivityComponentType } from "@stackflow/react";
 
@@ -27,7 +29,13 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         roomId: params.roomId,
     });
     const [isOpen, setIsOpen] = useState(false);
+    const { data } = usePreviousMessageHistory(params.roomId);
 
+    // if (isFetching) {
+    //     return <ChatHistoryFallback />;
+    // }
+
+    console.log(data);
     return (
         <Screen>
             <ChatHistoryContextProvider>
@@ -49,11 +57,12 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                         {chatHistory.histories.map((historyItem) => {
                             return (
                                 <ChatHistoryItem
-                                    key={historyItem.timeStamp}
+                                    key={historyItem.id}
                                     type={historyItem.type}
-                                    author={historyItem.author}
-                                    message={historyItem.message}
-                                    timeStamp={historyItem.timeStamp}
+                                    nickname={historyItem.nickname}
+                                    content={historyItem.content}
+                                    createdAt={historyItem.createdAt}
+                                    id={historyItem.id}
                                 />
                             );
                         })}
