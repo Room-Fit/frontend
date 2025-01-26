@@ -17,7 +17,8 @@ export default function SignUpVerifySection() {
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const { password, dispatch } = useSignUpStore();
 
-    const { emailRef, onSendEmailVerificationCode, isVisible } = useSendEmailVerificationCode();
+    const { emailRef, onSendEmailVerificationCode, isVerificationCodeInputFieldVisible, seconds } =
+        useSendEmailVerificationCode();
     const { emailVerificationCodeRef, isVerified, verifyCode } = useEmailVerify();
 
     const { toHomePage, toSignUpInfoSection } = useNavigateSignUpSection();
@@ -44,15 +45,16 @@ export default function SignUpVerifySection() {
                                     ref={emailRef}
                                 />
                                 <Button
-                                    className="flex-grow-[1]"
+                                    className="flex-grow-[1] w-24"
                                     onClick={onSendEmailVerificationCode}
+                                    disabled={isVerificationCodeInputFieldVisible}
                                 >
-                                    인증하기
+                                    {!isVerificationCodeInputFieldVisible ? "인증하기" : seconds}
                                 </Button>
                             </div>
                         </div>
 
-                        {isVisible && (
+                        {isVerificationCodeInputFieldVisible && (
                             <div>
                                 <Label
                                     htmlFor="verification-code"
@@ -70,7 +72,7 @@ export default function SignUpVerifySection() {
                                         disabled={isVerified}
                                     />
                                     <Button
-                                        className="flex-grow-[1]"
+                                        className="flex-grow-[1] w-24"
                                         onClick={verifyCode}
                                         disabled={isVerified}
                                     >
