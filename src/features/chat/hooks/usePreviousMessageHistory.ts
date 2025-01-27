@@ -7,26 +7,26 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 export type MessageHistoryType = {
     id: number;
     content: string;
-    nickname: string;
+    sender: string;
     createdAt: string;
-};
-
-export type MessageHistoryResponse = {
-    data: MessageHistoryType[];
     meta: {
         totalCount: number;
         hasNext: boolean;
     };
 };
 
+// export type MessageHistoryResponse = {
+//     data: MessageHistoryType[];
+// };
+
 const PAGE_SIZE = 20;
 
 const getPreviousMessageHistory = async (room_id: number) => {
     try {
-        const { data: response } = await api.get<BaseResponse<MessageHistoryResponse>>(
+        const { data: response } = await api.get<BaseResponse<MessageHistoryType[]>>(
             `/api/v1/room/${room_id}/messages?pageSize=${PAGE_SIZE}`,
         );
-        return response.data;
+        return response.data.reverse();
     } catch (err) {
         ExceptionHandler(err)
             .addCase(400, "잘못된 요청입니다.")
