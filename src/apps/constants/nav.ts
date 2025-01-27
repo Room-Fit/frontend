@@ -1,4 +1,4 @@
-import { CirclePlus, HeartHandshake, LucideProps, MessagesSquare, User } from "lucide-react";
+import { CirclePlus, HeartHandshake, LucideProps, MessagesSquare, User, Users } from "lucide-react";
 
 import { ActivityName } from "@/apps/stackflow";
 
@@ -23,6 +23,12 @@ export const navBottom: NavBottomItem[] = [
         path: "/match/create",
         label: "룸메 구하기",
         icon: CirclePlus,
+    },
+    {
+        activityName: "ProfileListPage",
+        path: "/profiles",
+        label: "프로필 찾기",
+        icon: Users,
     },
     {
         activityName: "ChatRoomListPage",

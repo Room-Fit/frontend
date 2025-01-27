@@ -13,6 +13,16 @@ const cardTheme = {
         secondaryColor: "#EFEFEF",
         background: "bg-[#EFEFEF]",
     },
+    blueTransparent: {
+        primaryColor: "#5DA5FF",
+        secondaryColor: "#EFEFEF",
+        background: "bg-[#5DA5FF66]",
+    },
+    grayTransparent: {
+        primaryColor: "#C9CACA",
+        secondaryColor: "#EFEFEF",
+        background: "bg-[#C9CACA66]",
+    },
 };
 
 export interface CardProps extends React.ComponentProps<"div"> {
