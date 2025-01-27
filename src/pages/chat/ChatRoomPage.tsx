@@ -5,6 +5,7 @@ import { Vote } from "lucide-react";
 
 import { Screen } from "@/apps/Screen";
 
+import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
 // import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
 import { ChatHistoryGroup } from "@/entities/chat/ui/ChatHistory/ChatHistoryGroup";
 import { ChatHistoryItem } from "@/entities/chat/ui/ChatHistory/ChatHistoryItem";
@@ -29,13 +30,8 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         roomId: params.roomId,
     });
     const [isOpen, setIsOpen] = useState(false);
-    const { data } = usePreviousMessageHistory(params.roomId);
+    const { data, isFetching } = usePreviousMessageHistory(params.roomId);
 
-    // if (isFetching) {
-    //     return <ChatHistoryFallback />;
-    // }
-
-    console.log(data);
     return (
         <Screen>
             <ChatHistoryContextProvider>
@@ -51,26 +47,39 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                             />
                         </ChatSideBar>
                     </ChatNavTop>
-
-                    <ChatHistoryGroup>
-                        <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
-                        {chatHistory.histories.map((historyItem) => {
-                            return (
+                    {isFetching ? (
+                        <ChatHistoryFallback />
+                    ) : (
+                        <ChatHistoryGroup>
+                            <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
+                            {data?.pages.map((historyItem) => {
+                                return historyItem?.map((item) => (
+                                    <ChatHistoryItem
+                                        key={item.id}
+                                        id={item.id as number}
+                                        type={item?.sender == "nick2" ? "send" : "receive"}
+                                        nickname={item?.sender as string}
+                                        content={item?.content as string}
+                                        createdAt={item?.createdAt as string}
+                                    />
+                                ));
+                            })}
+                            {chatHistory.histories.map((history) => (
                                 <ChatHistoryItem
-                                    key={historyItem.id}
-                                    type={historyItem.type}
-                                    nickname={historyItem.nickname}
-                                    content={historyItem.content}
-                                    createdAt={historyItem.createdAt}
-                                    id={historyItem.id}
+                                    key={history.id}
+                                    id={history.id as number}
+                                    type={history?.nickname == "nick2" ? "send" : "receive"}
+                                    nickname={history?.nickname as string}
+                                    content={history?.content as string}
+                                    createdAt={history?.createdAt as string}
                                 />
-                            );
-                        })}
-                    </ChatHistoryGroup>
+                            ))}
+                        </ChatHistoryGroup>
+                    )}
+
                     <ChatInput
                         ref={chatInputRef}
                         onSendButtonClick={() => {
-                            console.log(chatInputRef.current?.value);
                             sendMessage(chatInputRef.current?.value as string);
                         }}
                     />
