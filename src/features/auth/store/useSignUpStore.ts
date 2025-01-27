@@ -3,9 +3,12 @@ import { create } from "zustand";
 import { SignUpRequestBody } from "@/features/auth/service/signUp";
 import { devtools, redux } from "zustand/middleware";
 
-export type SignUpStoreState = SignUpRequestBody;
+export type SignUpStoreState = SignUpRequestBody & {
+    isEmailVerified: boolean;
+};
 
 export enum SignUpStoreActionType {
+    VERIFY_EMAIL = "VERIFY_EMAIL",
     SET_EMAIL = "SET_EMAIL",
     SET_PASSWORD = "SET_PASSWORD",
     SET_AUTH_TOKEN = "SET_AUTH_TOKEN",
@@ -18,6 +21,7 @@ export enum SignUpStoreActionType {
 }
 
 export type SignUpStoreAction =
+    | { type: SignUpStoreActionType.VERIFY_EMAIL }
     | { type: SignUpStoreActionType.SET_EMAIL; payload: { email: string } }
     | { type: SignUpStoreActionType.SET_PASSWORD; payload: { password: string } }
     | { type: SignUpStoreActionType.SET_AUTH_TOKEN; payload: { authToken: string } }
@@ -29,6 +33,7 @@ export type SignUpStoreAction =
     | { type: SignUpStoreActionType.COMPLETE };
 
 const initialState: SignUpStoreState = {
+    isEmailVerified: false,
     email: "",
     password: "",
     authToken: "",
@@ -44,6 +49,8 @@ export const signUpStoreReducer = (
     action: SignUpStoreAction,
 ): SignUpStoreState => {
     switch (action.type) {
+        case SignUpStoreActionType.VERIFY_EMAIL:
+            return { ...state, isEmailVerified: true };
         case SignUpStoreActionType.SET_EMAIL:
             return { ...state, email: action.payload.email };
         case SignUpStoreActionType.SET_PASSWORD:

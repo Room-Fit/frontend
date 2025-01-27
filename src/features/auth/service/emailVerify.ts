@@ -17,7 +17,7 @@ export async function verifyEmailVerificationCode(body: EmailVerifyRequestBody) 
     try {
         EmailVerifySchema.parse(body);
         const { data: response } = await api.post<BaseResponse<EmailVerifyResponseBody>>(
-            "/api/v1/auth/verify",
+            "/api/v1/auth/code/verify",
             body,
         );
         if (!response.data) throw new Error("인증 코드가 올바르지 않습니다.");
