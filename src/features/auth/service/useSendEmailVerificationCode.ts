@@ -1,14 +1,18 @@
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
+import { useTimer } from "@/features/auth/hooks/useTimer";
 import { sendEmailVerificationCode } from "@/features/auth/service/emailCode";
 import { SignUpStoreActionType, useSignUpStore } from "@/features/auth/store/useSignUpStore";
 import { renderToastFromDerivedError } from "@/shared/utils/renderToastFromDerivedError";
 
 export const useSendEmailVerificationCode = () => {
-    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [isVerificationCodeInputFieldVisible, setIsVerificationCodeInputFieldVisible] =
+        useState<boolean>(false);
     const emailRef = useRef<HTMLInputElement>(null);
     const { dispatch } = useSignUpStore();
+
+    const { seconds, startTimer } = useTimer(5 * 60);
 
     const onSendEmailVerificationCode = async () => {
         if (!emailRef.current?.value) return;
@@ -21,7 +25,9 @@ export const useSendEmailVerificationCode = () => {
                 error: renderToastFromDerivedError,
             })
             .then((data) => {
-                setIsVisible(true);
+                setIsVerificationCodeInputFieldVisible(true);
+                startTimer();
+
                 dispatch({
                     type: SignUpStoreActionType.SET_EMAIL,
                     payload: { email },
@@ -33,5 +39,5 @@ export const useSendEmailVerificationCode = () => {
             });
     };
 
-    return { isVisible, emailRef, onSendEmailVerificationCode };
+    return { isVerificationCodeInputFieldVisible, emailRef, onSendEmailVerificationCode, seconds };
 };

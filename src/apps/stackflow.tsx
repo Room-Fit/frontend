@@ -9,6 +9,7 @@ import MatchListPage from "@/pages/match/MatchListPage";
 import MyPage from "@/pages/mypage/MyPage";
 import ProfileDetailPage from "@/pages/profile/ProfileDetailPage";
 import ProfileEditPage from "@/pages/profile/ProfileEditPage";
+import ProfileListPage from "@/pages/profile/ProfileListPage";
 
 import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
@@ -33,6 +34,8 @@ const stackflowApp = stackflow({
                 CreateMatchPage: "/match/new",
                 MatchDetailPage: "/match/detail",
 
+                ProfileListPage: "/profiles",
+
                 ChatRoomListPage: "/chat",
                 ChatRoomPage: "/chat/room",
 
@@ -53,6 +56,8 @@ const stackflowApp = stackflow({
         MatchListPage,
         CreateMatchPage,
         MatchDetailPage,
+
+        ProfileListPage,
 
         ChatRoomListPage,
         ChatRoomPage,
