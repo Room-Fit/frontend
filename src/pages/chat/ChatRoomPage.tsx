@@ -16,7 +16,7 @@ import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileC
 import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
 import { ChatHistoryContextProvider } from "@/features/chat/contexts/ChatHistoryContext";
 import { useChat } from "@/features/chat/hooks/useChat";
-import { usePreviousMessageHistory } from "@/features/chat/hooks/usePreviousMessageHistory";
+import { useIntersectionObserver } from "@/features/chat/hooks/useIntersectionObserver";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
 import { ActivityComponentType } from "@stackflow/react";
 
@@ -30,8 +30,8 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         roomId: params.roomId,
     });
     const [isOpen, setIsOpen] = useState(false);
-    const { data, isFetching } = usePreviousMessageHistory(params.roomId);
-
+    // const { data, isFetching } = usePreviousMessageHistory(params.roomId);
+    const { data, isFetchingNextPage, locationRef } = useIntersectionObserver(params.roomId);
     return (
         <Screen>
             <ChatHistoryContextProvider>
@@ -47,10 +47,11 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                             />
                         </ChatSideBar>
                     </ChatNavTop>
-                    {isFetching ? (
+                    {isFetchingNextPage ? (
                         <ChatHistoryFallback />
                     ) : (
                         <ChatHistoryGroup>
+                            <div ref={locationRef}>Ref</div>
                             <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
                             {data?.pages.map((historyItem) => {
                                 return historyItem?.map((item) => (

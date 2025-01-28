@@ -15,7 +15,7 @@ export type MessageHistoryType = {
     };
 };
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 30;
 
 const getPreviousMessageHistory = async (room_id: number) => {
     try {
