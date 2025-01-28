@@ -5,6 +5,8 @@ import { Vote } from "lucide-react";
 
 import { Screen } from "@/apps/Screen";
 
+import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
+// import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
 import { ChatHistoryGroup } from "@/entities/chat/ui/ChatHistory/ChatHistoryGroup";
 import { ChatHistoryItem } from "@/entities/chat/ui/ChatHistory/ChatHistoryItem";
 import { ChatHistoryTime } from "@/entities/chat/ui/ChatHistory/ChatHistoryTime";
@@ -14,6 +16,7 @@ import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileC
 import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
 import { ChatHistoryContextProvider } from "@/features/chat/contexts/ChatHistoryContext";
 import { useChat } from "@/features/chat/hooks/useChat";
+import { useIntersectionObserver } from "@/features/chat/hooks/useIntersectionObserver";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
 import { ActivityComponentType } from "@stackflow/react";
 
@@ -27,7 +30,8 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         roomId: params.roomId,
     });
     const [isOpen, setIsOpen] = useState(false);
-
+    // const { data, isFetching } = usePreviousMessageHistory(params.roomId);
+    const { data, isFetchingNextPage, locationRef } = useIntersectionObserver(params.roomId);
     return (
         <Screen>
             <ChatHistoryContextProvider>
@@ -43,25 +47,40 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                             />
                         </ChatSideBar>
                     </ChatNavTop>
-
-                    <ChatHistoryGroup>
-                        <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
-                        {chatHistory.histories.map((historyItem) => {
-                            return (
+                    {isFetchingNextPage ? (
+                        <ChatHistoryFallback />
+                    ) : (
+                        <ChatHistoryGroup>
+                            <div ref={locationRef}>Ref</div>
+                            <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
+                            {data?.pages.map((historyItem) => {
+                                return historyItem?.map((item) => (
+                                    <ChatHistoryItem
+                                        key={item.id}
+                                        id={item.id as number}
+                                        type={item?.sender == "nick2" ? "send" : "receive"}
+                                        nickname={item?.sender as string}
+                                        content={item?.content as string}
+                                        createdAt={item?.createdAt as string}
+                                    />
+                                ));
+                            })}
+                            {chatHistory.histories.map((history) => (
                                 <ChatHistoryItem
-                                    key={historyItem.timeStamp}
-                                    type={historyItem.type}
-                                    author={historyItem.author}
-                                    message={historyItem.message}
-                                    timeStamp={historyItem.timeStamp}
+                                    key={history.id}
+                                    id={history.id as number}
+                                    type={history?.nickname == "nick2" ? "send" : "receive"}
+                                    nickname={history?.nickname as string}
+                                    content={history?.content as string}
+                                    createdAt={history?.createdAt as string}
                                 />
-                            );
-                        })}
-                    </ChatHistoryGroup>
+                            ))}
+                        </ChatHistoryGroup>
+                    )}
+
                     <ChatInput
                         ref={chatInputRef}
                         onSendButtonClick={() => {
-                            console.log(chatInputRef.current?.value);
                             sendMessage(chatInputRef.current?.value as string);
                         }}
                     />

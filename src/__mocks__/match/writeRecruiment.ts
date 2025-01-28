@@ -1,13 +1,13 @@
 import { http, HttpResponse } from "msw";
 
-import { RecruitmentPost } from "@/features/match/service/recruitmentPost";
+import { RecruitmentPost } from "@/features/match/service/createRecruitmentPost";
 
 export const writeRecruitmentHandler = [
     http.post("/api/v1/recruiment", async ({ request }) => {
         try {
             const body = (await request.json()) as RecruitmentPost;
 
-            if (!body.title || !body.description || !body.dormitory || !body.maxQuota) {
+            if (!body.name || !body.description || !body.dormitory || !body.maxQuota) {
                 return new HttpResponse(null, {
                     status: 400,
                     statusText: "잘못된 요청입니다.",

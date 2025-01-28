@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 import {
     Bug,
     FileQuestion,
@@ -13,12 +15,14 @@ import { BaseScreen } from "@/apps/Screen";
 import { NavTop } from "@/apps/layouts/NavTop";
 import { useFlow } from "@/apps/stackflow";
 
+import { AuthActionType, useAuth } from "@/features/auth/store/useAuth";
 import { Menu } from "@/features/mypage/ui/Menu";
 import { MenuItem } from "@/features/mypage/ui/MenuItem";
 import { ProfileHeader } from "@/features/mypage/ui/ProfileHeader";
 
 export default function MyPage() {
     const { push } = useFlow();
+    const { dispatch } = useAuth();
 
     return (
         <BaseScreen>
@@ -34,7 +38,15 @@ export default function MyPage() {
                         icon={<UserRoundPen size={20} />}
                         onClick={() => push("ProfileEditPage", {})}
                     />
-                    <MenuItem label="로그아웃" icon={<LogOut size={20} />} />
+                    <MenuItem
+                        label="로그아웃"
+                        icon={<LogOut size={20} />}
+                        onClick={() => {
+                            dispatch({ type: AuthActionType.SIGN_OUT });
+                            toast.success("로그아웃 되었습니다.");
+                            push("HomePage", {});
+                        }}
+                    />
                 </Menu>
 
                 <Menu label="고객센터">

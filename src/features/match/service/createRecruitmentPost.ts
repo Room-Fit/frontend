@@ -1,11 +1,12 @@
 import ExceptionHandler from "axios-exception-handler";
 
 import { api } from "@/shared/lib";
+import { BaseResponse } from "@/shared/types/BaseResponse";
 
 export type RecruitmentPost = {
-    id: number;
-    title: string;
+    name: string;
     description: string;
+    type: "PRIVATE" | "GROUP";
     dormitory:
         | "봉사관"
         | "화목관"
@@ -24,17 +25,17 @@ export type RecruitmentPost = {
 
 export const MAX_RECRUITEMENT_NUMBER = 6;
 
-export const postRecruitment = async ({
-    id,
-    title,
+export const createRecruitmentPost = async ({
+    name,
+    type,
     description,
     dormitory,
     maxQuota,
 }: RecruitmentPost) => {
     try {
-        const response = await api.post<RecruitmentPost>("/api/v1/recruiment", {
-            id,
-            title,
+        const { data: response } = await api.post<BaseResponse<RecruitmentPost>>("/api/v1/room", {
+            type,
+            name,
             dormitory,
             description,
             maxQuota,

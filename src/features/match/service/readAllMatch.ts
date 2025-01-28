@@ -1,20 +1,22 @@
 import ExceptionHandler from "axios-exception-handler";
 
 import { api } from "@/shared/lib";
+import { BaseResponse } from "@/shared/types/BaseResponse";
 import { useQuery } from "@tanstack/react-query";
 
-export type LookUpResponse = {
+export type ReadMatchList = {
     id: number;
-    title: string;
+    name: string;
     description: string;
     dormitory: string;
     currentQuota: number;
     maxQuota: number;
+    status: "RECRUITING" | "RECRUITMENT_COMPLETE" | "MATCH_COMPLETE";
 };
 
-const fetchMatchList = async () => {
+const readAllMatch = async () => {
     try {
-        const response = await api.get<LookUpResponse[]>("/api/v1/chat");
+        const { data: response } = await api.get<BaseResponse<ReadMatchList[]>>("/api/v1/room");
         return response.data;
     } catch (err) {
         ExceptionHandler(err)
@@ -27,6 +29,6 @@ const fetchMatchList = async () => {
 export const useMatchList = () => {
     return useQuery({
         queryKey: ["matchList"],
-        queryFn: fetchMatchList,
+        queryFn: readAllMatch,
     });
 };

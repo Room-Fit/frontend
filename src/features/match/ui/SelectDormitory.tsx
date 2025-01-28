@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { RecruitmentPost } from "@/features/match/service/recruitmentPost";
+import { RecruitmentPost } from "@/features/match/service/createRecruitmentPost";
 import {
     Select,
     SelectContent,
