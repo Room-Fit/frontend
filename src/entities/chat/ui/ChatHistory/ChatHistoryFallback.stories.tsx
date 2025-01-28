@@ -10,7 +10,5 @@ export default meta;
 type Story = StoryObj<typeof ChatHistoryFallback>;
 
 export const Default: Story = {
-    args: {
-        message: "로딩중입니다...",
-    },
+    args: {},
 };
