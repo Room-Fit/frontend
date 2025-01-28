@@ -5,6 +5,8 @@ import { Vote } from "lucide-react";
 
 import { Screen } from "@/apps/Screen";
 
+import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
+// import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
 import { ChatHistoryGroup } from "@/entities/chat/ui/ChatHistory/ChatHistoryGroup";
 import { ChatHistoryItem } from "@/entities/chat/ui/ChatHistory/ChatHistoryItem";
 import { ChatHistoryTime } from "@/entities/chat/ui/ChatHistory/ChatHistoryTime";
@@ -14,6 +16,7 @@ import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileC
 import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
 import { ChatHistoryContextProvider } from "@/features/chat/contexts/ChatHistoryContext";
 import { useChat } from "@/features/chat/hooks/useChat";
+import { useInfObserverFetch } from "@/features/chat/hooks/useInfObserverFetch";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
 import { ActivityComponentType } from "@stackflow/react";
 
@@ -27,7 +30,14 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         roomId: params.roomId,
     });
     const [isOpen, setIsOpen] = useState(false);
-
+    const { data, isPending, scrollContainerRef, targetRef, hasNext } = useInfObserverFetch<
+        HTMLUListElement,
+        HTMLDivElement
+    >({
+        rootMargin: "0px",
+        threshold: 0.5,
+        room_id: params.roomId,
+    });
     return (
         <Screen>
             <ChatHistoryContextProvider>
@@ -44,24 +54,34 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                         </ChatSideBar>
                     </ChatNavTop>
 
-                    <ChatHistoryGroup>
+                    <ChatHistoryGroup ref={scrollContainerRef}>
                         <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
-                        {chatHistory.histories.map((historyItem) => {
-                            return (
-                                <ChatHistoryItem
-                                    key={historyItem.timeStamp}
-                                    type={historyItem.type}
-                                    author={historyItem.author}
-                                    message={historyItem.message}
-                                    timeStamp={historyItem.timeStamp}
-                                />
-                            );
-                        })}
+                        {!isPending && hasNext && <ChatHistoryFallback ref={targetRef} />}
+                        {data?.data.flatMap((historyItems) => (
+                            <ChatHistoryItem
+                                key={historyItems.id}
+                                id={historyItems.id}
+                                type={historyItems.sender === "nick2" ? "send" : "receive"}
+                                nickname={historyItems.sender}
+                                content={historyItems.content}
+                                createdAt={historyItems.createdAt}
+                            />
+                        ))}
+                        {chatHistory.histories.map((history) => (
+                            <ChatHistoryItem
+                                key={history.id}
+                                id={history.id as number}
+                                type={history?.nickname == "nick2" ? "send" : "receive"}
+                                nickname={history?.nickname as string}
+                                content={history?.content as string}
+                                createdAt={history?.createdAt as string}
+                            />
+                        ))}
                     </ChatHistoryGroup>
+
                     <ChatInput
                         ref={chatInputRef}
                         onSendButtonClick={() => {
-                            console.log(chatInputRef.current?.value);
                             sendMessage(chatInputRef.current?.value as string);
                         }}
                     />

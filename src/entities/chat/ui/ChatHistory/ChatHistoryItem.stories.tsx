@@ -19,18 +19,18 @@ type Story = StoryObj<typeof ChatHistoryItem>;
 
 export const Send: Story = {
     args: {
-        author: "보내는 사람",
+        nickname: "보내는 사람",
         type: "send",
-        message: "최대 말풍선 길이입니다 다람쥐다람쥐다람쥐다람쥐",
-        timeStamp: "2023-10-05T14:48:00+09:00",
+        content: "최대 말풍선 길이입니다 다람쥐다람쥐다람쥐다람쥐",
+        createdAt: "2023-10-05T14:48:00+09:00",
     },
 };
 
 export const Receive: Story = {
     args: {
-        author: "받는 사람",
+        nickname: "받는 사람",
         type: "receive",
-        message: "최대 말풍선 길이입니다 다람쥐다람쥐다람쥐다람쥐",
-        timeStamp: "2023-10-05T14:48:00+09:00",
+        content: "최대 말풍선 길이입니다 다람쥐다람쥐다람쥐다람쥐",
+        createdAt: "2023-10-05T14:48:00+09:00",
     },
 };

@@ -2,28 +2,28 @@ import { House, Users } from "lucide-react";
 
 export interface MatchInfoProps {
     id: number;
-    title: string;
+    name: string;
     dormitory: string;
     currentQuota: number;
     maxQuota: number;
-    author: {
-        id: number;
-        nickname: string;
-    };
-    createdAt: string;
+    // author: {
+    //     id: number;
+    //     nickname: string;
+    // };
+    // createdAt: string;
 }
 
 export const MatchInfo = ({
-    title,
+    name,
     dormitory,
     currentQuota,
     maxQuota,
-    author,
-    createdAt,
+    // author,
+    // createdAt,
 }: MatchInfoProps) => {
     return (
         <div className="flex flex-col justify-end w-full h-full p-4 text-white">
-            <h1 className="mb-1 text-2xl font-semibold">{title}</h1>
+            <h1 className="mb-1 text-2xl font-semibold">{name}</h1>
 
             <div className="flex justify-between">
                 <ul className="flex gap-2 text-sm">
@@ -39,14 +39,14 @@ export const MatchInfo = ({
                     </li>
                 </ul>
 
-                <ul className="flex gap-2 text-sm">
+                {/* <ul className="flex gap-2 text-sm">
                     <li>
                         <span>{author.nickname}</span>
                     </li>
                     <li>
                         <span>{createdAt}</span>
                     </li>
-                </ul>
+                </ul> */}
             </div>
         </div>
     );

@@ -19,17 +19,19 @@ export const Default: Story = {
                 <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
 
                 <ChatHistoryItem
+                    id={0}
                     type="send"
-                    author="김룸핏"
-                    message="방 진짜 드릅게 쓰시네요 쓰레기장인줄"
-                    timeStamp={"2022-01-01T00:43:00+09:00"}
+                    nickname="김룸핏"
+                    content="방 진짜 드릅게 쓰시네요 쓰레기장인줄"
+                    createdAt={"2022-01-01T00:43:00+09:00"}
                 />
 
                 <ChatHistoryItem
+                    id={0}
                     type="receive"
-                    author="서룸핏"
-                    message="누가 누구보고 지적질하는진 모르겠는데, 님이 더 쓰레기 같아요"
-                    timeStamp={"2022-01-01T00:52:00+09:00"}
+                    nickname="서룸핏"
+                    content="누가 누구보고 지적질하는진 모르겠는데, 님이 더 쓰레기 같아요"
+                    createdAt={"2022-01-01T00:52:00+09:00"}
                 />
             </ChatHistoryGroup>
         );
