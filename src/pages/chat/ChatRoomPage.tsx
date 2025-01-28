@@ -16,7 +16,7 @@ import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileC
 import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
 import { ChatHistoryContextProvider } from "@/features/chat/contexts/ChatHistoryContext";
 import { useChat } from "@/features/chat/hooks/useChat";
-import { useIntersectionObserver } from "@/features/chat/hooks/useIntersectionObserver";
+import { useInfObserverFetch } from "@/features/chat/hooks/useInfObserverFetch";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
 import { ActivityComponentType } from "@stackflow/react";
 
@@ -30,8 +30,14 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         roomId: params.roomId,
     });
     const [isOpen, setIsOpen] = useState(false);
-    // const { data, isFetching } = usePreviousMessageHistory(params.roomId);
-    const { data, isFetchingNextPage, locationRef } = useIntersectionObserver(params.roomId);
+    const { data, isPending, scrollContainerRef, targetRef, hasNext } = useInfObserverFetch<
+        HTMLUListElement,
+        HTMLDivElement
+    >({
+        rootMargin: "0px",
+        threshold: 0.5,
+        room_id: params.roomId,
+    });
     return (
         <Screen>
             <ChatHistoryContextProvider>
@@ -47,36 +53,31 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                             />
                         </ChatSideBar>
                     </ChatNavTop>
-                    {isFetchingNextPage ? (
-                        <ChatHistoryFallback />
-                    ) : (
-                        <ChatHistoryGroup>
-                            <div ref={locationRef}>Ref</div>
-                            <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
-                            {data?.pages.map((historyItem) => {
-                                return historyItem?.map((item) => (
-                                    <ChatHistoryItem
-                                        key={item.id}
-                                        id={item.id as number}
-                                        type={item?.sender == "nick2" ? "send" : "receive"}
-                                        nickname={item?.sender as string}
-                                        content={item?.content as string}
-                                        createdAt={item?.createdAt as string}
-                                    />
-                                ));
-                            })}
-                            {chatHistory.histories.map((history) => (
-                                <ChatHistoryItem
-                                    key={history.id}
-                                    id={history.id as number}
-                                    type={history?.nickname == "nick2" ? "send" : "receive"}
-                                    nickname={history?.nickname as string}
-                                    content={history?.content as string}
-                                    createdAt={history?.createdAt as string}
-                                />
-                            ))}
-                        </ChatHistoryGroup>
-                    )}
+
+                    <ChatHistoryGroup ref={scrollContainerRef}>
+                        <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
+                        {!isPending && hasNext && <ChatHistoryFallback ref={targetRef} />}
+                        {data?.data.flatMap((historyItems) => (
+                            <ChatHistoryItem
+                                key={historyItems.id}
+                                id={historyItems.id}
+                                type={historyItems.sender === "nick2" ? "send" : "receive"}
+                                nickname={historyItems.sender}
+                                content={historyItems.content}
+                                createdAt={historyItems.createdAt}
+                            />
+                        ))}
+                        {chatHistory.histories.map((history) => (
+                            <ChatHistoryItem
+                                key={history.id}
+                                id={history.id as number}
+                                type={history?.nickname == "nick2" ? "send" : "receive"}
+                                nickname={history?.nickname as string}
+                                content={history?.content as string}
+                                createdAt={history?.createdAt as string}
+                            />
+                        ))}
+                    </ChatHistoryGroup>
 
                     <ChatInput
                         ref={chatInputRef}

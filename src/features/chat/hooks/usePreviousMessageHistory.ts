@@ -1,7 +1,7 @@
 import ExceptionHandler from "axios-exception-handler";
 
 import { api } from "@/shared/lib";
-import { BaseResponse } from "@/shared/types/BaseResponse";
+import { BasePaginationResponse } from "@/shared/types/BaseResponse";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 export type MessageHistoryType = {
@@ -9,20 +9,24 @@ export type MessageHistoryType = {
     content: string;
     sender: string;
     createdAt: string;
-    meta: {
-        totalCount: number;
-        hasNext: boolean;
-    };
 };
 
 const PAGE_SIZE = 30;
 
-const getPreviousMessageHistory = async (room_id: number) => {
+export const getPreviousMessageHistory = async ({
+    room_id,
+    lastMessageId,
+}: {
+    room_id: number;
+    lastMessageId?: undefined | number;
+}) => {
     try {
-        const { data: response } = await api.get<BaseResponse<MessageHistoryType[]>>(
-            `/api/v1/room/${room_id}/messages?pageSize=${PAGE_SIZE}`,
+        const { data: response } = await api.get<BasePaginationResponse<MessageHistoryType[]>>(
+            `/api/v1/room/${room_id}/messages`,
+            { params: { lastMessageId, pageSize: PAGE_SIZE } },
         );
-        return response.data.reverse();
+        response.data = response.data.reverse();
+        return response;
     } catch (err) {
         ExceptionHandler(err)
             .addCase(400, "잘못된 요청입니다.")
@@ -36,7 +40,7 @@ const getPreviousMessageHistory = async (room_id: number) => {
 
 export const usePreviousMessageHistory = (room_id: number) => {
     return useInfiniteQuery({
-        queryFn: () => getPreviousMessageHistory(room_id),
+        queryFn: () => getPreviousMessageHistory({ room_id, lastMessageId: undefined }),
         queryKey: ["previousMessage", room_id],
         initialPageParam: 1,
         getNextPageParam: (lastPage, allPages) => (lastPage ? allPages.length : null),
