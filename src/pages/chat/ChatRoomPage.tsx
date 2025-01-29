@@ -30,7 +30,6 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         roomId: params.roomId,
     });
     const { participants } = useMatchDetail(params.roomId);
-    console.log(participants);
 
     const [isOpen, setIsOpen] = useState(false);
     const { data, isPending, scrollContainerRef, targetRef, hasNext } = useInfObserverFetch<
