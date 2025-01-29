@@ -15,9 +15,9 @@ export const Default: Story = {
     render: () => {
         return (
             <ChatSideBarProfileGroup>
-                <ChatProfileCard id={1} name="김룸핏" description="경북대학교 컴퓨터학부" />
-                <ChatProfileCard id={2} name="김룸핏" description="경북대학교 컴퓨터학부" />
-                <ChatProfileCard id={3} name="김룸핏" description="경북대학교 컴퓨터학부" />
+                <ChatProfileCard id={1} nickname="김룸핏" college="경북대학교 컴퓨터학부" />
+                <ChatProfileCard id={2} nickname="김룸핏" college="경북대학교 컴퓨터학부" />
+                <ChatProfileCard id={3} nickname="김룸핏" college="경북대학교 컴퓨터학부" />
             </ChatSideBarProfileGroup>
         );
     },

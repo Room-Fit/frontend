@@ -6,21 +6,9 @@ export interface MatchInfoProps {
     dormitory: string;
     currentQuota: number;
     maxQuota: number;
-    // author: {
-    //     id: number;
-    //     nickname: string;
-    // };
-    // createdAt: string;
 }
 
-export const MatchInfo = ({
-    name,
-    dormitory,
-    currentQuota,
-    maxQuota,
-    // author,
-    // createdAt,
-}: MatchInfoProps) => {
+export const MatchInfo = ({ name, dormitory, currentQuota, maxQuota }: MatchInfoProps) => {
     return (
         <div className="flex flex-col justify-end w-full h-full p-4 text-white">
             <h1 className="mb-1 text-2xl font-semibold">{name}</h1>
@@ -38,15 +26,6 @@ export const MatchInfo = ({
                         </span>
                     </li>
                 </ul>
-
-                {/* <ul className="flex gap-2 text-sm">
-                    <li>
-                        <span>{author.nickname}</span>
-                    </li>
-                    <li>
-                        <span>{createdAt}</span>
-                    </li>
-                </ul> */}
             </div>
         </div>
     );

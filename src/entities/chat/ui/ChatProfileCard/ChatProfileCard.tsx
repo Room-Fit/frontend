@@ -8,18 +8,17 @@ import { cn } from "@/shared/lib";
 
 export interface ChatProfileCardProps {
     className?: string;
-
     id: number;
-    name: string;
-    description: string;
+    nickname: string;
+    college: string;
     onClick?: () => void;
 }
 
 export const ChatProfileCard = ({
     id,
     className,
-    name,
-    description,
+    nickname,
+    college,
     onClick,
 }: ChatProfileCardProps) => {
     const { push } = useFlow();
@@ -35,8 +34,8 @@ export const ChatProfileCard = ({
         >
             <div className="flex items-center justify-between w-full h-full py-1">
                 <div className="relative flex-grow-[1] z-10">
-                    <h1 className="my-1 text-xl font-bold text-black">{name}</h1>
-                    <p className="text-sm font-semibold text-dark-400">{description}</p>
+                    <h1 className="my-1 text-xl font-bold text-black">{nickname}</h1>
+                    <p className="text-sm font-semibold text-dark-400">{college}</p>
                 </div>
                 <div>
                     <Chip theme="gray" className="gap-0">

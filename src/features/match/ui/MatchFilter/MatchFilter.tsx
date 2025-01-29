@@ -22,7 +22,6 @@ import {
 
 export const MatchFilter = () => {
     const {
-        // recruitmentStatus,
         numOfAppliedFilters,
         minRecruitmentPeople,
         maxRecruitmentPeople,

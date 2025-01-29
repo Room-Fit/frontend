@@ -29,13 +29,14 @@ const readMatchDetail = async (id: number) => {
 };
 
 export const useMatchDetail = (id: number) => {
-    const { data } = useQuery({
+    const { data: response } = useQuery({
         queryKey: MATCH_QUERY_KEY_FACTORY.READ_MATCH_DETAIL_BY_ID(id),
         queryFn: () => readMatchDetail(id),
         enabled: !!id,
     });
 
     return {
-        data,
+        data: response,
+        participants: response?.participants,
     };
 };

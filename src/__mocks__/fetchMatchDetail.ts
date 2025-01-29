@@ -3,8 +3,6 @@ export const fetchMatchDetail = (id: number) => {
     return {
         id,
         title: "조용하고 청결한 룸메이트 구해요",
-        // description:
-        //     "조용하고 청결한 룸메이트를 구합니다. 학교 근처에 있으면 좋겠어요. MBTI 는 I 를 선호합니다.",
 
         currentQuota: 1,
         maxQuota: 4,

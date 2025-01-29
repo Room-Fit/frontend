@@ -6,7 +6,6 @@ import { Vote } from "lucide-react";
 import { Screen } from "@/apps/Screen";
 
 import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
-// import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
 import { ChatHistoryGroup } from "@/entities/chat/ui/ChatHistory/ChatHistoryGroup";
 import { ChatHistoryItem } from "@/entities/chat/ui/ChatHistory/ChatHistoryItem";
 import { ChatHistoryTime } from "@/entities/chat/ui/ChatHistory/ChatHistoryTime";
@@ -17,6 +16,7 @@ import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
 import { ChatHistoryContextProvider } from "@/features/chat/contexts/ChatHistoryContext";
 import { useChat } from "@/features/chat/hooks/useChat";
 import { useInfObserverFetch } from "@/features/chat/hooks/useInfObserverFetch";
+import { useMatchDetail } from "@/features/match/service/readMatchDetail";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
 import { ActivityComponentType } from "@stackflow/react";
 
@@ -29,6 +29,8 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         userId: 10,
         roomId: params.roomId,
     });
+    const { participants } = useMatchDetail(params.roomId);
+
     const [isOpen, setIsOpen] = useState(false);
     const { data, isPending, scrollContainerRef, targetRef, hasNext } = useInfObserverFetch<
         HTMLUListElement,
@@ -45,12 +47,14 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                     <ChatNavTop title={"채팅방 이름"} currentQuota={2} maxQuota={4}>
                         <Vote className="block text-dark-300" strokeWidth={1.5} />
                         <ChatSideBar open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
-                            <ChatProfileCard
-                                id={1}
-                                name={"김룸핏"}
-                                description={"경북대학교 컴퓨터학부"}
-                                onClick={() => setIsOpen((prev) => !prev)}
-                            />
+                            {participants?.map((participant) => (
+                                <ChatProfileCard
+                                    key={participant.id}
+                                    id={participant.id}
+                                    nickname={participant.nickname}
+                                    college={participant.college}
+                                />
+                            ))}
                         </ChatSideBar>
                     </ChatNavTop>
 

@@ -14,6 +14,7 @@ export interface MatchDetailPageParams {
 
 const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params }) => {
     const { data } = useMatchDetail(params.id);
+    console.log(data);
     return (
         <BaseScreen>
             <NavPrevious />
@@ -24,16 +25,19 @@ const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params 
                     dormitory={data?.dormitory ?? ""}
                     currentQuota={data?.currentQuota ?? 0}
                     maxQuota={data?.maxQuota ?? 0}
-                    // author={data?.author ?? { id: 0, nickname: "" }}
-                    // createdAt={data?.createdAt ?? ""}
                     id={data?.id ?? 0}
                 />
             </BackDropImage>
 
             <div className="flex flex-col gap-5 p-6">
-                <ChatProfileCard id={1} name={"김룸핏"} description="경북대학교 컴퓨터학부" />
-                <ChatProfileCard id={2} name={"김룸핏"} description="경북대학교 컴퓨터학부" />
-                <ChatProfileCard id={3} name={"김룸핏"} description="경북대학교 컴퓨터학부" />
+                {data?.participants.map((participant) => (
+                    <ChatProfileCard
+                        key={participant.id}
+                        id={participant.id}
+                        nickname={participant.nickname}
+                        college={participant.college}
+                    />
+                ))}
             </div>
         </BaseScreen>
     );

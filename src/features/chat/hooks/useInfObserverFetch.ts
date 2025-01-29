@@ -13,7 +13,6 @@ type useInfObserverOptions = {
 };
 
 export const useInfObserverFetch = <
-    // D extends Record<string, unknown>[],
     C extends HTMLElement = HTMLElement,
     T extends HTMLElement = HTMLElement,
 >({
