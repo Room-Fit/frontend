@@ -25,8 +25,6 @@ const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params 
                     dormitory={data?.dormitory ?? ""}
                     currentQuota={data?.currentQuota ?? 0}
                     maxQuota={data?.maxQuota ?? 0}
-                    // author={data?.author ?? { id: 0, nickname: "" }}
-                    // createdAt={data?.createdAt ?? ""}
                     id={data?.id ?? 0}
                 />
             </BackDropImage>

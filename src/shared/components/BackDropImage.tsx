@@ -7,13 +7,7 @@ export interface BackDropImageProps extends React.ComponentProps<"img"> {
     children?: React.ReactNode;
 }
 
-export const BackDropImage = ({
-    width,
-    height,
-    children,
-    ...props
-    // direction = "col",
-}: BackDropImageProps) => {
+export const BackDropImage = ({ width, height, children, ...props }: BackDropImageProps) => {
     return (
         <div className="relative" style={{ width: width, height: height }}>
             <img

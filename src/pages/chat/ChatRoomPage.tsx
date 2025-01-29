@@ -6,7 +6,6 @@ import { Vote } from "lucide-react";
 import { Screen } from "@/apps/Screen";
 
 import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
-// import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
 import { ChatHistoryGroup } from "@/entities/chat/ui/ChatHistory/ChatHistoryGroup";
 import { ChatHistoryItem } from "@/entities/chat/ui/ChatHistory/ChatHistoryItem";
 import { ChatHistoryTime } from "@/entities/chat/ui/ChatHistory/ChatHistoryTime";
