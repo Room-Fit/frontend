@@ -12,8 +12,8 @@ type Story = StoryObj<typeof ChatProfileCard>;
 export const Default: Story = {
     args: {
         id: 1,
-        name: "김대건",
-        description: "경북대학교 컴퓨터학부",
+        nickname: "김대건",
+        college: "경북대학교 컴퓨터학부",
         className: "w-[350px]",
     },
 };
