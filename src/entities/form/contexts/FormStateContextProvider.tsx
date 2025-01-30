@@ -3,7 +3,7 @@ import { forwardRef, useImperativeHandle, useLayoutEffect, useReducer } from "re
 import { FormStateContext } from "@/entities/form/contexts";
 import { FORM_DISPATCH_ACTION_TYPES, formReducer } from "@/entities/form/hooks/useFormStateContext";
 import { FormSchema } from "@/entities/form/types";
-import { DynamicFormRef } from "@/entities/form/ui/DynamicForm";
+import { DynamicFormRef } from "@/entities/form/ui/DynamicForm/DynamicForm";
 
 export interface FormStateContextProviderProps {
     formInitialState: FormSchema;

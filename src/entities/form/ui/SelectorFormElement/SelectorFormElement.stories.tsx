@@ -1,30 +1,31 @@
 import { FormStateContextProvider } from "@/entities/form/contexts";
 import { FormSchema } from "@/entities/form/types";
-import { DoubleSliderFormElement } from "@/entities/form/ui/DoubleSliderFormElement";
+import { SelectorFormElement } from "@/entities/form/ui/SelectorFormElement/SelectorFormElement";
 import type { Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof DoubleSliderFormElement> = {
-    title: "Entity/Form/DoubleSliderFormElement",
-    component: DoubleSliderFormElement,
+const meta: Meta<typeof SelectorFormElement> = {
+    title: "Entity/Form/SelectorFormElement",
+    component: SelectorFormElement,
 };
 
 export default meta;
-type Story = StoryObj<typeof DoubleSliderFormElement>;
+type Story = StoryObj<typeof SelectorFormElement>;
 
 const formInitialState: FormSchema = {
     id: 1,
-    title: "경북대학교 2025년 룸핏 모집공고",
-    description: "경북대학교 2025년 룸핏 모집공고",
+    title: "선호하는 색상",
+    description: "선호하는 색상을 선택해주세요.",
     questions: [
         {
             id: 1,
-            title: "기상시간",
-            type: "DOUBLE_SLIDER",
+            title: "선호하는 색상이 무엇인가요?",
+            type: "SELECTOR",
             options: [
-                { label: "최소", value: "4" },
-                { label: "최대", value: "12" },
+                { label: "빨강", value: "Red" },
+                { label: "초록", value: "Green" },
+                { label: "파랑", value: "Blue" },
             ],
-            optionDelimiter: "시",
+            optionDelimiter: null,
         },
     ],
 };
@@ -36,7 +37,7 @@ export const Default: Story = {
     render: (args) => {
         return (
             <FormStateContextProvider formInitialState={formInitialState}>
-                <DoubleSliderFormElement
+                <SelectorFormElement
                     id={args.id}
                     title={args.title}
                     options={args.options}

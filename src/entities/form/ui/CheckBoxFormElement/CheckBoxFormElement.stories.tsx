@@ -1,30 +1,31 @@
 import { FormStateContextProvider } from "@/entities/form/contexts";
 import { FormSchema } from "@/entities/form/types";
-import { SliderFormElement } from "@/entities/form/ui/SliderFormElement";
+import { CheckboxFormElement } from "@/entities/form/ui/CheckBoxFormElement/CheckboxFormElement";
 import type { Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof SliderFormElement> = {
-    title: "Entity/Form/SliderFormElement",
-    component: SliderFormElement,
+const meta: Meta<typeof CheckboxFormElement> = {
+    title: "Entity/Form/CheckboxFormElement",
+    component: CheckboxFormElement,
 };
 
 export default meta;
-type Story = StoryObj<typeof SliderFormElement>;
+type Story = StoryObj<typeof CheckboxFormElement>;
 
 const formInitialState: FormSchema = {
     id: 1,
-    title: "잠귀",
-    description: "잠귀에 대한 민감도를 선택해주세요.",
+    title: "선호하는 색상",
+    description: "선호하는 색상을 선택해주세요.",
     questions: [
         {
             id: 1,
-            title: "잠귀에 대한 민감도를 선택해주세요.",
-            type: "SLIDER",
-            options: [
-                { label: "밝음", value: "1" },
-                { label: "어두움", value: "10" },
-            ],
+            title: "선호하는 색상이 무엇인가요?",
+            type: "CHECKBOX",
             optionDelimiter: null,
+            options: [
+                { label: "빨강", value: "Red" },
+                { label: "초록", value: "Green" },
+                { label: "파랑", value: "Blue" },
+            ],
         },
     ],
 };
@@ -36,13 +37,13 @@ export const Default: Story = {
     render: (args) => {
         return (
             <FormStateContextProvider formInitialState={formInitialState}>
-                <SliderFormElement
+                <CheckboxFormElement
                     id={args.id}
                     title={args.title}
                     options={args.options}
-                    optionDelimiter={args.optionDelimiter}
                     type={args.type}
-                ></SliderFormElement>
+                    optionDelimiter={args.optionDelimiter}
+                />
             </FormStateContextProvider>
         );
     },
