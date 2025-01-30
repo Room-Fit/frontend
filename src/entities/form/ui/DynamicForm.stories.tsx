@@ -19,7 +19,7 @@ const formSchema: FormSchema = {
         {
             id: 1,
             title: "기상시간",
-            type: "doubleSlider",
+            type: "DOUBLE_SLIDER",
             optionDelimiter: "시",
             options: [
                 { label: "min", value: "4" },
@@ -29,7 +29,7 @@ const formSchema: FormSchema = {
         {
             id: 2,
             title: "취침시간",
-            type: "doubleSlider",
+            type: "DOUBLE_SLIDER",
             optionDelimiter: "시",
             options: [
                 { label: "min", value: "21" },
@@ -39,7 +39,7 @@ const formSchema: FormSchema = {
         {
             id: 3,
             title: "잠귀",
-            type: "slider",
+            type: "SLIDER",
             optionDelimiter: null,
             options: [
                 { label: "어두움", value: "1" },
@@ -49,7 +49,7 @@ const formSchema: FormSchema = {
         {
             id: 4,
             title: "취침등",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "없음", value: "없음" },
@@ -60,7 +60,7 @@ const formSchema: FormSchema = {
         {
             id: 5,
             title: "알람 설정",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "없음", value: "없음" },
@@ -71,7 +71,7 @@ const formSchema: FormSchema = {
         {
             id: 6,
             title: "잠버릇",
-            type: "checkbox",
+            type: "CHECKBOX",
             optionDelimiter: null,
             options: [
                 { label: "이갈이", value: "이갈이" },
@@ -84,7 +84,7 @@ const formSchema: FormSchema = {
         {
             id: 7,
             title: "더위",
-            type: "slider",
+            type: "SLIDER",
             optionDelimiter: null,
             options: [
                 { label: "적게탐", value: "1" },
@@ -94,7 +94,7 @@ const formSchema: FormSchema = {
         {
             id: 8,
             title: "추위",
-            type: "slider",
+            type: "SLIDER",
             optionDelimiter: null,
             options: [
                 { label: "적게탐", value: "1" },
@@ -104,7 +104,7 @@ const formSchema: FormSchema = {
         {
             id: 9,
             title: "청소주기",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "주1회", value: "주1회" },
@@ -115,7 +115,7 @@ const formSchema: FormSchema = {
         {
             id: 10,
             title: "깨끗함",
-            type: "slider",
+            type: "SLIDER",
             optionDelimiter: null,
             options: [
                 { label: "더러움", value: "1" },
@@ -125,7 +125,7 @@ const formSchema: FormSchema = {
         {
             id: 11,
             title: "룸메이트와 관계",
-            type: "slider",
+            type: "SLIDER",
             optionDelimiter: null,
             options: [
                 { label: "학교사람", value: "1" },
@@ -135,7 +135,7 @@ const formSchema: FormSchema = {
         {
             id: 12,
             title: "룸메이트와 물건공유",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "없음", value: "없음" },
@@ -146,7 +146,7 @@ const formSchema: FormSchema = {
         {
             id: 13,
             title: "친구초대",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "상관없음", value: "상관없음" },
@@ -159,7 +159,7 @@ const formSchema: FormSchema = {
         {
             id: 14,
             title: "운동빈도",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "안함", value: "안함" },
@@ -170,7 +170,7 @@ const formSchema: FormSchema = {
         {
             id: 15,
             title: "운동시간대",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "없음", value: "없음" },
@@ -182,7 +182,7 @@ const formSchema: FormSchema = {
         {
             id: 16,
             title: "본가방문 주기",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "방학만", value: "방학만" },
@@ -195,7 +195,7 @@ const formSchema: FormSchema = {
         {
             id: 17,
             title: "공부장소",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "기숙사", value: "기숙사" },
@@ -207,7 +207,7 @@ const formSchema: FormSchema = {
         {
             id: 18,
             title: "게임",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "안함", value: "안함" },
@@ -218,7 +218,7 @@ const formSchema: FormSchema = {
         {
             id: 19,
             title: "흡연",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "안함", value: "없음" },
@@ -230,7 +230,7 @@ const formSchema: FormSchema = {
         {
             id: 20,
             title: "실내통화",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "안함", value: "안함" },
@@ -242,7 +242,7 @@ const formSchema: FormSchema = {
         {
             id: 21,
             title: "음주빈도",
-            type: "slider",
+            type: "SLIDER",
             optionDelimiter: null,
             options: [
                 { label: "자주안마심", value: "1" },
@@ -252,7 +252,7 @@ const formSchema: FormSchema = {
         {
             id: 22,
             title: "나는 대학 옮길 준비가 되어 있다",
-            type: "selector",
+            type: "SELECTOR",
             optionDelimiter: null,
             options: [
                 { label: "예", value: "예" },
