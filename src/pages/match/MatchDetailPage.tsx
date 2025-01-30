@@ -1,4 +1,5 @@
 import { BaseScreen } from "@/apps/Screen";
+import { siteConfiguration } from "@/apps/config/site";
 
 import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileCard";
 import { useMatchDetail } from "@/features/match/service/readMatchDetail";
@@ -14,7 +15,10 @@ export interface MatchDetailPageParams {
 
 const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params }) => {
     const { data } = useMatchDetail(params.id);
-    console.log(data);
+
+    const university = siteConfiguration.university.find(
+        (item) => item.label === data?.participants[0].college,
+    );
     return (
         <BaseScreen>
             <NavPrevious />
@@ -35,7 +39,7 @@ const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params 
                         key={participant.id}
                         id={participant.id}
                         nickname={participant.nickname}
-                        college={participant.college}
+                        college={university?.label ?? ""}
                     />
                 ))}
             </div>

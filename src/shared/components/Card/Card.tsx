@@ -13,15 +13,15 @@ const cardTheme = {
         secondaryColor: "#EFEFEF",
         background: "bg-[#EFEFEF]",
     },
-    blueTransparent: {
+    genderMTransparent: {
         primaryColor: "#5DA5FF",
         secondaryColor: "#EFEFEF",
         background: "bg-[#5DA5FF66]",
     },
-    grayTransparent: {
-        primaryColor: "#C9CACA",
+    genderFTransparent: {
+        primaryColor: "#FF66FF",
         secondaryColor: "#EFEFEF",
-        background: "bg-[#C9CACA66]",
+        background: "bg-[#FFCBFA]",
     },
 };
 

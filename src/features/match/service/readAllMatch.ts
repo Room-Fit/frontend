@@ -1,5 +1,6 @@
 import ExceptionHandler from "axios-exception-handler";
 
+import { MATCH_QUERY_KEY_FACTORY } from "@/features/match/service/keys";
 import { api } from "@/shared/lib";
 import { BaseResponse } from "@/shared/types/BaseResponse";
 import { useQuery } from "@tanstack/react-query";
@@ -28,7 +29,7 @@ const readAllMatch = async () => {
 
 export const useMatchList = () => {
     return useQuery({
-        queryKey: ["matchList"],
+        queryKey: [MATCH_QUERY_KEY_FACTORY.READ_ALL_MATCH],
         queryFn: readAllMatch,
     });
 };
