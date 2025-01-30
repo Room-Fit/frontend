@@ -9,13 +9,13 @@ import { queryClient } from "@/shared/lib";
 import { useMutation } from "@tanstack/react-query";
 
 export const useCreateRecruitment = () => {
-    const { push } = useFlow();
+    const { replace } = useFlow();
 
     const mutation = useMutation({
         mutationFn: createRecruitmentPost,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: MATCH_QUERY_KEY_FACTORY.READ_ALL_MATCH });
-            push("MatchListPage", {});
+            queryClient.invalidateQueries({ queryKey: MATCH_QUERY_KEY_FACTORY.READ_ALL_MATCH() });
+            replace("MatchListPage", {});
         },
     });
     const handleSubmit = async (formData: RecruitmentPost) => {

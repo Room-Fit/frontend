@@ -29,7 +29,8 @@ const readAllMatch = async () => {
 
 export const useMatchList = () => {
     return useQuery({
-        queryKey: [MATCH_QUERY_KEY_FACTORY.READ_ALL_MATCH],
+        queryKey: [MATCH_QUERY_KEY_FACTORY.READ_ALL_MATCH()],
         queryFn: readAllMatch,
+        staleTime: 0,
     });
 };
