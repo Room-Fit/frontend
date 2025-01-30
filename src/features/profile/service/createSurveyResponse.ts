@@ -3,6 +3,7 @@ import ExceptionHandler from "axios-exception-handler";
 import { FormSchema, Option } from "@/entities/form/types";
 import { api } from "@/shared/lib";
 import { BaseResponse } from "@/shared/types/BaseResponse";
+import { useMutation } from "@tanstack/react-query";
 
 export type CreateSurveyRequestBody = {
     questionReplies: {
@@ -44,3 +45,12 @@ export async function createSurveyResponse(formSchema: FormSchema) {
             .handle();
     }
 }
+
+export const useCreateSurveyResponse = (body: FormSchema) => {
+    return useMutation({
+        mutationFn: () => createSurveyResponse(body),
+        onSuccess: () => {
+            // TODO: 요청 성공시 query invalidation
+        },
+    });
+};
