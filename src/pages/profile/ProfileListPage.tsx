@@ -1,29 +1,38 @@
 import { BaseScreen } from "@/apps/Screen";
 import { NavTop } from "@/apps/layouts/NavTop";
-import { RecruitmentStatus } from "@/apps/types/status";
+import { useFlow } from "@/apps/stackflow";
 
 import { ProfileCard } from "@/entities/profile/ui/ProfileCard/ProfileCard";
+import { useReadUserList } from "@/features/profile/service/readUserList";
 
 export default function ProfileListPage() {
+    const { data } = useReadUserList();
+    const { push } = useFlow();
+    const [university] = data ?? [];
+
+    const parseStudentId = (studentId: string) => {
+        return studentId.toString().substring(2, 4);
+    };
+    const pushProfileDetailPage = (id: number) => {
+        push("ProfileDetailPage", { id });
+    };
     return (
         <BaseScreen>
             <NavTop />
-            <div className="flex flex-col gap-4 p-4">
-                <ProfileCard status={RecruitmentStatus.RECRUITING} nickname={"김대건"}>
-                    <div className="flex flex-col">
-                        <p className="text-xs">20 학번</p>
-                        <p className="text-xs">2000년생</p>
-                        <p className="text-xs">ESTP</p>
-                    </div>
-                </ProfileCard>
-
-                <ProfileCard status={RecruitmentStatus.MATCH_COMPLETE} nickname={"김대건"}>
-                    <div className="flex flex-col">
-                        <p className="text-xs">20 학번</p>
-                        <p className="text-xs">2000년생</p>
-                        <p className="text-xs">ESTP</p>
-                    </div>
-                </ProfileCard>
+            <div className="flex flex-col gap-4 p-4 ">
+                {data?.map((user) => (
+                    <ProfileCard
+                        gender={user.gender}
+                        nickname={user.nickname}
+                        onClick={() => pushProfileDetailPage(user.id)}
+                    >
+                        <div className="flex flex-col font-bold">
+                            <p className="text-xs">{parseStudentId(user.studentId)}학번</p>
+                            <p className="text-xs">{user.birth}년생</p>
+                            <p className="text-xs">{university.college}</p>
+                        </div>
+                    </ProfileCard>
+                ))}
             </div>
         </BaseScreen>
     );
