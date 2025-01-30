@@ -1,5 +1,3 @@
-import { RecruitmentStatus } from "@/apps/types/status";
-
 import { ProfileCard } from "@/entities/profile/ui/ProfileCard/ProfileCard";
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -13,7 +11,7 @@ type Story = StoryObj<typeof ProfileCard>;
 
 export const Blue: Story = {
     args: {
-        status: RecruitmentStatus.RECRUITING,
+        gender: "M",
         nickname: "김대건",
         children: "안녕하세요",
     },
@@ -21,7 +19,7 @@ export const Blue: Story = {
 
 export const GrayTransparent: Story = {
     args: {
-        status: RecruitmentStatus.MATCH_COMPLETE,
+        gender: "F",
         nickname: "김대건",
         children: "안녕하세요",
     },

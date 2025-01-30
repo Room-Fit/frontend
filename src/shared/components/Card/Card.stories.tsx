@@ -25,14 +25,14 @@ export const Gray: Story = {
 
 export const GrayTransparent: Story = {
     args: {
-        theme: "grayTransparent",
+        theme: "genderMTransparent",
         children: <div className="p-12" />,
     },
 };
 
 export const BlueTransparent: Story = {
     args: {
-        theme: "blueTransparent",
+        theme: "genderFTransparent",
         children: <div className="p-12" />,
     },
 };
