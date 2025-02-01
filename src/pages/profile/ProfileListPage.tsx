@@ -8,7 +8,6 @@ import { useReadUserList } from "@/features/profile/service/readUserList";
 export default function ProfileListPage() {
     const { data } = useReadUserList();
     const { push } = useFlow();
-    const [university] = data ?? [];
 
     const parseStudentId = (studentId: string) => {
         return studentId.toString().substring(2, 4);
@@ -29,7 +28,7 @@ export default function ProfileListPage() {
                         <div className="flex flex-col font-bold">
                             <p className="text-xs">{parseStudentId(user.studentId)}학번</p>
                             <p className="text-xs">{user.birth}년생</p>
-                            <p className="text-xs">{university.college}</p>
+                            <p className="text-xs">{user.college}</p>
                         </div>
                     </ProfileCard>
                 ))}
