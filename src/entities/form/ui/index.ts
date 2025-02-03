@@ -1,3 +1,3 @@
-export * from "./CheckboxFormElement";
-export * from "./SelectorFormElement";
-export * from "./SliderFormElement";
+export * from "./CheckBoxFormElement/CheckboxFormElement";
+export * from "./SelectorFormElement/SelectorFormElement";
+export * from "./SliderFormElement/SliderFormElement";

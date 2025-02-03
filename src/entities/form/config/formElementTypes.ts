@@ -1,7 +1,7 @@
 import { SliderFormElement } from "@/entities/form/ui";
-import { CheckboxFormElement } from "@/entities/form/ui/CheckboxFormElement";
-import { DoubleSliderFormElement } from "@/entities/form/ui/DoubleSliderFormElement";
-import { SelectorFormElement } from "@/entities/form/ui/SelectorFormElement";
+import { CheckboxFormElement } from "@/entities/form/ui/CheckBoxFormElement/CheckboxFormElement";
+import { DoubleSliderFormElement } from "@/entities/form/ui/DoubleSliderFormElement/DoubleSliderFormElement";
+import { SelectorFormElement } from "@/entities/form/ui/SelectorFormElement/SelectorFormElement";
 
 export type FormElementType = keyof typeof formElementMap;
 

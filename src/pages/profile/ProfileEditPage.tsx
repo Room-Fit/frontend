@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { BaseScreen } from "@/apps/Screen";
 
 import { FormSchema } from "@/entities/form/types";
-import { DynamicForm, DynamicFormRef } from "@/entities/form/ui/DynamicForm";
+import { DynamicForm, DynamicFormRef } from "@/entities/form/ui/DynamicForm/DynamicForm";
 import { useCreateSurveyResponse } from "@/features/profile/service/createSurveyResponse";
 import { useRecentSurvey } from "@/features/profile/service/useRecentSurvey";
 import { NavPrevious } from "@/shared/components";

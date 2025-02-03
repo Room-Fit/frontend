@@ -1,5 +1,5 @@
 import { FormSchema } from "@/entities/form/types";
-import { DynamicForm } from "@/entities/form/ui/DynamicForm";
+import { DynamicForm } from "@/entities/form/ui/DynamicForm/DynamicForm";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof DynamicForm> = {
