@@ -17,10 +17,8 @@ export const replyElementMap = {
 };
 
 export const DynamicReply = ({ questions }: DynamicReplyProps) => {
-    questions.map((reply) => {
+    return questions.map((reply) => {
         const Component = replyElementMap[reply.type];
         return <Component {...reply} />;
     });
-
-    return <div>asdf</div>;
 };
