@@ -27,11 +27,8 @@ export default function MyPage() {
     const { dispatch } = useAuth();
     const { accessToken } = useAuth.getState();
     const user_id = parseJwt(accessToken);
-    const { data, isLoading } = useMyInfo(user_id.id);
+    const { data, isPending } = useMyInfo(user_id.id);
 
-    if (isLoading) {
-        return <div>내 정보를 불러오는 중 입니다...</div>;
-    }
     if (!data) return;
 
     return (
@@ -39,6 +36,8 @@ export default function MyPage() {
             <NavTop />
 
             <section className="p-4">
+                {isPending && <div>내 정보를 불러오는 중 입니다...</div>}
+
                 <ProfileHeader nickname={data.nickname} email={data.email} />
 
                 <Menu label="내 정보 관리">
