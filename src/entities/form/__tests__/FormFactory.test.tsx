@@ -1,7 +1,7 @@
 import { FormFactory } from "@/entities/form/lib/FormFactory";
 import { FormSchema } from "@/entities/form/types";
-import { CheckboxFormElement } from "@/entities/form/ui/CheckboxFormElement";
-import { SelectorFormElement } from "@/entities/form/ui/SelectorFormElement";
+import { CheckboxFormElement } from "@/entities/form/ui/CheckBoxFormElement/CheckboxFormElement";
+import { SelectorFormElement } from "@/entities/form/ui/SelectorFormElement/SelectorFormElement";
 
 describe("FormFactory", () => {
     describe("createFormBySchema()", () => {

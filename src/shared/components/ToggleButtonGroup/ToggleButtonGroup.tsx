@@ -6,12 +6,18 @@ import { cn } from "@/shared/lib";
 export interface ToggleButtonGroupProps {
     className?: string;
 
+    defaultOption: string;
     options: string[];
     onChange: (selectedOption: string) => void;
 }
 
-export const ToggleButtonGroup = ({ className, options, onChange }: ToggleButtonGroupProps) => {
-    const [selectedOption, setSelectedOption] = useState<string>("");
+export const ToggleButtonGroup = ({
+    className,
+    defaultOption,
+    options,
+    onChange,
+}: ToggleButtonGroupProps) => {
+    const [selectedOption, setSelectedOption] = useState<string>(defaultOption);
 
     useEffect(() => {
         onChange(selectedOption as string);

@@ -11,21 +11,32 @@ const meta: Meta<typeof ToggleButtonGroup> = {
 export default meta;
 type Story = StoryObj<typeof ToggleButtonGroup>;
 
-const ToggleButtonGroupExample = ({ options }: { options: string[] }) => {
+const ToggleButtonGroupExample = ({
+    defaultOption,
+    options,
+}: {
+    defaultOption: string;
+    options: string[];
+}) => {
     const [option, setOption] = useState("수면환경");
 
     useEffect(() => {
         console.log({ option });
     }, [option]);
 
-    return <ToggleButtonGroup options={options} onChange={setOption} />;
+    return (
+        <ToggleButtonGroup options={options} defaultOption={defaultOption} onChange={setOption} />
+    );
 };
 
 export const Default: Story = {
     args: {
+        defaultOption: "수면환경",
         options: ["수면환경", "환경정보", "생활 및 관계", "취미 및 활동"],
     },
     render: (args) => {
-        return <ToggleButtonGroupExample options={args.options} />;
+        return (
+            <ToggleButtonGroupExample defaultOption={args.defaultOption} options={args.options} />
+        );
     },
 };

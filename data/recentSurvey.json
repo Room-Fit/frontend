@@ -26,11 +26,14 @@
         {
             "id": 3,
             "title": "잠귀",
-            "type": "SLIDER",
+            "type": "SELECTOR",
             "optionDelimiter": null,
             "options": [
-                { "label": "어두움", "value": "1" },
-                { "label": "밝음", "value": "5" }
+                { "label": "매우 어두움", "value": "매우 어두움" },
+                { "label": "어두움", "value": "어두움" },
+                { "label": "보통", "value": "보통" },
+                { "label": "밝음", "value": "밝음" },
+                { "label": "매우 밝음", "value": "매우 밝음" }
             ]
         },
         {
@@ -71,21 +74,27 @@
         {
             "id": 7,
             "title": "더위",
-            "type": "SLIDER",
+            "type": "SELECTOR",
             "optionDelimiter": null,
             "options": [
-                { "label": "적게탐", "value": "1" },
-                { "label": "많이탐", "value": "5" }
+                { "label": "거의 안탐", "value": "거의 안탐" },
+                { "label": "적게탐", "value": "적게탐" },
+                { "label": "보통", "value": "보통" },
+                { "label": "많이탐", "value": "많이탐" },
+                { "label": "매우 많이 탐", "value": "매우 많이 탐" }
             ]
         },
         {
             "id": 8,
             "title": "추위",
-            "type": "SLIDER",
+            "type": "SELECTOR",
             "optionDelimiter": null,
             "options": [
-                { "label": "적게탐", "value": "1" },
-                { "label": "많이탐", "value": "5" }
+                { "label": "거의 안탐", "value": "거의 안탐" },
+                { "label": "적게탐", "value": "적게탐" },
+                { "label": "보통", "value": "보통" },
+                { "label": "많이탐", "value": "많이탐" },
+                { "label": "매우 많이 탐", "value": "매우 많이 탐" }
             ]
         },
         {
@@ -102,22 +111,28 @@
         {
             "id": 10,
             "title": "깨끗함",
-            "type": "SLIDER",
+            "type": "SELECTOR",
             "optionDelimiter": null,
             "options": [
-                { "label": "더러움", "value": "1" },
-                { "label": "깨끗함", "value": "5" }
+                { "label": "매우 더러움", "value": "매우 더러움" },
+                { "label": "더러움", "value": "더러움" },
+                { "label": "보통", "value": "보통" },
+                { "label": "깨끗함", "value": "깨끗함" },
+                { "label": "매우 깨끗함", "value": "매우 깨끗함" }
             ]
         },
 
         {
             "id": 11,
             "title": "룸메이트와 관계",
-            "type": "SLIDER",
+            "type": "SELECTOR",
             "optionDelimiter": null,
             "options": [
-                { "label": "학교사람", "value": "1" },
-                { "label": "절친", "value": "5" }
+                { "label": "모르는 사람", "value": "모르는 사람" },
+                { "label": "안 친함", "value": "안 친함" },
+                { "label": "보통", "value": "보통" },
+                { "label": "친함", "value": "친함" },
+                { "label": "절친", "value": "절친" }
             ]
         },
         {
@@ -220,11 +235,14 @@
         {
             "id": 21,
             "title": "음주빈도",
-            "type": "SLIDER",
+            "type": "SELECTOR",
             "optionDelimiter": null,
             "options": [
-                { "label": "자주안마심", "value": "1" },
-                { "label": "자주마심", "value": "5" }
+                { "label": "아예 안마심", "value": "아예 안마심" },
+                { "label": "자주 안마심", "value": "자주 안마심" },
+                { "label": "가끔 마심", "value": "가끔 마심" },
+                { "label": "자주 마심", "value": "자주 마심" },
+                { "label": "술고래", "value": "술고래" }
             ]
         },
         {
