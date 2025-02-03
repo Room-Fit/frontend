@@ -26,8 +26,8 @@ export default function MyPage() {
     const { push } = useFlow();
     const { dispatch } = useAuth();
     const { accessToken } = useAuth.getState();
-    const user_id = parseJwt(accessToken);
-    const { data, isPending } = useMyInfo(user_id.id);
+    const userInfo = parseJwt(accessToken);
+    const { data, isPending } = useMyInfo(userInfo.id);
 
     if (!data) return;
 
