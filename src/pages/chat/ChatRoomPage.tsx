@@ -32,7 +32,7 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
     const { participants } = useMatchDetail(params.roomId);
 
     const [isOpen, setIsOpen] = useState(false);
-    const { data, isPending, scrollContainerRef, targetRef, hasNext } = useInfObserverFetch<
+    const { data, scrollContainerRef, targetRef, hasNext } = useInfObserverFetch<
         HTMLUListElement,
         HTMLDivElement
     >({
@@ -60,7 +60,9 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
 
                     <ChatHistoryGroup ref={scrollContainerRef}>
                         <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
-                        {!isPending && hasNext && <ChatHistoryFallback ref={targetRef} />}
+                        {data && data.data.length > 0 && hasNext && (
+                            <ChatHistoryFallback ref={targetRef} />
+                        )}
                         {data?.data.flatMap((historyItems) => (
                             <ChatHistoryItem
                                 key={historyItems.id}

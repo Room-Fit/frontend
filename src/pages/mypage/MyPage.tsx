@@ -16,20 +16,29 @@ import { NavTop } from "@/apps/layouts/NavTop";
 import { useFlow } from "@/apps/stackflow";
 
 import { AuthActionType, useAuth } from "@/features/auth/store/useAuth";
+import { useMyInfo } from "@/features/mypage/service/readMyInfo";
 import { Menu } from "@/features/mypage/ui/Menu";
 import { MenuItem } from "@/features/mypage/ui/MenuItem";
 import { ProfileHeader } from "@/features/mypage/ui/ProfileHeader";
+import { parseJwt } from "@/shared/lib/decodeJWT";
 
 export default function MyPage() {
     const { push } = useFlow();
     const { dispatch } = useAuth();
+    const { accessToken } = useAuth.getState();
+    const userInfo = parseJwt(accessToken);
+    const { data, isPending } = useMyInfo(userInfo.id);
+
+    if (!data) return;
 
     return (
         <BaseScreen>
             <NavTop />
 
             <section className="p-4">
-                <ProfileHeader nickname={"toothlessKid"} email={"toothless@knu.ac.kr"} />
+                {isPending && <div>내 정보를 불러오는 중 입니다...</div>}
+
+                <ProfileHeader nickname={data.nickname} email={data.email} />
 
                 <Menu label="내 정보 관리">
                     <MenuItem label="비밀번호 변경하기" icon={<KeyRound size={20} />} />
