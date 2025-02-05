@@ -1,6 +1,7 @@
 import { useRef } from "react";
 
 import { BaseScreen } from "@/apps/Screen";
+import { useFlow } from "@/apps/stackflow";
 
 import { FormSchema } from "@/entities/form/types";
 import { DynamicForm, DynamicFormRef } from "@/entities/form/ui/DynamicForm/DynamicForm";
@@ -11,7 +12,7 @@ import { Button } from "@/shared/ui";
 
 export default function ProfileEditPage() {
     const { isPending, data } = useRecentSurvey();
-
+    const { push } = useFlow();
     const dynamicFormRef = useRef<DynamicFormRef>(null);
     const { mutate } = useCreateSurveyResponse(
         dynamicFormRef.current?.getFormState() as FormSchema,
@@ -30,9 +31,8 @@ export default function ProfileEditPage() {
                         <Button
                             className="w-full my-2"
                             onClick={() => {
-                                // TODO: 추후 API 스키마 변경에 따른 수정 필요
-                                console.log(dynamicFormRef.current?.getFormState());
                                 mutate();
+                                push("MatchListPage", {});
                             }}
                         >
                             등록하기

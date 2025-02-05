@@ -1,7 +1,10 @@
+import { useFlow } from "@/apps/stackflow";
+
 import { Modal } from "@/shared/components";
 import { Button } from "@/shared/ui";
 
 export const ProfileModal = () => {
+    const { push } = useFlow();
     return (
         <Modal.Root>
             <Modal.Content className="w-full m-8">
@@ -12,7 +15,11 @@ export const ProfileModal = () => {
                     <p>프로필을 등록하면 룸핏의 모든 서비스를 이용할 수 있어요!</p>
                 </div>
 
-                <Button variant="default" className="w-full">
+                <Button
+                    variant="default"
+                    className="w-full"
+                    onClick={() => push("ProfileEditPage", {})}
+                >
                     프로필 등록하기
                 </Button>
             </Modal.Content>
