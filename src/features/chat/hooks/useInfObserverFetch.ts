@@ -81,7 +81,6 @@ export const useInfObserverFetch = <
         (entries: IntersectionObserverEntry[]) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    console.warn("Element 가 화면에 보임!");
                     fetchPaginatedData();
                 }
             });

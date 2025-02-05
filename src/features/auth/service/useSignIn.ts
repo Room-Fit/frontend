@@ -15,7 +15,6 @@ export const useSignIn = () => {
     const passwordRef = useRef<HTMLInputElement>(null);
 
     const signIn = useCallback(async () => {
-        console.log(emailRef.current?.value, passwordRef.current?.value);
         if (!emailRef.current?.value || !passwordRef.current?.value) return;
 
         await toast
