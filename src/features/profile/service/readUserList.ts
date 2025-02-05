@@ -11,6 +11,7 @@ export type UserListResponse = {
     birth: string;
     gender: "M" | "F";
     college: string;
+    surveyComplete: boolean;
 };
 
 const readUserList = async () => {
