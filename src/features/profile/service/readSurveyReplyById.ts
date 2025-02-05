@@ -41,7 +41,6 @@ export function useSurveyReplyById(userId: number) {
     const query = useQuery({
         queryKey: PROFILE_QUERY_KEY_FACTORY.READ_SURVEY_REPLY_BY_ID(userId),
         queryFn: () => readSurveyReplyById(userId),
-        throwOnError: false,
         retry: false,
     });
     return { ...query };
