@@ -5,9 +5,11 @@ import { ActivityName } from "@/apps/stackflow";
 import { useFlow } from "@/apps/stackflow";
 
 import { ProfileModal } from "@/entities/profile/ui/ProfileModal/ProfileModal";
+import { useActivity } from "@stackflow/react";
 
 export const NavBottom = () => {
     const { replace } = useFlow();
+    const activity = useActivity();
 
     return (
         <Fragment>
@@ -20,7 +22,10 @@ export const NavBottom = () => {
                             <li
                                 key={index}
                                 className="flex items-center h-full"
-                                onClick={() => replace(item.activityName as ActivityName, {})}
+                                onClick={() => {
+                                    if (activity.name === item.activityName) return;
+                                    replace(item.activityName as ActivityName, {});
+                                }}
                             >
                                 <button className="flex flex-col items-center">
                                     <item.icon size={25} />
