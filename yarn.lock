@@ -2733,6 +2733,11 @@
   dependencies:
     react-fast-compare "^3.2.2"
 
+"@stackflow/link@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@stackflow/link/-/link-1.6.1.tgz#c6ced64dd5b531f4a339f0dc350f4c0e78f51d21"
+  integrity sha512-M8Vu/rNn1MzFhBMJDzfCQuFU8zKTRVY1W4PoqIXVDIn9mZS1Kr8+Iaak3yODM/lPts8EZkIuRKrbf+8O3jxXaQ==
+
 "@stackflow/plugin-basic-ui@^1.10.1":
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/@stackflow/plugin-basic-ui/-/plugin-basic-ui-1.10.1.tgz#a62542c568fe9eb55a4c16b2beafd8245c6a1065"
@@ -2752,6 +2757,11 @@
     flatted "^3.3.1"
     history "^5.3.0"
     url-pattern "^1.0.3"
+
+"@stackflow/plugin-preload@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@stackflow/plugin-preload/-/plugin-preload-1.4.3.tgz#cdae864ccc5171429982cb796b99859b4ab67b1b"
+  integrity sha512-WI9Dr0e3lsq6s6Vs4VxsB0j9z+hFbQIO7iipeyDYw8uGzs5gorXqdNnH/S+8Td02sDme1/KRWjVLoorZCAMqPg==
 
 "@stackflow/plugin-renderer-basic@^1.1.13":
   version "1.1.13"

@@ -70,4 +70,6 @@ const stackflowApp = stackflow({
 });
 
 export const { Stack, useFlow } = stackflowApp;
+
+export type TypeActivities = typeof stackflowApp.activities;
 export type ActivityName = keyof typeof stackflowApp.activities;
