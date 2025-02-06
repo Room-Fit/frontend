@@ -32,7 +32,7 @@ export async function readSurveyReplyById(userId: number) {
         ExceptionHandler(err)
             .addCase(404, "존재하지 않는 프로필입니다")
             // TODO : 추후, 404 에러에 대한 처리로 변경 필요.
-            .addCase(500, "존재하지 않는 프로필입니다")
+            .addCase(500, "서버 오류가 발생했습니다.")
             .handle();
     }
 }

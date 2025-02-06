@@ -12,6 +12,7 @@ export type MyInfo = {
     studentId: number;
     college: string;
     gender: string;
+    surveyComplete: boolean;
 };
 
 const readMyInfo = async (user_id: number) => {

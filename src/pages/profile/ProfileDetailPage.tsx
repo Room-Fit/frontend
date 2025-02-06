@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 import { BaseScreen } from "@/apps/Screen";
-import { useFlow } from "@/apps/stackflow";
 
 import { DynamicReply } from "@/entities/profile/ui/DynamicReply/DynamicReply";
 import { ProfileGroup } from "@/entities/profile/ui/ProfileGroup/ProfileGroup";
@@ -28,17 +26,10 @@ export interface ProfileDetailPageProps {
 
 export default function ProfileDetailPage({ params }: ProfileDetailPageProps) {
     const { data } = useUserDetailsById(params.id);
-    const { isPending, data: reply, isError, error } = useSurveyReplyById(params.id);
+    const { isPending, data: reply } = useSurveyReplyById(params.id);
 
     const [range, setRange] = useState<{ min: number; max: number }>({ min: 0, max: 6 });
 
-    const { pop } = useFlow();
-
-    if (isError) {
-        toast.error(error.message);
-        pop();
-        return null;
-    }
     if (isPending) return <div>loading...</div>;
 
     return (
