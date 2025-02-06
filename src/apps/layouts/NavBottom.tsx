@@ -5,6 +5,7 @@ import { ActivityName } from "@/apps/stackflow";
 import { useFlow } from "@/apps/stackflow";
 
 import { ProfileModal } from "@/entities/profile/ui/ProfileModal/ProfileModal";
+import { cn } from "@/shared/lib";
 import { useActivity } from "@stackflow/react";
 
 export const NavBottom = () => {
@@ -27,7 +28,12 @@ export const NavBottom = () => {
                                     replace(item.activityName as ActivityName, {});
                                 }}
                             >
-                                <button className="flex flex-col items-center">
+                                <button
+                                    className={cn(
+                                        "flex flex-col items-center",
+                                        activity.name === item.activityName && "text-primary",
+                                    )}
+                                >
                                     <item.icon size={25} />
                                     <p className="text-sm">{item.label}</p>
                                 </button>
