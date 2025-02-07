@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 import {
@@ -23,23 +24,30 @@ import { ProfileHeader } from "@/features/mypage/ui/ProfileHeader";
 import { parseJwt } from "@/shared/lib/decodeJWT";
 
 export default function MyPage() {
-    const { push } = useFlow();
+    const { replace, push } = useFlow();
     const { dispatch } = useAuth();
-    const { accessToken } = useAuth.getState();
-    const userInfo = parseJwt(accessToken);
-    const { data, isPending } = useMyInfo(userInfo.id);
 
-    if (!data) return;
+    const { accessToken } = useAuth.getState();
+
+    const userInfo = accessToken ? parseJwt(accessToken) : null;
+
+    const { data, isPending } = useMyInfo(userInfo?.id);
+
+    useEffect(() => {
+        if (!accessToken) {
+            replace("HomePage", {});
+            return;
+        }
+    }, [accessToken, replace]);
+
+    if (!data || !userInfo) return;
 
     return (
         <BaseScreen>
             <NavTop />
-
             <section className="p-4">
                 {isPending && <div>내 정보를 불러오는 중 입니다...</div>}
-
                 <ProfileHeader nickname={data.nickname} email={data.email} />
-
                 <Menu label="내 정보 관리">
                     <MenuItem label="비밀번호 변경하기" icon={<KeyRound size={20} />} />
                     <MenuItem
@@ -53,17 +61,14 @@ export default function MyPage() {
                         onClick={() => {
                             dispatch({ type: AuthActionType.SIGN_OUT });
                             toast.success("로그아웃 되었습니다.");
-                            push("HomePage", {});
                         }}
                     />
                 </Menu>
-
                 <Menu label="고객센터">
                     <MenuItem label="문의하기" icon={<FileQuestion size={20} />} />
                     <MenuItem label="건의사항" icon={<UserRoundPen size={20} />} />
                     <MenuItem label="버그신고" icon={<Bug size={20} />} />
                 </Menu>
-
                 <Menu label="기타">
                     <MenuItem label="개인정보 처리방침" icon={<Info size={20} />} />
                     <MenuItem label="서비스 이용약관" icon={<Scroll size={20} />} />
