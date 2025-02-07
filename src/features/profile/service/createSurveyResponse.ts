@@ -1,7 +1,10 @@
 import ExceptionHandler from "axios-exception-handler";
 
+import { useFlow } from "@/apps/stackflow";
+
 import { FormSchema, Option } from "@/entities/form/types";
-import { api } from "@/shared/lib";
+import { PROFILE_QUERY_KEY_FACTORY } from "@/features/profile/service/keys";
+import { api, queryClient } from "@/shared/lib";
 import { BaseResponse } from "@/shared/types/BaseResponse";
 import { useMutation } from "@tanstack/react-query";
 
@@ -47,10 +50,14 @@ export async function createSurveyResponse(formSchema: FormSchema) {
 }
 
 export const useCreateSurveyResponse = (body: FormSchema) => {
+    const { push } = useFlow();
     return useMutation({
         mutationFn: () => createSurveyResponse(body),
         onSuccess: () => {
-            // TODO: 요청 성공시 query invalidation
+            queryClient.invalidateQueries({
+                queryKey: PROFILE_QUERY_KEY_FACTORY.READ_RECENT_SURVEY(),
+            });
+            push("MatchListPage", {});
         },
     });
 };
