@@ -6,9 +6,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/shared/ui";
 
 export interface ChatSideBarProps {
     children?: React.ReactNode;
-    open: boolean;
-    onOpenChange: () => void;
-    onClick: () => void;
+    open?: boolean;
+    onOpenChange?: () => void;
+    onClick?: () => void;
 }
 
 export const ChatSideBar = ({ children, open, onOpenChange, onClick }: ChatSideBarProps) => {
@@ -20,7 +20,7 @@ export const ChatSideBar = ({ children, open, onOpenChange, onClick }: ChatSideB
 
             <SheetContent className="rounded-l-xl w-[330px] pt-[60px]">
                 <ChatSideBarProfileGroup>{children}</ChatSideBarProfileGroup>
-                <LeaveChatRoomButton onClick={onClick} />
+                <LeaveChatRoomButton onClick={() => onClick && onClick()} />
             </SheetContent>
         </Sheet>
     );
