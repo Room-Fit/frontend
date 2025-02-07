@@ -16,6 +16,7 @@ import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
 import { ChatHistoryContextProvider } from "@/features/chat/contexts/ChatHistoryContext";
 import { useChat } from "@/features/chat/hooks/useChat";
 import { useInfObserverFetch } from "@/features/chat/hooks/useInfObserverFetch";
+import { usePutExitChatRoom } from "@/features/chat/service/exitChatRoom";
 import { useMatchDetail } from "@/features/match/service/readMatchDetail";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
 import { ActivityComponentType } from "@stackflow/react";
@@ -30,6 +31,7 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         roomId: params.roomId,
     });
     const { participants } = useMatchDetail(params.roomId);
+    const { mutate: exitChatRoom } = usePutExitChatRoom(params.roomId);
 
     const [isOpen, setIsOpen] = useState(false);
     const { data, scrollContainerRef, targetRef, hasNext } = useInfObserverFetch<
@@ -40,13 +42,28 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         threshold: 0.5,
         room_id: params.roomId,
     });
+
+    const SidebarChangeHandler = () => {
+        setIsOpen((prev) => !prev);
+    };
+
+    const handleExitChatRoom = () => {
+        if (window.confirm("채팅방을 나가시겠습니까?")) {
+            exitChatRoom();
+        }
+    };
+
     return (
         <Screen>
             <ChatHistoryContextProvider>
                 <ChatGradientLayer className="w-full min-h-screen">
                     <ChatNavTop title={"채팅방 이름"} currentQuota={2} maxQuota={4}>
                         <Vote className="block text-dark-300" strokeWidth={1.5} />
-                        <ChatSideBar open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
+                        <ChatSideBar
+                            open={isOpen}
+                            onOpenChange={SidebarChangeHandler}
+                            onClick={handleExitChatRoom}
+                        >
                             {participants?.map((participant) => (
                                 <ChatProfileCard
                                     key={participant.id}
