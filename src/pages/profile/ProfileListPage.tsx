@@ -11,17 +11,25 @@ export default function ProfileListPage() {
     const { data } = useReadUserList();
     const { push } = useFlow();
 
+    if (!data) return null;
+
     const parseStudentId = (studentId: string) => {
         return studentId.toString().substring(2, 4);
     };
-    if (!data) return null;
 
     const pushProfileDetailPage = (id: number) => {
         const user = data.find((user) => user.id === id);
-        if (!user?.surveyComplete) {
+
+        if (!user) {
+            toast.error("사용자 정보를 불러올 수 없습니다.");
+            return null;
+        }
+
+        if (!user.surveyComplete) {
             toast.error("아직 프로필을 등록하지 않은 사용자입니다.");
             return null;
         }
+
         push("ProfileDetailPage", { id });
     };
 
