@@ -1,5 +1,7 @@
 import ExceptionHandler from "axios-exception-handler";
 
+import { useFlow } from "@/apps/stackflow";
+
 import { MATCH_QUERY_KEY_FACTORY } from "@/features/match/service/keys";
 import { api, queryClient } from "@/shared/lib";
 import { BaseResponse } from "@/shared/types/BaseResponse";
@@ -24,12 +26,14 @@ const joinChatRoom = async (room_id: number) => {
 };
 
 export const usePostJoinChatRoom = (room_id: number) => {
+    const { push } = useFlow();
     return useMutation({
         mutationFn: () => joinChatRoom(room_id),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: MATCH_QUERY_KEY_FACTORY.READ_MATCH_DETAIL_BY_ID,
+                queryKey: MATCH_QUERY_KEY_FACTORY.READ_MATCH_DETAIL_BY_ID(room_id),
             });
+            push("ChatRoomPage", { room_id });
         },
     });
 };
