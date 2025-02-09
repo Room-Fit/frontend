@@ -30,7 +30,9 @@ export default function ProfileDetailPage({ params }: ProfileDetailPageProps) {
 
     const [range, setRange] = useState<{ min: number; max: number }>({ min: 0, max: 6 });
 
+    if (!data || !reply) return;
     if (isPending) return <div>loading...</div>;
+    const currentYear = Number(new Date().getFullYear());
 
     return (
         <BaseScreen>
@@ -39,19 +41,19 @@ export default function ProfileDetailPage({ params }: ProfileDetailPageProps) {
             <section className="px-6 py-4">
                 <div>
                     <Label>이름</Label>
-                    <TextDisplay>{data?.nickname}</TextDisplay>
+                    <TextDisplay>{data.nickname}</TextDisplay>
                 </div>
                 <div>
                     <Label>전공</Label>
-                    <TextDisplay>{data?.college}</TextDisplay>
+                    <TextDisplay>{data.college}</TextDisplay>
                 </div>
                 <div>
                     <Label>학번</Label>
-                    <TextDisplay>{data?.studentId}</TextDisplay>
+                    <TextDisplay>{data.studentId}</TextDisplay>
                 </div>
                 <div>
                     <Label>나이</Label>
-                    <TextDisplay>{data?.birth}</TextDisplay>
+                    <TextDisplay>{currentYear - Number(data.birth)}</TextDisplay>
                 </div>
 
                 <ToggleButtonGroup
@@ -67,7 +69,7 @@ export default function ProfileDetailPage({ params }: ProfileDetailPageProps) {
             <section className="p-2 py-4 bg-dark-100">
                 <ProfileGroup className="w-full p-4">
                     <DynamicReply
-                        questions={reply?.questions.slice(range.min, range.max) as QuestionReply[]}
+                        questions={reply.questions.slice(range.min, range.max) as QuestionReply[]}
                     />
                 </ProfileGroup>
             </section>
