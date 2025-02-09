@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createPortal } from "react-dom";
 
 import { useModal } from "@/shared/components/Modal/useModal";
-import { useInitialStyle } from "@/shared/hooks";
+import { useOnMountAnimation } from "@/shared/hooks/useOnMountAnimation";
 import { cn } from "@/shared/lib";
 
 export interface ModalProps {
@@ -33,17 +33,17 @@ const Wrapper = ({ children }: { children?: React.ReactNode }) => {
 const Overlay = () => {
     const { closeModal } = useModal();
 
-    const { ref } = useInitialStyle<HTMLDivElement>({
-        opacity: "0",
-        transition: "all 200ms ease-in-out",
+    const { ref } = useOnMountAnimation<HTMLDivElement>({
+        initialStyles: {
+            opacity: "0",
+        },
+        animationStyles: {
+            opacity: "1",
+        },
+        duration: 200,
+        delay: 0,
+        timingFunction: "ease-in-out",
     });
-
-    useEffect(() => {
-        const element = ref.current;
-        if (!element) return;
-
-        element.style.opacity = "1";
-    }, [ref]);
 
     return (
         <div
@@ -55,27 +55,21 @@ const Overlay = () => {
 };
 
 const Container = ({ children }: { children?: React.ReactNode }) => {
-    const { isOpen } = useModal();
-
-    const { ref } = useInitialStyle<HTMLDivElement>({
-        opacity: "0",
-        transform: "scale(0.7)",
-    });
-
     const { closeModal } = useModal();
 
-    useEffect(() => {
-        const element = ref.current;
-        if (!element) return;
-
-        if (isOpen) {
-            element.style.opacity = "1";
-            element.style.transform = "scale(1)";
-        } else {
-            element.style.opacity = "0";
-            element.style.transform = "scale(0.7)";
-        }
-    }, [isOpen, ref]);
+    const { ref } = useOnMountAnimation<HTMLDivElement>({
+        initialStyles: {
+            opacity: "0",
+            transform: "scale(0.7)",
+        },
+        animationStyles: {
+            opacity: "1",
+            transform: "scale(1)",
+        },
+        duration: 200,
+        delay: 0,
+        timingFunction: "ease-in-out",
+    });
 
     return (
         <div
