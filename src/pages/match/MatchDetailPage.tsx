@@ -18,11 +18,13 @@ export interface MatchDetailPageParams {
     id: number;
 }
 
+const INCREASE_PARTICIPANT_COUNT = 1;
+
 const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params }) => {
     const { data } = useMatchDetail(params.id);
     const { accessToken } = useAuth.getState();
-    const user = parseJwt(accessToken);
-    const { mutate: joinChatRoom } = usePostJoinChatRoom(user.id);
+    const user = accessToken ? parseJwt(accessToken) : null;
+    const { mutate: joinChatRoom } = usePostJoinChatRoom(params.id);
     // TODO JWT토큰을 parse없이 해서 내 정보를 가질 수 있도록 수정 필요
 
     if (!user || !accessToken) return null;
@@ -33,7 +35,11 @@ const MatchDetailPage: ActivityComponentType<MatchDetailPageParams> = ({ params 
             toast.error("이미 참여중인 채팅방입니다.");
             return;
         }
-        joinChatRoom(user.id);
+        if (data.participants.length + INCREASE_PARTICIPANT_COUNT > data.maxQuota) {
+            toast.error("채팅방 최대 인원을 초과했습니다.");
+            return;
+        }
+        joinChatRoom();
     };
 
     return (
