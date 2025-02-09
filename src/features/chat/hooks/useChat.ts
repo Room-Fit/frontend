@@ -11,7 +11,6 @@ import { ChatHistoryActionTypes, useChatHistory } from "@/features/chat/hooks/us
 import { CompatClient, Stomp } from "@stomp/stompjs";
 
 export interface MessagePayload {
-    id: number;
     roomId: number;
     sender: {
         userId: number;
@@ -23,9 +22,10 @@ export interface MessagePayload {
 export type UseChatOptions = {
     roomId: number;
     userId: number;
+    nickname: string;
 };
 
-export const useChat = ({ roomId, userId }: UseChatOptions) => {
+export const useChat = ({ roomId, userId, nickname }: UseChatOptions) => {
     const stompClient = useRef<CompatClient | null>(null);
     const chatInputRef = useRef<HTMLInputElement>(null);
 
@@ -41,7 +41,7 @@ export const useChat = ({ roomId, userId }: UseChatOptions) => {
                 dispatch({
                     type: ChatHistoryActionTypes.PUSH_BACK_MESSAGE,
                     payload: {
-                        id: parsedMessage.id,
+                        id: parsedMessage.sender.userId,
                         type: parsedMessage.sender.userId === userId ? "send" : "receive",
                         nickname: parsedMessage.sender.nickname,
                         content: parsedMessage.content,
@@ -85,16 +85,17 @@ export const useChat = ({ roomId, userId }: UseChatOptions) => {
         if (!stompClient.current) return;
         if (!chatInputRef.current) return;
 
+        const trimmedMessage = message.trim();
+        if (trimmedMessage === "") return;
         const messagePayload: MessagePayload = {
-            id: 0,
             roomId,
             sender: {
                 userId,
-                nickname: "John Doe",
+                nickname,
             },
             content: message,
         };
-
+        console.log("ROOMID", roomId, "SENDER", userId);
         stompClient.current.send(
             `${STOMP_DESTINATION_PREFIX}/${roomId}`,
             {},
@@ -105,7 +106,6 @@ export const useChat = ({ roomId, userId }: UseChatOptions) => {
 
     return {
         chatHistory,
-
         chatInputRef,
         isConnected,
         error,

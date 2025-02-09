@@ -13,12 +13,14 @@ import { ChatInput } from "@/entities/chat/ui/ChatInput/ChatInput";
 import { ChatNavTop } from "@/entities/chat/ui/ChatNavTop/ChatNavTop";
 import { ChatProfileCard } from "@/entities/chat/ui/ChatProfileCard/ChatProfileCard";
 import { ChatSideBar } from "@/entities/chat/ui/ChatSideBar/ChatProfileSideBar";
+import { useAuth } from "@/features/auth/store/useAuth";
 import { ChatHistoryContextProvider } from "@/features/chat/contexts/ChatHistoryContext";
 import { useChat } from "@/features/chat/hooks/useChat";
 import { useInfObserverFetch } from "@/features/chat/hooks/useInfObserverFetch";
 import { usePutExitChatRoom } from "@/features/chat/service/exitChatRoom";
 import { useMatchDetail } from "@/features/match/service/readMatchDetail";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
+import { parseJwt } from "@/shared/lib/decodeJWT";
 import { ActivityComponentType } from "@stackflow/react";
 
 export interface ChatRoomPageParams {
@@ -26,14 +28,6 @@ export interface ChatRoomPageParams {
 }
 
 const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => {
-    const { chatInputRef, sendMessage, chatHistory } = useChat({
-        userId: 10,
-        roomId: params.roomId,
-    });
-    const { participants } = useMatchDetail(params.roomId);
-    const { mutate: exitChatRoom } = usePutExitChatRoom(params.roomId);
-
-    const [isOpen, setIsOpen] = useState(false);
     const { data, scrollContainerRef, targetRef, hasNext } = useInfObserverFetch<
         HTMLUListElement,
         HTMLDivElement
@@ -42,6 +36,21 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         threshold: 0.5,
         room_id: params.roomId,
     });
+    const { accessToken } = useAuth.getState();
+
+    const userInfo = accessToken ? parseJwt(accessToken) : null;
+    // TODO : 로그인 성공 시 store에 user와 관련된 정보 저장 시 변경 예정
+    const { chatInputRef, sendMessage, chatHistory } = useChat({
+        userId: userInfo.id,
+        roomId: params.roomId,
+        nickname: userInfo.nickname,
+    });
+    const { data: chatroomInformation, participants } = useMatchDetail(params.roomId);
+    const { mutate: exitChatRoom } = usePutExitChatRoom(params.roomId);
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    if (!participants || !chatroomInformation) return;
 
     const SidebarChangeHandler = () => {
         setIsOpen((prev) => !prev);
@@ -57,19 +66,24 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
         <Screen>
             <ChatHistoryContextProvider>
                 <ChatGradientLayer className="w-full min-h-screen">
-                    <ChatNavTop title={"채팅방 이름"} currentQuota={2} maxQuota={4}>
+                    <ChatNavTop
+                        title={"채팅방 이름"}
+                        currentQuota={chatroomInformation.currentQuota}
+                        maxQuota={chatroomInformation.maxQuota}
+                    >
                         <Vote className="block text-dark-300" strokeWidth={1.5} />
                         <ChatSideBar
                             open={isOpen}
                             onOpenChange={SidebarChangeHandler}
                             onClick={handleExitChatRoom}
                         >
-                            {participants?.map((participant) => (
+                            {participants.map((participant) => (
                                 <ChatProfileCard
                                     key={participant.id}
                                     id={participant.id}
                                     nickname={participant.nickname}
                                     college={participant.college}
+                                    onClick={() => setIsOpen(!open)}
                                 />
                             ))}
                         </ChatSideBar>
@@ -84,7 +98,9 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                             <ChatHistoryItem
                                 key={historyItems.id}
                                 id={historyItems.id}
-                                type={historyItems.sender === "nick2" ? "send" : "receive"}
+                                type={
+                                    historyItems.sender === userInfo.nickname ? "send" : "receive"
+                                }
                                 nickname={historyItems.sender}
                                 content={historyItems.content}
                                 createdAt={historyItems.createdAt}
@@ -93,11 +109,11 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
                         {chatHistory.histories.map((history) => (
                             <ChatHistoryItem
                                 key={history.id}
-                                id={history.id as number}
-                                type={history?.nickname == "nick2" ? "send" : "receive"}
-                                nickname={history?.nickname as string}
-                                content={history?.content as string}
-                                createdAt={history?.createdAt as string}
+                                id={history.id}
+                                type={history.nickname == userInfo.nickname ? "send" : "receive"}
+                                nickname={history.nickname}
+                                content={history.content}
+                                createdAt={history.createdAt}
                             />
                         ))}
                     </ChatHistoryGroup>
