@@ -33,7 +33,6 @@ export const useChat = ({ roomId, userId }: UseChatOptions) => {
     const [error, setError] = useState<string | null>(null);
 
     const { state: chatHistory, dispatch } = useChatHistory();
-
     const subscribeTopic = useCallback(
         (topic: string) => {
             stompClient.current?.subscribe(topic, (message) => {
