@@ -28,6 +28,7 @@ export const useInfObserverFetch = <
     const [isError, setIsError] = useState<boolean>(false);
     const [data, setData] = useState<BasePaginationResponse<MessageHistoryType[]> | null>(null);
     const [error, setError] = useState<Error | null>(null);
+
     const [hasNext, setHasNext] = useState<boolean>(true);
     const [lastMessageId, setLastMessageId] = useState<number | undefined>(undefined);
     const [initialLoad, setIsInitialLoad] = useState<boolean>(true);
@@ -35,13 +36,16 @@ export const useInfObserverFetch = <
     const [prevScrollTop, setPrevScrollTop] = useState<number>(0);
 
     const fetchPaginatedData = useCallback(async () => {
-        if (isPending || !hasNext || !scrollContainerRef.current) return;
+        if (isPending || !hasNext) return;
+
+        const scrollContainerElement = scrollContainerRef.current;
+        if (!scrollContainerElement) return;
 
         try {
             setIsPending(true);
 
-            const currentScrollHeight = scrollContainerRef.current.scrollHeight;
-            const currentScrollTop = scrollContainerRef.current.scrollTop;
+            const currentScrollHeight = scrollContainerElement.scrollHeight;
+            const currentScrollTop = scrollContainerElement.scrollTop;
             setPrevScrollHeight(currentScrollHeight);
             setPrevScrollTop(currentScrollTop);
 
@@ -80,9 +84,7 @@ export const useInfObserverFetch = <
     const observerCallback = useCallback(
         (entries: IntersectionObserverEntry[]) => {
             entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    fetchPaginatedData();
-                }
+                if (entry.isIntersecting) fetchPaginatedData();
             });
         },
         [fetchPaginatedData],
@@ -101,6 +103,7 @@ export const useInfObserverFetch = <
             setPrevScrollHeight(0);
             setPrevScrollTop(0);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
     // [2] IntersectionObserver 설정
@@ -112,12 +115,14 @@ export const useInfObserverFetch = <
             observerCallback,
             observerOptions,
         );
+
         intersectionObserverRef.current.observe(target);
 
         return () => {
             intersectionObserverRef.current?.unobserve(target);
         };
-    }, [observerCallback, observerOptions]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [observerCallback, observerOptions, targetRef.current, scrollContainerRef.current]);
 
     return {
         isPending,
