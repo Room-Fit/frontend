@@ -59,8 +59,7 @@ export const useChat = ({ roomId, userId, nickname }: UseChatOptions) => {
         subscribeTopic(`${STOMP_TOPIC_PREFIX}/${roomId}`);
     }, [roomId, subscribeTopic]);
 
-    const onError = (err: string) => {
-        console.log("Error: ", err);
+    const onError = () => {
         setIsConnected(false);
     };
 
@@ -95,7 +94,7 @@ export const useChat = ({ roomId, userId, nickname }: UseChatOptions) => {
             },
             content: message,
         };
-        console.log("ROOMID", roomId, "SENDER", userId);
+
         stompClient.current.send(
             `${STOMP_DESTINATION_PREFIX}/${roomId}`,
             {},
