@@ -11,7 +11,7 @@ export type MessageHistoryType = {
     createdAt: string;
 };
 
-const PAGE_SIZE = 30;
+const PAGE_SIZE = 20;
 
 export const getPreviousMessageHistory = async ({
     room_id,

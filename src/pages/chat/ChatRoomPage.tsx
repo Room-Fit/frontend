@@ -5,7 +5,6 @@ import { Vote } from "lucide-react";
 
 import { Screen } from "@/apps/Screen";
 
-import { ChatHistoryFallback } from "@/entities/chat/ui/ChatHistory/ChatHistoryFallback";
 import { ChatHistoryGroup } from "@/entities/chat/ui/ChatHistory/ChatHistoryGroup";
 import { ChatHistoryItem } from "@/entities/chat/ui/ChatHistory/ChatHistoryItem";
 import { ChatHistoryTime } from "@/entities/chat/ui/ChatHistory/ChatHistoryTime";
@@ -20,6 +19,7 @@ import { useInfObserverFetch } from "@/features/chat/hooks/useInfObserverFetch";
 import { usePutExitChatRoom } from "@/features/chat/service/exitChatRoom";
 import { useMatchDetail } from "@/features/match/service/readMatchDetail";
 import { ChatGradientLayer } from "@/shared/components/GradientLayers/ChatGradientLayer";
+import { Spinner } from "@/shared/components/Spinner/Spinner";
 import { parseJwt } from "@/shared/lib/decodeJWT";
 import { ActivityComponentType } from "@stackflow/react";
 
@@ -91,9 +91,16 @@ const ChatRoomPage: ActivityComponentType<ChatRoomPageParams> = ({ params }) => 
 
                     <ChatHistoryGroup ref={scrollContainerRef}>
                         <ChatHistoryTime timeStamp={"2022-01-01T00:00:00+09:00"} />
-                        {data && data.data.length > 0 && hasNext && (
-                            <ChatHistoryFallback ref={targetRef} />
+                        {hasNext && (
+                            <Spinner
+                                ref={targetRef}
+                                width={20}
+                                height={20}
+                                borderWidth={2}
+                                styles={{ margin: "0px auto" }}
+                            />
                         )}
+
                         {data?.data.flatMap((historyItems) => (
                             <ChatHistoryItem
                                 key={historyItems.id}
